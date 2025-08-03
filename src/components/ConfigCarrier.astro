@@ -1,0 +1,42 @@
+---
+
+import { siteConfig } from "../config";
+---
+
+<div id="config-carrier" data-hue={siteConfig.themeColor.hue}>
+    <script>
+        document.addEventListener("click", function (e) {
+            const colors = ["#ff7f50", "#87cefa", "#da70d6", "#32cd32", "#6495ed", "#ff69b4", "#ffa500", "#00ced1", "#ff4500", "#8a2be2", "#7fff00", "#d2691e", "#ff1493", "#00bfff", "#adff2f", "#ff6347"];
+            const particleCount = 12; 
+            for (let i = 0; i < particleCount; i++) {
+                const span = document.createElement("span");
+                const offsetX = (Math.random() - 0.5) * 200;
+                const offsetY = (Math.random() - 0.5) * 200;
+
+                span.style.position = "absolute";
+                span.style.left = e.pageX + "px";
+                span.style.top = e.pageY + "px";
+                span.style.pointerEvents = "none";
+                span.style.zIndex = "9999";
+                span.style.width = "11px";
+                span.style.height = "11px";
+                span.style.borderRadius = "50%";
+                span.style.background = colors[Math.floor(Math.random() * colors.length)];
+                span.style.transition = "all 0.6s ease-out";
+                span.style.willChange = "transform, opacity";
+
+                document.body.appendChild(span);
+
+                requestAnimationFrame(() => {
+                    span.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(0)`;
+                    span.style.opacity = "0";
+                });
+
+                setTimeout(() => {
+                    document.body.removeChild(span);
+                }, 700);
+            }
+        }
+    );
+    </script>
+</div>
