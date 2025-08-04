@@ -33,7 +33,8 @@ jobs:
           run_install: true
 
       - name: Build with Astro
-        run: pnpm run build
+        run: |
+          NODE_ENV=production pnpm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
