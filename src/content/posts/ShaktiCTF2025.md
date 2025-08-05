@@ -6,7 +6,7 @@ description: "Shakti CTF 2025 writeup"
 image: ""
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
-draft: false
+draft: true
 ---
 
 跟 eating 一起打，這次計分沒有分開計 w
