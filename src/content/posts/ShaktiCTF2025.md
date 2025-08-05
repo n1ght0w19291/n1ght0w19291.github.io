@@ -1,7 +1,7 @@
 ---
 title: Shakti CTF 2025
 published: 2025-07-26
-updated: 2025-07-27
+updated: 2025-08-05
 description: "Shakti CTF 2025 writeup"
 image: ""
 tags: ["CTF Writeup"]
@@ -9,7 +9,7 @@ category: "CTF Writeup"
 draft: false
 ---
 
-這次還是 eating 大電神帶我打
+跟 eating 一起打，這次計分沒有分開計 w
 
 131 th / 554
 
@@ -195,7 +195,7 @@ shaktictf{u_g0t_wh@t_u_w15h3d__th3_s3@sh311_f1@g}
 
 ---
 
-分享一下很酷的東西，如果 eating 大大沒有提示我的話我可能這輩子都找不到這次的 welcome flag 了
+分享一下很酷的東西，如果隊友沒有提示我的話我可能這輩子都找不到這次的 welcome flag 了
 
 不確定甚麼原理，但是在 discord 裡面，這一段符號後面的內容除了把整份文字複製下來才可以看到，並且送出訊息後不會通知
 
@@ -204,5 +204,3 @@ shaktictf{u_g0t_wh@t_u_w15h3d__th3_s3@sh311_f1@g}
 ```
 
 應該是整到很多人，太好玩了，到比賽結束前還有人在文字頻道 /flag
-
-eating 能找到肯定也是天才

@@ -1,7 +1,7 @@
 ---
 title: DownUnderCTF 2025
 published: 2025-07-18
-updated: 2025-07-22
+updated: 2025-08-05
 description: "DownUnderCTF 2025 writeup"
 image: ""
 tags: ["CTF Writeup"]
@@ -10,7 +10,7 @@ draft: false
 ---
 
 星期六開會 + 聚餐時間就這麼不見了，只寫完三題 ~~beginner 等級的題目 好難過~~  
-這次有 eating 大電神帶我打，eating 最電了 ⚡
+這次跟 eating 一起
 
 536 th /2336
 
