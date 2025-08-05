@@ -9,7 +9,7 @@ category: "CTF Writeup"
 draft: true
 ---
 
-跟 eating 一起打，這次計分沒有分開計 w
+跟 eating 一起打，這次計分沒有分開計
 
 131 th / 554
 
@@ -195,7 +195,7 @@ shaktictf{u_g0t_wh@t_u_w15h3d__th3_s3@sh311_f1@g}
 
 ---
 
-分享一下很酷的東西，如果隊友沒有提示我的話我可能這輩子都找不到這次的 welcome flag 了
+分享一下很酷的東西，少了提示可能這輩子都找不到 welcome flag 了
 
 不確定甚麼原理，但是在 discord 裡面，這一段符號後面的內容除了把整份文字複製下來才可以看到，並且送出訊息後不會通知
 
