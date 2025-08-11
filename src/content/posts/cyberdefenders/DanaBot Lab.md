@@ -122,7 +122,7 @@ md5sum resources.dll
 
 ```txt
 I successfully completed DanaBot Blue Team Lab at @CyberDefenders!
-https://cyberdefenders.org/blueteam-ctf-challenges/achievements/pinzhenhuang0910/danabot/
+https://cyberdefenders.org/blueteam-ctf-challenges/achievements/n1ght0w1/danabot/
 
 #CyberDefenders #CyberSecurity #BlueYard #BlueTeam #InfoSec #SOC #SOCAnalyst #DFIR #CCD #CyberDefender
 ```
