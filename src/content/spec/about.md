@@ -112,6 +112,7 @@ draft: false
   - **No Hack No CTF 2025**  
     28 th / 473
   - **AIS3 2025**
+    結業
 
 - **2025.08**
 
