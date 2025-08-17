@@ -3,7 +3,7 @@ title: Tomcat Takeover Lab
 published: 2025-08-08
 updated: 2025-08-08
 description: "CyberDefenders Tomcat Takeover Lab writeup"
-image: ""
+image: "/assets/cyberdefenders/Tomcat_Takeover_Lab/cover.png"
 tags: ["CyberDefenders", "Blue Team CTF"]
 category: "CyberDefenders"
 draft: false

@@ -3,7 +3,7 @@ title: DanaBot Lab
 published: 2025-08-02
 updated: 2025-08-03
 description: "CyberDefenders DanaBot Lab writeup"
-image: ""
+image: "/assets/cyberdefenders/DanaBot_Lab/cover.png"
 tags: ["CyberDefenders", "Blue Team CTF"]
 category: "CyberDefenders"
 draft: false

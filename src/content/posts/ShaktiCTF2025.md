@@ -3,7 +3,7 @@ title: Shakti CTF 2025
 published: 2025-07-26
 updated: 2025-08-05
 description: "Shakti CTF 2025 writeup"
-image: ""
+image: "/assets/ShaktiCTF2025/cover.png"
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
 draft: true
