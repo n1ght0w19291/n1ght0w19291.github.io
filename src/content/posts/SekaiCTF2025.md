@@ -6,7 +6,7 @@ description: "SekaiCTF 2025 writeup"
 image: "/assets/SekaiCTF2025/cover.png"
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
-draft: true
+draft: false
 ---
 
 ![score](/assets/SekaiCTF2025/image.png)
