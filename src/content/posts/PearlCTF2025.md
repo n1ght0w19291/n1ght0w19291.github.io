@@ -3,7 +3,7 @@ title: PearlCTF 2025
 published: 2025-03-10
 updated: 2025-07-09
 description: "PearlCTF 2025 writeup"
-image: ""
+image: "/assets/PearlCTF2025/cover.png"
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
 draft: false

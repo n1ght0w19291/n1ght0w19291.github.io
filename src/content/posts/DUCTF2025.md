@@ -3,7 +3,7 @@ title: DownUnderCTF 2025
 published: 2025-07-18
 updated: 2025-08-05
 description: "DownUnderCTF 2025 writeup"
-image: ""
+image: "/assets/DUCTF2025/cover.png"
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
 draft: false

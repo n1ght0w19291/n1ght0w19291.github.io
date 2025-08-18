@@ -3,7 +3,7 @@ title: TSC CTF 2025
 published: 2025-01-17
 updated: 2025-07-09
 description: "TSC CTF 2025 writeup"
-image: ""
+image: "/assets/TSCCTF2025/cover.png"
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
 draft: false

@@ -3,7 +3,7 @@ title: My First CTF & Pre-exam 2025
 published: 2025-05-27
 updated: 2025-07-09
 description: "My First CTF & Pre-exam 2025 writeup"
-image: ""
+image: "/assets/Pre-exam2025/mfctflogo.png"
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
 draft: false

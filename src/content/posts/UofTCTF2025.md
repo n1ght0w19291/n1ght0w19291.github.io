@@ -3,7 +3,7 @@ title: UofTCTF 2025
 published: 2025-01-11
 updated: 2025-07-09
 description: "UofTCTF 2025 Writeup"
-image: ""
+image: "/assets/UofTCTF/cover.png"
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
 draft: false

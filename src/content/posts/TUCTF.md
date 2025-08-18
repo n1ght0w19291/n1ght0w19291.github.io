@@ -3,7 +3,7 @@ title: TUCTF
 published: 2025-01-25
 updated: 2025-07-09
 description: "TUCTF Writeup"
-image: ""
+image: "/assets/TUCTF/cover.png"
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
 draft: false

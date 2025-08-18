@@ -3,7 +3,7 @@ title: PicoCTF 2025
 published: 2025-03-20
 updated: 2025-07-09
 description: "picoCTF 2025 writeup"
-image: ""
+image: "/assets/picoCTF/picoCTFlogo.png"
 tags: ["CTF Writeup", "picoCTF"]
 category: "CTF Writeup"
 draft: false
