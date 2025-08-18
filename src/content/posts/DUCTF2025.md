@@ -12,7 +12,7 @@ draft: false
 星期六開會 + 聚餐時間就這麼不見了，只寫完三題 ~~beginner 等級的題目 好難過~~  
 這次跟 eating 一起
 
-536 th /2336
+536 / 2336
 
 ![](/assets/DUCTF2025/Pasted%20image%2020250720173209.png)
 

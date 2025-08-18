@@ -9,7 +9,7 @@ category: "CTF Writeup"
 draft: false
 ---
 
-44 th / 1024
+44 / 1024
 
 ![團隊成績](/assets/PearlCTF2025/team.png)
 

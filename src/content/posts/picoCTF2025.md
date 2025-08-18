@@ -18,7 +18,7 @@ draft: false
 
 :::note[團隊排名]
 
-231 th / 10460
+231 / 10460
 ![team rank - 231/10460](/assets/picoCTF2025/summary/image-2.png)
 
 :::

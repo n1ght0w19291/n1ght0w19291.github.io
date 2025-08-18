@@ -9,7 +9,7 @@ category: "CTF Writeup"
 draft: false
 ---
 
-85 th / 509
+85 / 509
 
 很努力地去開提示，賭自己能不能多寫幾題，現實是，不能 (╥﹏╥)
 

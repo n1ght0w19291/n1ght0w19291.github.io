@@ -11,7 +11,7 @@ draft: true
 
 跟 eating 一起打，這次計分沒有分開計
 
-131 th / 554
+131 / 554
 
 ![](/assets/ShaktiCTF2025/Pasted%20image%2020250726231045.png)
 
