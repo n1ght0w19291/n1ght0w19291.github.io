@@ -13,7 +13,7 @@ draft: false
 
 > 不用很厲害才開始，要先開始才會很厲害
 
-目前就讀臺北市立大學資訊科學系，大三。對程式設計與資安領域充滿興趣，持續透過開發實作與 CTF 比賽累積實戰經驗。
+就讀臺北市立大學資訊科學系，大三。對程式設計與資安領域充滿興趣，持續透過開發實作與 CTF 比賽累積實戰經驗。
 
 目前專注於後端開發與資安相關技術，未來希望朝這兩個方向深入發展。
 
@@ -21,13 +21,19 @@ draft: false
 
 - **專案開發**
 
-  - [請假系統維護](#請假系統維護團隊)
-  - [減碳系統開發](#減碳系統開發團隊)
+  - [請假系統維護](/posts/project/utaipei_portal/)
+  - [減碳系統開發](/posts/project/utaipei_carbon_diary)
 
 - **其他**
   - 參加臺北程式設計節黑客松（城市儀表板／城市通微服務）
   - 大二上擔任「Java 程式設計」課程助教
   - CPE 最高題數 4 題
+  - 臺北市立大學資訊科學系系學會
+    - 第 17 屆 技術組外聘人員、儲備幹部
+    - 第 18 屆 技術組組長
+  - 臺北市立大學資訊科學系學生會
+    - 第 11 屆 資訊部外聘人員
+    - 第 12 屆 資訊部部員
   - 參加 AIS3 2025 軟體、網頁及 IoT 安全組 結業
   - 第十屆 AIS3 好厲駭 高階培訓模式學員
 
@@ -123,40 +129,6 @@ draft: false
     441 / 1060
   - **HITCON CTF 2025**  
     67 / 1289
-
----
-
-## 專案經歷
-
-### 請假系統維護團隊
-
-<img src="/assets/images/project/portal_img.png" alt="portal" style="max-height: 400px; max-width: 50%; border-radius: 16px;" />
-
-2024/07 - present
-
-> 學生可於此系統進行請假相關事宜，並檢視請假紀錄。
-
-於上線一年後加入維護團隊，與現團隊成員一同維護請假系統，並且參與後續前端開發。
-
-`React` | `JavaScript` | `CSS`
-
-[查看專案 > 請假系統](https://portal.utaipei.edu.tw/)
-
-### 減碳系統開發團隊
-
-<img src="/assets/images/project/carbon_img.png" alt="carbon diary" style="max-height: 400px; max-width: 50%; border-radius: 16px;" />
-
-2024/08 - 2025/07
-
-> 學生用餐時若有攜帶環保餐具，可掃描店家 QRCode，並於本系統紀錄減碳次數，管理員可於管理者介面檢視減碳紀錄、抽獎名單及下載.csv。
-
-負責前端開發，並且參與後續維護。
-
-因學校政策減碳系統無後續使用規劃，於 2025 年 7 月停止維護。
-
-`React` | `Next.js` | `TypeScript` | `CSS`
-
-[查看專案 > Carbon Diary](https://portal.utaipei.edu.tw/)
 
 ---
 
