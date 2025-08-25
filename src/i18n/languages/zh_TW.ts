@@ -2,37 +2,37 @@ import Key from "../i18nKey";
 import type { Translation } from "../translation";
 
 export const zh_TW: Translation = {
-  [Key.home]: "首頁",
-  [Key.about]: "關於",
-  [Key.archive]: "彙整",
-  [Key.search]: "搜尋",
+  [Key.home]: "Home",
+  [Key.about]: "About",
+  [Key.archive]: "Archive",
+  [Key.search]: "Search",
 
-  [Key.tags]: "標籤",
-  [Key.categories]: "分類",
-  [Key.recentPosts]: "最新文章",
+  [Key.tags]: "Tags",
+  [Key.categories]: "Categories",
+  [Key.recentPosts]: "Recent Posts",
 
-  [Key.comments]: "評論",
+  [Key.comments]: "Comments",
 
-  [Key.untitled]: "無標題",
-  [Key.uncategorized]: "未分類",
-  [Key.noTags]: "無標籤",
+  [Key.untitled]: "Untitled",
+  [Key.uncategorized]: "Uncategorized",
+  [Key.noTags]: "No Tags",
 
-  [Key.wordCount]: "字",
-  [Key.wordsCount]: "字",
-  [Key.minuteCount]: "分鐘",
-  [Key.minutesCount]: "分鐘",
-  [Key.postCount]: "篇文章",
-  [Key.postsCount]: "篇文章",
+  [Key.wordCount]: "word",
+  [Key.wordsCount]: "words",
+  [Key.minuteCount]: "minute",
+  [Key.minutesCount]: "minutes",
+  [Key.postCount]: "post",
+  [Key.postsCount]: "posts",
 
-  [Key.themeColor]: "主題色",
+  [Key.themeColor]: "Theme Color",
 
-  [Key.lightMode]: "亮色",
-  [Key.darkMode]: "暗色",
-  [Key.systemMode]: "跟隨系統",
+  [Key.lightMode]: "Light",
+  [Key.darkMode]: "Dark",
+  [Key.systemMode]: "System",
 
-  [Key.more]: "更多",
+  [Key.more]: "More",
 
-  [Key.author]: "作者",
-  [Key.publishedAt]: "發佈於",
-  [Key.license]: "許可協議",
+  [Key.author]: "Author",
+  [Key.publishedAt]: "Published at",
+  [Key.license]: "License",
 };
