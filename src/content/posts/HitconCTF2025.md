@@ -6,7 +6,7 @@ description: "HITCON CTF 2025 writeup"
 image: "/assets/HitconCTF2025/logo.png"
 tags: ["CTF Writeup"]
 category: "CTF Writeup"
-draft: true
+draft: false
 ---
 
 是 HITCON CTF！太酷啦~  
@@ -33,11 +33,11 @@ draft: true
 
 ### git-playground
 
-這個程式是一個模擬的 Git playground，使用者可以在 `/work` 目錄下執行部分 Git 指令和基本 Unix 指令  
+這個程式讓使用者可以在 `/work` 目錄下執行部分 Git 指令和基本 Unix 指令  
 程式會初始化 Git repository，設置環境變數，並提供一個命令行介面
 
-這題的`run.sh`裡面提到`FLAG is in the environment variable`  
-然後環境有 `less` 這種 pager，可以在 `git log` 或 `git show` 的畫面中進入 `less`，這一題不能用 `git show`，會因為黑名單顯示 `Dont't try to hack me`  
+這題的`run.sh` 裡面提到 `FLAG is in the environment variable`  
+然後環境有 `less` ，可以在 `git log` 或 `git show` 的畫面中進入 `less`，但這一題不能用 `git show`，會因為黑名單顯示 `Dont't try to hack me`  
 `less` 支援 `!command`，允許在 less 裡執行指令，進而讀取環境變數
 
 ```bash
@@ -55,7 +55,7 @@ Enter your command: git show
 Dont't try to hack me
 ```
 
-改成用 `git log` ， `git log` 需要 pager 的指令，會呼叫 `less` 來瀏覽輸出
+`git log` 會呼叫 `less` 來瀏覽輸出
 
 ```bash
 Enter your command: git log
@@ -66,8 +66,7 @@ Date:   Sat Aug 23 16:07:27 2025 +0000
     a
 ```
 
-`less` 支援輸入 `!command` 來執行外部指令  
-可以透過 `!set` 來顯示 shell 當前環境變數
+透過 `!set` 來顯示 shell 當前環境變數
 
 ```bash
 !set
@@ -103,7 +102,7 @@ USER='root'
 !done  (press RETURN)
 ```
 
-就拿到 flag 了
+拿到 flag 了
 
 ![](/assets/HitconCTF2025/IMG-20250824001655804.png)
 
@@ -116,6 +115,7 @@ hitcon{Bu5yb0X_34511y_cR4sH_Wh3N_bu117_w17h_C14Ng?}
 ---
 
 好難啊 (╥﹏╥)  
+大比賽還是要多看看，本來以為打了幾場 CTF 應該算有學到一點皮毛，打完只覺得：我根本不會打 CTF  
 剩下的題目翻了都沒什麼想法，打比賽的時候還有點不舒服，有一半的比賽時間都在睡覺 www  
 再多練一下 QQ  
-下個 CTF 再見~
+下個 CTF 見~
