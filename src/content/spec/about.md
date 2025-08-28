@@ -17,12 +17,13 @@ draft: false
 
 目前專注於後端開發與資安相關技術，未來希望朝這兩個方向深入發展。
 
-就學期間：
+大學就學期間：
 
 - **專案開發**
 
   - [請假系統維護](/posts/project/utaipei_portal/)
   - [減碳系統開發](/posts/project/utaipei_carbon_diary)
+  - [系學會網站開發](/posts/project/utaipei_utcssa_official/)
 
 - **其他**
   - 參加臺北程式設計節黑客松（城市儀表板／城市通微服務）
@@ -30,7 +31,7 @@ draft: false
   - CPE 最高題數 4 題
   - 臺北市立大學資訊科學系系學會
     - 第 17 屆 技術組外聘人員、儲備幹部
-    - 第 18 屆 技術組組長
+    - 第 18 屆 技術股股長
   - 臺北市立大學資訊科學系學生會
     - 第 11 屆 資訊部外聘人員
     - 第 12 屆 資訊部部員
@@ -145,6 +146,7 @@ draft: false
 - React
 - Next.js
 - Vue.js
+- Astro
 - PHP
 
 ### DevOps

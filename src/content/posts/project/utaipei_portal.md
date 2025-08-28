@@ -1,7 +1,7 @@
 ---
 title: Portal
 published: 2025-08-25
-updated: 2025-08-25
+updated: 2025-08-28
 description: "請假系統團隊專案紀錄"
 image: "/assets/project/utaipei_portal/portal_img.png"
 tags: ["Project", "UTaipei"]
@@ -32,6 +32,16 @@ draft: false
 
 [查看專案 > 請假系統](https://portal.utaipei.edu.tw/)
 
+### 期間在前端的貢獻
+
+- **Setting Menu**：新增 Setting Menu 並完成手機、電腦切版
+- **關於團隊頁面**：修改原有頁面，改為 logo 切換成員名單，並優化摩天輪樣式計算
+- **Markdown 樣式**：支援更多 Markdown 語法與樣式
+- **常見問題**：新增 FAQ modal 與問題內容
+- **歷史公告**：新增公告 modal，串接 Firebase API，依 start time 逆序顯示
+- **修復自動填入錯誤**：修正登入按鈕在密碼第一碼與 autofill 下未啟用的問題
+- **Playwright e2e 測試**：撰寫前端頁面測試，並在 GitHub Action 新增 `playwright.yml`
+
 ## 心得
 
 ### 進團隊前
@@ -54,9 +64,9 @@ draft: false
 
 即使在一年後的今天回頭看，仍然能感受到當初那份悸動。
 
-寒假後我們又為系統進行部分重構，比較酷的是給請假系統也加上了 Playwright e2e 測試，以及 infra 大神 ErEr 把 CRA 換成了他最喜歡的 Vite
+寒假後我們又為系統進行部分重構，比較酷的是給請假系統也加上了 Playwright e2e 測試，以及 infra 大神 ErEr 把 CRA 換成了他最喜歡的 Vite 。
 
-### 維運
+### 日常維運
 
 開學之後，主要的工作大概是：在收到使用者回報有人填寫之後，盡快依照內容去查 log，或是和相關單位聯絡，幫使用者快速解決問題。  
 有時候表單在上課時間寄來，如果剛好有空就會忍不住先排查（其實是不太好的習慣）。要是當天沒帶電腦，就少了一次學習和實作的機會。
