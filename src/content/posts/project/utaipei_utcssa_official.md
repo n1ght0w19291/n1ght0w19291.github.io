@@ -1,7 +1,7 @@
 ---
 title: UTCSSA Official
 published: 2025-08-28
-updated: 2025-08-29
+updated: 2025-08-30
 description: "系學會會網專案紀錄"
 image: "/assets/project/utaipei_utcssa_official/website_index_mobile.png"
 tags: ["Project", "UTaipei"]
@@ -24,7 +24,8 @@ draft: false
 
 `Astro` | `JavaScript` | `CSS` | `SSR` | `Supabase` | `Supabase API` | `Github Action`
 
-[查看專案 > UTCSSA](https://utcssa.org/)
+[查看專案 > UTCSSA](https://utcssa.org/)  
+如果網頁無法查看或正常顯示，可能是學校停電或是正在維護中。
 
 ### 個人貢獻
 
