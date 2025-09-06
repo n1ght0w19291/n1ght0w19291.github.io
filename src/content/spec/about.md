@@ -137,29 +137,11 @@ draft: false
 
 ## Skills
 
-### 語言與框架
-
-- C
-- C++
-- Java
-- Python
-- JavaScript
-- TypeScript
-- React
-- Next.js
-- Vue.js
-- Astro
-- PHP
-
-### DevOps
-
-- Docker
-- Git
-- GitHub
-
-### 資料庫
-
-- MySQL
+| 類別       | 技能                                                                             |
+| ---------- | -------------------------------------------------------------------------------- |
+| 語言與框架 | C, C++, Java, Python, JavaScript, TypeScript, React, Next.js, Vue.js, Astro, PHP |
+| DevOps     | Docker, Git, GitHub                                                              |
+| 資料庫     | MySQL                                                                            |
 
 ---
 
