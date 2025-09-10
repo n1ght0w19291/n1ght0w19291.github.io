@@ -43,12 +43,12 @@ draft: false
 - [picoCTF](https://play.picoctf.org/users/n1ght0w1)
 - [LeetCode](https://leetcode.com/u/n1ght0w1/)
 
-<div style="max-width: 800px; margin: auto; text-align: center; width: 100%;">
+<div style="max-width: 800px; margin: auto; text-align: center; width: 100%; background-color: rgba(254, 254, 254, 1); border: 1px solid #ddd;  border-radius: 6px; ">
   <img src="https://ghchart.rshah.org/n1ght0w19291" 
        alt="GitHub Contributions" 
-       style="width: 100%; border: 1px solid #ddd; border-radius: 6px; padding: 4px 10px; background-color: white;">
+       style="width: 100%; padding: 0px 10px;">
 
-  <div style="margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px;width: 100%">
+  <div style="margin: 10px 0px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px;width: 100%; color: #555">
     <span>Less</span>
     <div style="width: 14px; height: 14px; background-color: #ebedf0; border: 1px solid #ccc;"></div>
     <div style="width: 14px; height: 14px; background-color: #c6e48b;"></div>
