@@ -19,6 +19,7 @@ import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
 import { pathsEqual, url } from "../utils/url-utils";
 import "katex/dist/katex.css";
+import { generateOGImage } from "@/pages/api/OGImage";
 
 interface Props {
 	title?: string;
@@ -70,6 +71,8 @@ const bannerOffsetByPosition = {
 };
 const bannerOffset =
 	bannerOffsetByPosition[siteConfig.banner.position || "center"];
+
+const ogImage = await generateOGImage(pageTitle ?? siteConfig.title);
 ---
 
 <!DOCTYPE html>
@@ -93,6 +96,10 @@ const bannerOffset =
         ) : (
         <meta property="og:type" content="website" />
         )}
+		<meta property="og:image" content={ogImage ?? ""} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
 
 		<meta name="twitter:card" content="summary_large_image">
 		<meta property="twitter:url" content={Astro.url}>
