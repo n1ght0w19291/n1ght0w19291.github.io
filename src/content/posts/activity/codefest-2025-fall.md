@@ -4,7 +4,7 @@ published: 2025-10-28
 updated: 2025-11-10
 description: "2025 臺北秋季程式設計節 心得"
 image: "/assets/activity/codefest-2025-fall/cover.png"
-tags: ["hackathon", "codefest"]
+tags: ["Hackathon", "Codefest"]
 category: "Event Journal"
 draft: true
 ---
