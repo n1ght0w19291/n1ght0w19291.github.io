@@ -63,101 +63,122 @@ draft: false
 
 ## 學歷
 
-- **臺北市立大學**  
-  資訊科學系 大三  
-  就讀中  
-  2023/09 - present
-- **臺北市立中山女子高級中學**  
-  普通科 高中  
-  畢業  
-  2019/09 - 2022/06
+<div style="display: flex; flex-direction: column; gap: 36px;">
+
+  <div style="display: flex; align-items: center; border-radius: 8px; padding: 12px 16px;">
+    <img src="/assets/images/school/UT.png" alt="臺北市立大學" style="width: 60px; height: 60px; border-radius: 8px; margin-right: 16px; background-color: white; padding: 4px;">
+    <div>
+      <strong>臺北市立大學</strong><br>
+      資訊科學系 大三<br>
+      就讀中<br>
+      <small>2023/09 - present</small>
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: center; border-radius: 8px; padding: 12px 16px;">
+    <img src="/assets/images/school/ZSGH.png" alt="臺北市立中山女子高級中學" style="width: 60px; height: 60px; border-radius: 8px; margin-right: 16px; background-color: white; padding: 4px;">
+    <div>
+      <strong>臺北市立中山女子高級中學</strong><br>
+      普通科 高中<br>
+      畢業<br>
+      <small>2019/09 - 2022/06</small>
+    </div>
+  </div>
+
+</div>
 
 ---
 
 ## 其他經歷
 
-- **2022**
+- **2025.11**
 
-  - **GICS 資安女婕思**  
-    資安闖天關 高中職組 初賽
-
-- **2024.05**
-
-  - **2024 臺北春季程式設計節 城市儀表板大黑客松**  
-    進入決選
-
-- **2024.09**
-
-  - **2024 臺北秋季程式設計節 城市通微服務大黑客松**  
+  - **2025 臺北秋季程式設計節 城市通微服務大黑客松**  
     初賽
-  - **PatriotCTF**  
-    162 / 1360
-
-- **2024.10**
-  - **IRON CTF 2024**  
-    29 / 1033
-- **2024.11**
-
-  - **2024 Haunted Brewery**  
-    40 / 340
-  - **臺北市立大學 113.1 全校程式設計實作競賽**  
-    佳作
-  - **INTIGRITI 1337UP LIVE 2024**  
-    66 / 1061
-
-- **2024.12**
-
-  - **0xL4ugh CTF**  
-    104 / 308
-
-- **2025.01**
-
-  - **IrisCTF2025**  
-    242 / 1064
-  - **TSCCTF2025**  
-    85 / 509
-
-- **2025.03**
-
-  - **PearlCTF 2025**  
-    44 / 1024
-  - **picoCTF 2025**  
-    231 / 10460
-
-- **2025.05**
-
-  - **MyFirstCTF 2025**  
-    11 / 83 ，潛力獎
-  - **Pre-exam 2025**  
-    186 / 389
-
-- **2025.07**
-
-  - **No Hack No CTF 2025**  
-    28 / 473
-  - **AIS3 2025**  
-    軟體、網頁及 IoT 安全組 結業
-
-- **2025.08**
-
-  - **WHY2025 CTF**  
-    102 / 1806
-  - **SekaiCTF 2025**  
-    441 / 1060
-  - **HITCON CTF 2025**  
-    67 / 1289
-  - **TFC CTF 2025**  
-    359 / 1791
 
 - **2025.09**
 
   - **2025 AEGIS 神盾盃 初賽**  
     15 / 40
 
-- **2025.11**
+- **2025.08**
 
-  - **2025 臺北秋季程式設計節 城市通微服務大黑客松**  
+  - **TFC CTF 2025**  
+    359 / 1791
+  - **HITCON CTF 2025**  
+    67 / 1289
+  - **SekaiCTF 2025**  
+    441 / 1060
+  - **HITCON 2025**  
+    會眾
+  - **WHY2025 CTF**  
+    102 / 1806
+  - **COSCUP x RubyConf TW 2025**  
+    會眾
+
+- **2025.07**
+
+  - **AIS3 2025**  
+    軟體、網頁及 IoT 安全組 結業
+  - **No Hack No CTF 2025**  
+    28 / 473
+
+- **2025.05**
+
+  - **Pre-exam 2025**  
+    186 / 389
+  - **MyFirstCTF 2025**  
+    11 / 83 ，潛力獎
+
+- **2025.03**
+
+  - **picoCTF 2025**  
+    231 / 10460
+  - **PearlCTF 2025**  
+    44 / 1024
+
+- **2025.01**
+
+  - **TSCCTF2025**  
+    85 / 509
+  - **IrisCTF2025**  
+    242 / 1064
+
+- **2024.12**
+
+  - **0xL4ugh CTF**  
+    104 / 308
+
+- **2024.11**
+
+  - **INTIGRITI 1337UP LIVE 2024**  
+    66 / 1061
+  - **臺北市立大學 113.1 全校程式設計實作競賽**  
+    佳作
+  - **2024 Haunted Brewery**  
+    40 / 340
+
+- **2024.10**
+
+  - **IRON CTF 2024**  
+    29 / 1033
+
+- **2024.09**
+
+  - **PatriotCTF**  
+    162 / 1360
+  - **2024 臺北秋季程式設計節 城市通微服務大黑客松**  
     初賽
+
+- **2024.05**
+
+  - **2024 臺北春季程式設計節 城市儀表板大黑客松**  
+    進入決選
+
+- **2022**
+
+  - **GICS 資安女婕思**  
+    資安闖天關 高中職組 初賽
 
 ---
 
