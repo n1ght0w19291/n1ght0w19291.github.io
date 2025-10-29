@@ -70,13 +70,29 @@ draft: true
 
 ## 心得
 
+### 前兩次黑客松回顧
+
 在聊這次黑客松之前，先偷偷講一下前兩次的經驗。  
 我很喜歡臺北程式設計節的其中一個原因在於他們禁止以簡報呈現（~~禁止畫餅~~），即便是最後交出來的是屍體也得 coding，這才是屬於開發者的黑客松 🔥  
-第一次參加黑客松的時候，從晚上十一點一路卡到凌晨五點，才終於把功能做出來，並且有進入決選對我來說都是其次，feature 完成那一刻的成就感，讓我又去參加了第二次黑客松。  
+第一次參加黑客松的時候，從晚上十一點一路卡到凌晨五點，才終於把功能做出來，進入決選對我來說都是其次，feature 完成那一刻的成就感，讓我又去參加了第二次黑客松。  
 這兩次之間累積了一些開發經驗，讓我發現平常開發的節奏和黑客松完全是兩回事 —— 黑客松的節奏更快，得在一天內生出新的 feature。
-不過這也不是什麼大問題，做完自己的 task 沒有甚麼事情之後，就開始看隊友卡 bug、順便看 PM 抓狂( ◕‿‿◕ )，或是現場來了我另外四個高中同學，都分別屬於不同隊伍，偶爾會去串門子，根本是同學會，然後清晨再跟隊友出去看日出 🌅。
+不過這也不是什麼大問題，做完自己的 task 沒有甚麼事情之後，就開始看隊友卡 bug、順便看 PM 抓狂( ◕‿‿◕ )
+
+發現之前的 repo 還有人留著沒有刪掉，截個 Contribution Graph 紀念一下。
+
+<div>
+    <img src="/assets/activity/codefest-2025-fall/ContributionCodefest2024Spring.png" alt="2024-05-06 coding" style="max-width: 50%; height: auto;" />
+    <small>（圖：2024 臺北春季程式設計節 比賽期間的 GitHub Contribution Graph）</small>
+    <img src="/assets/activity/codefest-2025-fall/ContributionCodefest2024Fall.png" alt="2024-09-09 coding" style="max-width: 50%; height: auto;" />
+    <small>（圖：2024 臺北秋季程式設計節 比賽期間的 GitHub Contribution Graph）</small>
+</div>
+
+另外，還有四個高中同學也參加了初賽，都分別屬於不同隊伍，偶爾會去串門子，根本就是資訊班群的同學會。  
+然後清晨再跟隊友出去看日出 🌅。
 
 <img src="/assets/activity/codefest-2025-fall/sunrise.jpg" alt="2024-09-09 日出" style="max-width: 50%; height: auto;" />
+
+### 這次黑客松心得
 
 這次我們的隊友都屬於跨領域型的工程師，不過少了一個專門負責發想與報告的人。
 
