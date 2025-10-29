@@ -72,7 +72,7 @@ draft: true
 
 ### 前兩次黑客松回顧
 
-在聊這次黑客松之前，先偷偷講一下前兩次的經驗。  
+在聊這次黑客松之前，先偷偷講一下前兩次的經驗，細節有點忘記了，就不另外開一篇了 XD  
 我很喜歡臺北程式設計節的其中一個原因在於他們禁止以簡報呈現（~~禁止畫餅~~），即便是最後交出來的是屍體也得 coding，這才是屬於開發者的黑客松 🔥  
 第一次參加黑客松的時候，從晚上十一點一路卡到凌晨五點，才終於把功能做出來，進入決選對我來說都是其次，feature 完成那一刻的成就感，讓我又去參加了第二次黑客松。  
 這兩次之間累積了一些開發經驗，讓我發現平常開發的節奏和黑客松完全是兩回事 —— 黑客松的節奏更快，得在一天內生出新的 feature。
@@ -81,9 +81,9 @@ draft: true
 發現之前的 repo 還有人留著沒有刪掉，截個 Contribution Graph 紀念一下。
 
 <div>
-    <img src="/assets/activity/codefest-2025-fall/ContributionCodefest2024Spring.png" alt="2024-05-06 coding" style="max-width: 50%; height: auto;" />
+    <img src="/assets/activity/codefest-2025-fall/ContributionCodefest2024Spring.png" alt="2024-05 Github Contribution Graph" style="max-width: 50%; height: auto;" />
     <small>（圖：2024 臺北春季程式設計節 比賽期間的 GitHub Contribution Graph）</small>
-    <img src="/assets/activity/codefest-2025-fall/ContributionCodefest2024Fall.png" alt="2024-09-09 coding" style="max-width: 50%; height: auto;" />
+    <img src="/assets/activity/codefest-2025-fall/ContributionCodefest2024Fall.png" alt="2024-09 Github Contribution Graph" style="max-width: 50%; height: auto;" />
     <small>（圖：2024 臺北秋季程式設計節 比賽期間的 GitHub Contribution Graph）</small>
 </div>
 
@@ -94,6 +94,12 @@ draft: true
 
 ### 這次黑客松心得
 
-這次我們的隊友都屬於跨領域型的工程師，不過少了一個專門負責發想與報告的人。
+這次我們的隊友都屬於跨領域型的工程師，不過少了一個專門負責發想與報告的人。上次學姊太全能了，又發想又當設計師，但我們這次~~出門沒有帶 UI/UX 設計師~~。
 
 黑客松真的很消耗體力，尤其我們這種不睡覺的，不知道之後有沒有體力再參加 (⋟﹏⋞)
+
+---
+
+終於寫完了，期中週真的很地獄  
+然後快要到 AICUP 的初賽截止日了，到處越級打怪的日子真難過。雖然沒什麼成果，但是期末報告書寫完應該會來更新一篇，~~反正報告書寫都寫了~~  
+還有台北探索 (╥﹏╥) ，再也不無聊去投計畫了，事情根本做不完
