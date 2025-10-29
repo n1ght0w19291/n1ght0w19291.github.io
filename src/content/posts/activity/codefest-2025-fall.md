@@ -87,8 +87,8 @@ draft: true
     <small>（圖：2024 臺北秋季程式設計節 比賽期間的 GitHub Contribution Graph）</small>
 </div>
 
-另外，還有四個高中同學也參加了初賽，都分別屬於不同隊伍，偶爾會去串門子，根本就是資訊班群的同學會。  
-然後清晨再跟隊友出去看日出 🌅。
+另外，還有四個高中同學也參加了 2024 臺北秋季程式設計節的初賽，都分別屬於不同隊伍，偶爾會去串門子，根本就是資訊班群的同學會。  
+然後清晨再跟隊友出去看日出 🌅
 
 <img src="/assets/activity/codefest-2025-fall/sunrise.jpg" alt="2024-09-09 日出" style="max-width: 50%; height: auto;" />
 
