@@ -24,15 +24,15 @@ draft: true
 > 後端：Python + MQTT + PostgreSQL
 
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
-  <img src="/assets/activity/codefest-2025-fall/image-4.png" alt="徽章頁面" style="width: 200px;">
-  <img src="/assets/activity/codefest-2025-fall/image-5.png" alt="主頁面" style="width: 200px;">
-  <img src="/assets/activity/codefest-2025-fall/image-6.png" alt="運動紀錄頁面" style="width: 200px;">
-  <img src="/assets/activity/codefest-2025-fall/image-7.png" alt="即時通訊頁面" style="width: 200px;">
-  <img src="/assets/activity/codefest-2025-fall/image-8.png" alt="個人資料頁面" style="width: 200px;">
-  <img src="/assets/activity/codefest-2025-fall/image-9.png" alt="成就頁面" style="width: 200px;">
-  <img src="/assets/activity/codefest-2025-fall/image-10.png" alt="排行榜頁面" style="width: 200px;">
-  <img src="/assets/activity/codefest-2025-fall/image-11.png" alt="徽章詳細頁面" style="width: 200px;">
-  <img src="/assets/activity/codefest-2025-fall/image-12.png" alt="排行榜詳細頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-4.png" alt="頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-5.png" alt="頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-6.png" alt="頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-7.png" alt="頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-8.png" alt="頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-9.png" alt="頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-10.png" alt="頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-11.png" alt="頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-12.png" alt="頁面" style="width: 200px;">
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
