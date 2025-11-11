@@ -1,7 +1,7 @@
 ---
 title: 2025 臺北秋季程式設計節 城市通微服務大黑客松
 published: 2025-10-28
-updated: 2025-11-10
+updated: 2025-11-11
 description: "2025 臺北秋季程式設計節 心得"
 image: "/assets/activity/codefest-2025-fall/cover.png"
 tags: ["Hackathon", "Codefest"]
@@ -16,6 +16,29 @@ draft: true
 後面章節有詳細心得，這邊先講重點：
 
 ### 本次黑客松 feature
+
+> 主題：運動之都  
+> 應用名稱： `Jo Excercise`
+>
+> 前端：Flutter + Vite + Vue3 + TypeScript + Firebase Hosting  
+> 後端：Python + MQTT
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
+  <img src="/assets/activity/codefest-2025-fall/image-4.png" alt="徽章頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-5.png" alt="主頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-6.png" alt="運動紀錄頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-7.png" alt="即時通訊頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-8.png" alt="個人資料頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-9.png" alt="成就頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-10.png" alt="排行榜頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-11.png" alt="徽章詳細頁面" style="width: 200px;">
+  <img src="/assets/activity/codefest-2025-fall/image-12.png" alt="排行榜詳細頁面" style="width: 200px;">
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    <img src="/assets/activity/codefest-2025-fall/image-13.png" alt="Github Contribution" style="max-width: 50%; height: auto;" />
+    <small>（圖：2025 臺北秋季程式設計節 比賽期間的前端 GitHub Contribution Graph）</small>
+</div>
 
 ---
 
@@ -49,7 +72,9 @@ draft: true
 信件裡原本說「面試兩分鐘，深入了解團隊技術背景」，還說可以準備簡報（但沒準備也沒關係）；結果現場又說想聽聽大家對市政的想法（就是主題方向那種想法，不是政治）。  
 雖然跟說好的不太一樣，但反正我們沒被叫去面試，可以安心吃午餐 😌
 
-<img src="/assets/activity/codefest-2025-fall/workshop.jpg" alt="2025-10-24 工作坊" style="max-width: 50%; height: auto;" />
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    <img src="/assets/activity/codefest-2025-fall/workshop.jpg" alt="2025-10-24 工作坊" style="max-width: 50%; height: auto;" />
+</div>
 
 ### 小插曲
 
@@ -66,19 +91,25 @@ draft: true
 
 一進門看到大紅色的婚宴圓桌，我感覺我來錯了地方。
 
-<img src="/assets/activity/codefest-2025-fall/image-3.png" alt="2025-11-08 場地" style="max-width: 50%; height: auto;" />
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    <img src="/assets/activity/codefest-2025-fall/image-3.png" alt="2025-11-08 場地" style="max-width: 50%; height: auto;" />
+</div>
 
 主辦這次送了超大滑鼠墊、一件黑色薄外套、一個~~仿菜市場買菜袋子的~~提袋，其他的不說，來過兩次就知道後面熬夜的時候這個外套絕對不夠暖。  
 上面有趙局長精心設計的 logo，連車輪餅上面都有烙圖案，看的出來局長對這個設計真的很滿意w
 
-<img src="/assets/activity/codefest-2025-fall/image-2.png" alt="車輪餅" style="max-width: 50%; height: auto;" />
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    <img src="/assets/activity/codefest-2025-fall/image-2.png" alt="車輪餅" style="max-width: 50%; height: auto;" />
+</div>
 
 前端 UI 其實刻滿快的，很快就開始跟後端的要要看有沒有 API 可以串接，沒有就開始研究看看 Flutter 的 GPS 功能要怎麼傳到 Firebase Hosting 的前端。  
 不確定是在 dart 那邊沒有寫好所以前端沒有接到，還是前端的呼叫方法錯了，邊開系學會的線上幹部會議邊 debug，最後已經花了三個小時還是沒有成功，只能先放著看看有沒有下一件事情。  
 大概凌晨兩點開始串接 API。那時候後端還沒有全部完成，加上我的 WSL 又有點死了，只能他們先給規格，前端先串 API，串完再進行測試以及修改。  
 四點多的時候部屬上去，前端開始測試，發現除了後端預計的 200 跟 422，出現了一些 403、307 之類的錯誤，開始到處 debug。
 
-<img src="/assets/activity/codefest-2025-fall/image-1.png" alt="2025-11-09 日出" style="max-width: 50%; height: auto;" />
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    <img src="/assets/activity/codefest-2025-fall/image-1.png" alt="2025-11-09 日出" style="max-width: 50%; height: auto;" />
+</div>
 
 最後 deploy 到 Firebase Hosting 的時候，發現其他功能都是正常的，只有即時通訊的部分傳送按鈕沒有反應，剛開始以為是 BaseButton 元件的問題，後來測試完發現是 Firebase Hosting 給的網址是 HTTPS，但是 MQTT 的連線是用 WS（非加密），所以失敗了。  
 前面隊友以為沒事了，狂喝能量飲料讓自己保持清醒，桌上大概有八、九瓶，結果到最後關頭才發現這個問題，看起來快急死了，趕快在伺服器那邊加上 SSL 憑證更改一些設定，終於在開始初選前一兩分鐘成功連線，他絕對是天才。  
@@ -86,7 +117,9 @@ draft: true
 
 雖然沒進決選，但是還是很好奇能進決選的其他隊伍都做了甚麼，不過沒聽兩組就直接睡著了。
 
-<img src="/assets/activity/codefest-2025-fall/image.png" alt="蘋果糖" style="max-width: 50%; height: auto;" />
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    <img src="/assets/activity/codefest-2025-fall/image.png" alt="蘋果糖" style="max-width: 50%; height: auto;" />
+</div>
 
 ## 心得
 
@@ -102,7 +135,7 @@ coding 的同時，官方攝影師一直在到處拍，真的很不自在，尤�
 
 發現之前的 repo 還有人留著沒有刪掉，截個 Contribution Graph 紀念一下。
 
-<div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
     <img src="/assets/activity/codefest-2025-fall/ContributionCodefest2024Spring.png" alt="2024-05 Github Contribution Graph" style="max-width: 50%; height: auto;" />
     <small>（圖：2024 臺北春季程式設計節 比賽期間的 GitHub Contribution Graph）</small>
     <img src="/assets/activity/codefest-2025-fall/ContributionCodefest2024Fall.png" alt="2024-09 Github Contribution Graph" style="max-width: 50%; height: auto;" />
@@ -112,18 +145,34 @@ coding 的同時，官方攝影師一直在到處拍，真的很不自在，尤�
 另外，還有四個高中同學也參加了 2024 臺北秋季程式設計節的初賽，都分別屬於不同隊伍，偶爾會去串門子，根本就是資訊班群的同學會。  
 然後清晨再跟隊友出去看日出 🌅
 
-<img src="/assets/activity/codefest-2025-fall/sunrise.jpg" alt="2024-09-09 日出" style="max-width: 50%; height: auto;" />
+<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+    <img src="/assets/activity/codefest-2025-fall/sunrise.jpg" alt="2024-09-09 日出" style="max-width: 50%; height: auto;" />
+</div>
 
 ### 這次黑客松心得
 
 這次我們的隊友都屬於跨領域型的工程師，不過少了一個專門負責發想與報告的人。上次學姊太全能，又發想主題又當設計師，但我們這次~~出門沒有帶 UI/UX 設計師~~，要自己想辦法。
 
-還是比較習慣自己一個、沒有人在我旁邊的時候寫程式，凌晨有點撐不住了很想睡覺，但是在 debug 的時候隊友一個在旁邊快睡著一直點頭、一個回傳有錯就一直「啊？」，沒有辦法專心檢查跟思考火氣上來了 💢，要睡去旁邊睡！
+還是比較習慣自己一個、沒有人在我旁邊的時候寫程式，凌晨有點撐不住了很想睡覺，但是在 debug 的時候隊友一個在旁邊快睡著一直點頭、一個回傳有錯就一直「啊？」，沒有辦法專心檢查跟思考火氣上來了 💢，要睡可以到旁邊睡，真的 www
 
-佳衛好像說要 Demo 給他看，不要啊 www
+很感謝這次的隊友們，雖然沒有進決選，但我們成功在二十四小時內完成一個微服務，整體來說應該算完整，我覺得大家超強的。  
+感謝 Anorak ，最後一小時緊急處理剛發現的 MQTT 連線問題，辛苦了。  
+感謝 ErEr，處理了後端部屬還有沒有人碰過的 websocket + MQTT 問題，報告辛苦了。  
+感謝 BlueBoy，你是古希臘掌管後端 API 的神，還有凌晨到前端支援 debug，全能電神。  
+感謝 ayuki，處理 DB 設計以及想辦法讓報告能順利進行的同時，還要克服你這兩天倒楣到極致的運氣 xddd，真的很不容易。
+感謝隊友們！
+
+這兩天不想再 coding 了，一個黑客松成功讓我在 wakaTime 的統計榜上用到台灣榜第九名，有點太累了。
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 16px 0;">
+    <img src="/assets/activity/codefest-2025-fall/image-14.png" alt="WakaTime Leaderboard" />
+    <small>（圖：2025-11-11 WakaTime）</small>
+</div>
+
+然後佳衛好像說要 Demo 給他看，我想趕快把 Android Studio 刪掉了，不要啊 www
 
 黑客松真的很消耗體力，尤其是不睡覺的，不知道之後有沒有體力再參加 (⋟﹏⋞)  
-~~但反正下一次春季是雙北的不會去~~
+~~但反正下一次春季是雙北的不會去~~，我需要找到時間好好休息。
 
 ---
 

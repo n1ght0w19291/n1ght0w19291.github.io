@@ -11,6 +11,8 @@ draft: false
 
 # n1ght0w1
 
+<img src="https://wakatime.com/badge/user/627e64fa-481a-41cc-989e-fee4123f4e9b.svg" alt="WakaTime Badge" />
+
 > 不用很厲害才開始，要先開始才會很厲害
 
 就讀臺北市立大學資訊科學系，大三。對程式設計與資安領域充滿興趣，持續透過開發實作與 CTF 比賽累積實戰經驗。
@@ -20,13 +22,15 @@ draft: false
 大學就學期間：
 
 - **專案開發**
-
   - [請假系統維護](/posts/project/utaipei_portal/)
   - [減碳系統開發](/posts/project/utaipei_carbon_diary)
   - [系學會網站開發](/posts/project/utaipei_utcssa_official/)
 
 - **其他**
-  - 參加臺北程式設計節黑客松（城市儀表板／城市通微服務）
+  - 參加 CodeFest Taipei 臺北程式設計節黑客松
+    - 2024 臺北春季程式設計節 城市儀表板大黑客松（進入決選）
+    - 2024 臺北秋季程式設計節 城市通微服務大黑客松（初賽）
+    - 2025 臺北秋季程式設計節 城市通微服務大黑客松（初賽）
   - 大二上擔任「Java 程式設計」課程助教
   - CPE 最高題數 4 題
   - 臺北市立大學資訊科學系系學會
@@ -42,6 +46,7 @@ draft: false
 
 - [picoCTF](https://play.picoctf.org/users/n1ght0w1)
 - [LeetCode](https://leetcode.com/u/n1ght0w1/)
+- [WakaTime](https://wakatime.com/@n1ght0w1?rank=me&page=1&country_code=TW)
 
 <div style="max-width: 800px; margin: auto; text-align: center; width: 100%; background-color: rgba(254, 254, 254, 1); border: 1px solid #ddd;  border-radius: 6px; ">
   <img src="https://ghchart.rshah.org/n1ght0w19291" 
@@ -92,17 +97,14 @@ draft: false
 ## 其他經歷
 
 - **2025.11**
-
   - **2025 臺北秋季程式設計節 城市通微服務大黑客松**  
     初賽
 
 - **2025.09**
-
   - **2025 AEGIS 神盾盃 初賽**  
     15 / 40
 
 - **2025.08**
-
   - **TFC CTF 2025**  
     359 / 1791
   - **HITCON CTF 2025**  
@@ -117,40 +119,34 @@ draft: false
     會眾
 
 - **2025.07**
-
   - **AIS3 2025**  
     軟體、網頁及 IoT 安全組 結業
   - **No Hack No CTF 2025**  
     28 / 473
 
 - **2025.05**
-
   - **Pre-exam 2025**  
     186 / 389
   - **MyFirstCTF 2025**  
     11 / 83 ，潛力獎
 
 - **2025.03**
-
   - **picoCTF 2025**  
     231 / 10460
   - **PearlCTF 2025**  
     44 / 1024
 
 - **2025.01**
-
   - **TSCCTF2025**  
     85 / 509
   - **IrisCTF2025**  
     242 / 1064
 
 - **2024.12**
-
   - **0xL4ugh CTF**  
     104 / 308
 
 - **2024.11**
-
   - **INTIGRITI 1337UP LIVE 2024**  
     66 / 1061
   - **臺北市立大學 113.1 全校程式設計實作競賽**  
@@ -159,24 +155,20 @@ draft: false
     40 / 340
 
 - **2024.10**
-
   - **IRON CTF 2024**  
     29 / 1033
 
 - **2024.09**
-
   - **PatriotCTF**  
     162 / 1360
   - **2024 臺北秋季程式設計節 城市通微服務大黑客松**  
     初賽
 
 - **2024.05**
-
   - **2024 臺北春季程式設計節 城市儀表板大黑客松**  
     進入決選
 
 - **2022**
-
   - **GICS 資安女婕思**  
     資安闖天關 高中職組 初賽
 
