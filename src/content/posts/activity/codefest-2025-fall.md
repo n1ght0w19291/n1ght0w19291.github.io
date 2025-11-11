@@ -2,7 +2,7 @@
 title: 2025 臺北秋季程式設計節 城市通微服務大黑客松
 published: 2025-10-28
 updated: 2025-11-12
-description: "2025 臺北秋季程式設計節 心得"
+description: "2025 臺北秋季程式設計節 參加紀錄與心得"
 image: "/assets/activity/codefest-2025-fall/cover.png"
 tags: ["Hackathon", "Codefest"]
 category: "Event Journal"
@@ -18,9 +18,9 @@ draft: true
 ### 本次黑客松 feature
 
 > 主題：運動之都  
-> 應用名稱： `Jo Excercise`
+> 應用名稱： `Jo Exercise`
 >
-> 前端：Flutter + Vite + Vue3 + TypeScript + Firebase Hosting  
+> 前端：Flutter + Vite + Vue 3 + TypeScript + Firebase Hosting  
 > 後端：Python + MQTT + PostgreSQL
 
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
@@ -168,9 +168,9 @@ coding 的同時，官方攝影師一直在到處拍，真的很不自在，尤�
 想睡的拜託去旁邊睡，這句話是認真的 www
 
 很感謝這次的隊友們，雖然沒有進決選，但我們成功在二十四小時內完成一個微服務，整體來說應該算完整，我覺得大家超強的。  
-感謝 Anorak ，最後一小時緊急處理剛發現的 MQTT 連線問題，辛苦了。  
-感謝 ErEr，處理了後端部屬還有沒有人碰過的 websocket + MQTT 問題，報告辛苦了。  
-感謝 BlueBoy，你是古希臘掌管後端 API 的神，還有凌晨到前端支援 debug，全能電神。  
+感謝 Anorak，最後一小時緊急處理剛發現的 MQTT 連線問題，辛苦了。  
+感謝 ErEr，infra 大神，還處理了沒有人碰過的 websocket + MQTT 問題，報告辛苦了。  
+感謝 BlueBoy，古希臘掌管後端 API 的神，還有凌晨到前端支援 debug，感謝全能電神。  
 感謝 ayuki，處理 DB 設計以及想辦法讓報告能順利進行的同時，還要克服你這兩天倒楣到極致的運氣，真的很不容易。  
 感謝隊友們！！！
 
