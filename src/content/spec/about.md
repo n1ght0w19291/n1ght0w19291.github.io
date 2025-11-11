@@ -27,7 +27,7 @@ draft: false
   - [系學會網站開發](/posts/project/utaipei_utcssa_official/)
 
 - **其他**
-  - 參加 CodeFest Taipei 臺北程式設計節黑客松
+  - 參加 Taipei CodeFest 臺北程式設計節黑客松
     - 2024 臺北春季程式設計節 城市儀表板大黑客松（進入決選）
     - 2024 臺北秋季程式設計節 城市通微服務大黑客松（初賽）
     - 2025 臺北秋季程式設計節 城市通微服務大黑客松（初賽）
