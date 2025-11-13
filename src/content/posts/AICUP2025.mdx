@@ -18,10 +18,11 @@ import LineChart from "../../components/charts/AICUP2025LineChart.jsx";
 ### 參加比賽全靠運氣
 
 某天剛好刷到玉山舉辦的「警示帳戶辨識」比賽，看起來蠻有趣的，點進去一看才發現是影像處理概論教授提過的 AI CUP。  
-雖然我之前完全沒有接觸過 AI 專題，直接參賽感覺風險不小，但若能找隊友一起討論應該會比較安心，所以就和班上幾位同學組成了四人小隊。  
-後來找影像處理概論的教授擔任指導老師，不過教授說我們得分開報名才能各自算期末專題，唯一的好消息是我們可以從 AI CUP 的三個主題自己做選擇，沒有一定要參加影像辨識的主題。結果我等於要同時準備比賽和期末報告，只能硬著頭皮上了——至少省下了想題目的時間。  
+之前完全沒有接觸過 AI 專題，直接參賽感覺風險不小，如果能找隊友一起討論會比較安心，所以就和班上幾位同學組成了四人小隊。  
+後來找影像處理概論的教授擔任指導老師，不過教授說我們得分開報名才能各自算期末專題，四人小隊原地解散。  
+唯一的好消息是我們可以從 AI CUP 的三個主題自己做選擇，沒有一定要參加影像辨識的主題。結果我等於要同時準備比賽和期末報告，只能硬著頭皮上了——至少省下了想題目的時間。  
 本來以為能有隊友一起討論，結果變成個人戰後參賽人數就從四個變成三個。  
-這學期的排程真的太可怕，完全是「要出事」的節奏。
+這學期的排程真的太可怕，現在還要自己參賽，更可怕了。
 
 ## 賽中
 
@@ -45,212 +46,22 @@ import LineChart from "../../components/charts/AICUP2025LineChart.jsx";
 
 <LineChart client:load fallback={<div>Loading chart...</div>} />
 
-這篇就當作一個簡單的紀錄，主要記下第一次提交的結果與最高 F1-score。
+這篇就當作一個簡單的紀錄。  
+仔細看了一下提交時間，我真的有空處理 AI CUP 只有大概兩個禮拜 w
 
-### 第一次 scoring
+### 模型訓練
 
-第一次成功提交的 F1-score 是 0.1046512。  
-使用 LightGBM 做模型，並使用 SMOTE
+#### 最高 F1-score：0.1616766
 
-### F1-score 最高：0.1616766
+不想讀自動機的時候怎麼辦？~~當然是 VS Code 打開開始 train model 啊~~
 
-```python title="model.py"
-import os
-import pandas as pd
-import numpy as np
-from lightgbm import LGBMClassifier, early_stopping, log_evaluation
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import (
-    classification_report,
-    confusion_matrix,
-    precision_recall_curve,
-    auc,
-)
-from imblearn.over_sampling import SMOTE
+<img src="/assets/AICUP2025/IMG-20251009030020250.png" alt="最高 F1-score " />
 
-# ================================
-# 參數設定
-# ================================
-DATA_DIR = "./preliminary/data"
-CACHE_DIR = f"{DATA_DIR}/cache_data"
-os.makedirs(CACHE_DIR, exist_ok=True)
-
-DAYS_LIST = [3, 7, 30]
-TEST_SIZE = 0.2
-RANDOM_STATE = 42
-TARGET_PRECISION = 0.4
-CLASS_WEIGHT_RATIO = 50
-N_ESTIMATORS = 3000
-
-# ================================
-# 讀取資料
-# ================================
-tx = pd.read_csv(f"{DATA_DIR}/acct_transaction.csv")
-alert = pd.read_csv(f"{DATA_DIR}/acct_alert.csv")
-need_to_predict = pd.read_csv(f"{DATA_DIR}/acct_predict.csv")
-
-# ================================
-# 資料前處理
-# ================================
-tx["txn_amt"] = pd.to_numeric(tx["txn_amt"], errors="coerce")
-tx["is_self_txn"] = (
-    tx["is_self_txn"].map({"Y": 1, "N": 0})
-    if tx["is_self_txn"].dtype == object
-    else tx["is_self_txn"]
-)
-tx["txn_date"] = pd.to_datetime(tx["txn_date"])
-tx["is_alert"] = tx["from_acct"].isin(alert["acct"]).astype(int)
-latest_date = (
-    tx.groupby("from_acct")["txn_date"]
-    .max()
-    .reset_index()
-    .rename(columns={"txn_date": "latest_txn_date"})
-)
-tx = tx.merge(latest_date, on="from_acct", how="left")
-
-# ================================
-# 特徵工程函數
-# ================================
-def get_temporal_features(df, days):
-    cache_file = f"{CACHE_DIR}/temporal_features_{days}d.pkl"
-    if os.path.exists(cache_file):
-        return pd.read_pickle(cache_file)
-    print(f"Calculating temporal features for {days} days...")
-    df["days_diff"] = (df["latest_txn_date"] - df["txn_date"]).dt.days
-    df_window = df[df["days_diff"] <= days]
-    stats = (
-        df_window.groupby("from_acct")
-        .agg(
-            txn_amt_count=("txn_amt", "count"),
-            txn_amt_sum=("txn_amt", "sum"),
-            txn_amt_mean=("txn_amt", "mean"),
-            txn_amt_max=("txn_amt", "max"),
-            txn_amt_25p=("txn_amt", lambda x: x.quantile(0.25)),
-            txn_amt_75p=("txn_amt", lambda x: x.quantile(0.75)),
-        )
-        .add_suffix(f"_{days}d")
-    )
-    stats.to_pickle(cache_file)
-    return stats
-
-def aggregate_features(df, days_list):
-    acct_stats = df.groupby("from_acct").agg(
-        txn_amt_count=("txn_amt", "count"),
-        txn_amt_sum=("txn_amt", "sum"),
-        txn_amt_mean=("txn_amt", "mean"),
-        txn_amt_max=("txn_amt", "max"),
-        channel_type_nunique=("channel_type", "nunique"),
-        currency_type_nunique=("currency_type", "nunique"),
-        is_self_txn_mean=("is_self_txn", "mean"),
-        to_acct_nunique=("to_acct", "nunique"),
-        to_acct_type_nunique=("to_acct_type", "nunique"),
-        from_acct_type_first=("from_acct_type", "first"),
-    )
-
-    for days in days_list:
-        feats = get_temporal_features(df.copy(), days)
-        acct_stats = acct_stats.merge(
-            feats, left_index=True, right_index=True, how="left"
-        )
-
-    acct_stats["txn_amt_25p"] = df.groupby("from_acct")["txn_amt"].quantile(0.25)
-    acct_stats["txn_amt_75p"] = df.groupby("from_acct")["txn_amt"].quantile(0.75)
-    acct_stats.fillna(0, inplace=True)
-    return acct_stats
-
-# ================================
-# 準備訓練資料
-# ================================
-exclude_accounts = set(need_to_predict["acct"])
-tx_train = tx[~tx["from_acct"].isin(exclude_accounts)]
-
-X = aggregate_features(tx_train, DAYS_LIST)
-y = tx_train.groupby("from_acct")["is_alert"].max().reindex(X.index).astype(int).values
-
-# ================================
-# 切分訓練/驗證集
-# ================================
-X_train, X_valid, y_train, y_valid = train_test_split(
-    X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE, stratify=y
-)
-
-# ================================
-# SMOTE 過採樣
-# ================================
-sm = SMOTE(random_state=RANDOM_STATE)
-X_train_res, y_train_res = sm.fit_resample(X_train, y_train)
-
-# ================================
-# 訓練 LightGBM 模型
-# ================================
-model = LGBMClassifier(
-    objective="binary",
-    boosting_type="gbdt",
-    min_child_samples=70,
-    num_leaves=31,
-    learning_rate=0.05,
-    colsample_bytree=0.8,
-    subsample=0.8,
-    subsample_freq=5,
-    n_estimators=N_ESTIMATORS,
-    class_weight={0: 1, 1: CLASS_WEIGHT_RATIO},
-)
-model.fit(
-    X_train_res,
-    y_train_res,
-    eval_set=[(X_valid, y_valid)],
-    eval_metric="average_precision",
-    callbacks=[early_stopping(50), log_evaluation(100)],
-)
-
-# ================================
-# threshold 選擇：F1-score 最大
-# ================================
-y_pred_prob = model.predict_proba(X_valid)[:, 1]
-precision, recall, thresholds = precision_recall_curve(y_valid, y_pred_prob)
-f1_scores = 2 * (precision * recall) / (precision + recall + 1e-8)
-best_idx = np.argmax(f1_scores)
-best_thresh = thresholds[best_idx]
-print(f"Best threshold by F1: {best_thresh:.7f}, max F1: {f1_scores[best_idx]:.7f}")
-
-y_pred = (y_pred_prob > best_thresh).astype(int)
-print(confusion_matrix(y_valid, y_pred))
-print(classification_report(y_valid, y_pred, digits=4))
-
-pr_auc_score = auc(recall, precision)
-print(f"Best threshold: {best_thresh:.7f}, PR-AUC: {pr_auc_score:.7f}")
-print(confusion_matrix(y_valid, y_pred))
-print(classification_report(y_valid, y_pred, digits=4))
-
-# ================================
-# 預測測試集
-# ================================
-X_test = aggregate_features(tx, DAYS_LIST)
-X_test = (
-    need_to_predict[["acct"]]
-    .merge(X_test, left_on="acct", right_index=True, how="left")
-    .fillna(0)
-)
-X_test = X_test.set_index("acct").reindex(columns=X.columns, fill_value=0)
-
-y_test_pred_prob = model.predict_proba(X_test)[:, 1]
-y_test_pred = (y_test_pred_prob > best_thresh).astype(int)
-
-submission = pd.DataFrame({"acct": X_test.index, "label": y_test_pred})
-submission.to_csv(f"{DATA_DIR}/submission.csv", index=False)
-
-# ================================
-# 確認結果
-# ================================
-
-result_f1_score = submission["label"].mean()
-print(f"Predicted positive rate: {result_f1_score:.7f}")
-```
 
 ## 後記
 
 參加這次比賽除了要同時完成影像辨識概論的期末專題外，主要還是想藉此機會實際接觸 AI 模型訓練。  
-由於這學期事情真的太多，原本對能不能進初賽就沒有期待，我在期中繳交的期末報告裡甚至寫下目標只是「達到 baseline 0.2」，結果我甚至沒能完成目標。  
+由於這學期事情真的太多，原本對能不能進初賽就沒有期待，我在期中繳交的期末報告裡甚至寫下目標只是「達到 baseline 0.2」，結果我甚至沒能完成目標，期末報告的時候不知道教授會不會覺得這個成績很不行，但同時要完成太多事情，實在沒有更多時間了。  
 很多時候在本地訓練時看起來模型有在進步，但實際上是 overfitting。看著線上評分越來越低，只能一邊找原因、一邊嘗試在提升 F1-score 的同時避免過擬合。  
 比賽結束後我仍嘗試做一些改進，但因為沒有官方評分系統了，即使指標看似變好，也無法確定是否仍然 overfitting。  
 真的很好奇那些能達到 F1-score 0.7 的參賽者是怎麼做到的，我感覺自己還沒掌握到訣竅。  
