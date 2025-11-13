@@ -23,6 +23,9 @@ draft: true
 > 前端：Flutter + Vite + Vue 3 + TypeScript + Firebase Hosting  
 > 後端：Python + MQTT + PostgreSQL
 
+<details>
+<summary>Jo Exercise 應用頁面截圖</summary>
+
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
   <img src="/assets/activity/codefest-2025-fall/image-4.png" alt="頁面" style="width: 200px;">
   <img src="/assets/activity/codefest-2025-fall/image-5.png" alt="頁面" style="width: 200px;">
@@ -34,6 +37,7 @@ draft: true
   <img src="/assets/activity/codefest-2025-fall/image-11.png" alt="頁面" style="width: 200px;">
   <img src="/assets/activity/codefest-2025-fall/image-12.png" alt="頁面" style="width: 200px;">
 </div>
+</details>
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
     <img src="/assets/activity/codefest-2025-fall/image-13.png" alt="Github Contribution" style="max-width: 50%; height: auto;" />
@@ -44,7 +48,7 @@ draft: true
 
 ## 前言
 
-每次都沒有把參加黑客松的東西留下來，覺得有點可惜。  
+每次參加黑客松都沒留下紀錄，覺得有點可惜。  
 這次在比賽前就先把 `.md` 開好了，終於要好好記下來了。
 
 ## 賽前
@@ -72,7 +76,7 @@ draft: true
 我感覺這次的評分機制比之前嚴謹多了 —— 上次那個一人隊伍進決選真的太誇張，上臺根本在唬爛。
 
 另外，主辦方把需要面試的隊伍分成兩組，數量還不一樣，猜測可能兩組問的問題也不同（？）  
-信件裡原本說「面試兩分鐘，深入了解團隊技術背景」，還說可以準備簡報（但沒準備也沒關係）；結果現場又說想聽聽大家對市政的想法（就是主題方向那種想法，不是政治）。  
+信件裡原本說「面試兩分鐘，深入了解團隊技術背景」，還說可以準備簡報（但沒準備也沒關係）；結果現場又說想聽聽大家對市政的想法（就是主題方向那種想法）。  
 雖然跟說好的不太一樣，但反正我們沒被叫去面試，可以安心吃午餐 😌
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
@@ -102,28 +106,35 @@ draft: true
 </div>
 
 主辦這次送了超大滑鼠墊、一件黑色薄外套、一個~~仿菜市場買菜袋子的~~提袋，其他的不說，來過兩次就知道後面熬夜的時候這個外套絕對不夠暖。  
-上面有趙局長精心設計的 logo，連車輪餅上面都有烙圖案，看的出來局長對這個設計真的很滿意w
+上面有趙局長精心設計的 logo，連車輪餅上都有烙 logo，看得出局長對這設計真的超滿意w
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
     <img src="/assets/activity/codefest-2025-fall/image-2.png" alt="車輪餅" style="max-width: 50%; height: auto;" />
 </div>
 
 前端 UI 其實刻滿快的，很快就開始跟後端的要要看有沒有 API 可以串接，沒有就開始研究看看 Flutter 的 GPS 功能要怎麼傳到 Firebase Hosting 的前端。  
-不確定是在 dart 那邊沒有寫好所以前端沒有接到，還是前端的呼叫方法錯了，邊開系學會的線上幹部會議邊 debug，最後已經花了三個小時還是沒有成功，只能先放著看看有沒有下一件事情。  
+不確定是 Dart 那邊沒寫好，還是前端呼叫方式錯了，邊開系學會的線上幹部會議邊 debug，最後已經花了三個小時還是沒有成功，只能先放著看看有沒有下一件事情。  
 大概凌晨兩點開始串接 API。那時候後端還沒有全部完成，加上我的 WSL 又有點死了，只能他們先給規格，前端先串 API，串完再進行測試以及修改。  
-四點多的時候部屬上去，前端開始測試，發現除了後端預計的 200 跟 422，出現了一些 403、307 之類的錯誤，開始到處 debug。
+凌晨四點多的時候後端部屬上去，前端開始測試，發現除了後端預計的 200 跟 422，出現了一些 403、307 之類的錯誤，開始到處 debug。
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
     <img src="/assets/activity/codefest-2025-fall/image-1.png" alt="2025-11-09 日出" style="max-width: 50%; height: auto;" />
 </div>
 
-最後 deploy 到 Firebase Hosting 的時候，發現其他功能都是正常的，只有即時通訊的部分傳送按鈕沒有反應，剛開始以為是 BaseButton 元件的問題，後來測試完發現是 Firebase Hosting 給的網址是 HTTPS，但是 MQTT 的連線是用 WS（非加密），所以失敗了。  
-前面隊友以為沒事了，狂喝能量飲料讓自己保持清醒，桌上大概有八、九瓶，結果到最後關頭才發現這個問題，看起來快急死了，趕快在伺服器那邊加上 SSL 憑證更改一些設定，終於在開始初選前一兩分鐘成功連線，他絕對是天才。  
-學弟妹要去參賽的話，記得~~出門要帶憑證~~。
+最後 deploy 到 Firebase Hosting 的時候，發現其他功能都是正常的，只有即時通訊的部分傳送按鈕沒有反應，剛開始以為是 BaseButton 元件的問題，後來測試完發現是 Firebase Hosting 給的網址是 HTTPS，但是 MQTT 的連線是用 WS（非加密），所以失敗了。
 
-雖然沒進決選，但是還是很好奇能進決選的其他隊伍都做了甚麼，不過沒聽兩組就直接睡著了。
+:::note
+Firebase Hosting 僅支援 HTTPS，所以若使用 MQTT 需改為 wss://，否則會因為混合內容被瀏覽器封鎖。
+:::
 
-最後主辦還有準備蘋果糖/糖葫蘆，沒有很明白這是什麼流行，沒吃懂，但這間店是從台南來的，我只能說，不甜 www
+前面隊友 Anorak 以為沒事了，狂喝能量飲料讓自己保持清醒，桌上大概堆了八、九瓶，結果最後一刻才發現這問題，看起來快急死了，趕快在伺服器那邊加上 SSL 憑證更改一些設定，終於在開始初選前一兩分鐘成功連線，他絕對是天才。  
+學弟妹要去參賽的話，記得~~出門要帶憑證，現場簽一個也行~~。
+
+雖然沒進決選，但是還是很好奇能進決選的其他隊伍都做了甚麼，不過聽沒兩組就直接睡著了。  
+喔對了，強烈譴責 BlueBoy 把我睡在地板的照片傳出去 www  
+~~早知道我也拍一張你在懶骨頭有點死了的照片給佳衛~~
+
+最後主辦還有準備蘋果糖/糖葫蘆，沒有跟上流行，沒吃懂，但這間店是從台南來的，~~怎麼不甜~~
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
     <img src="/assets/activity/codefest-2025-fall/image.png" alt="蘋果糖" style="max-width: 50%; height: auto;" />
@@ -132,7 +143,8 @@ draft: true
 ## 心得
 
 coding 的同時，官方攝影師一直在到處拍，真的很不自在，尤其知道會被剪進去影片裡面 www  
-然後官方會採訪隊伍，輪到我們的時候大家開始閃採訪，成功躲過去了 w
+然後官方會採訪隊伍，輪到我們的時候大家開始閃採訪，成功躲過去了 w  
+~~我不想跟 waaaaaaaiting 還有瑪麗亞一樣變梗圖~~
 
 ### 前兩次黑客松回顧
 
@@ -163,18 +175,20 @@ coding 的同時，官方攝影師一直在到處拍，真的很不自在，尤�
 這次我們的隊友都屬於跨領域型的工程師，不過少了一個專門負責發想與報告的人。上次學姊太全能，又發想主題又當設計師，但我們這次~~出門沒有帶 UI/UX 設計師~~，要自己想辦法。  
 好消息是人人都有專題，~~拼一拼又是一個好專案~~，我的意思是分工超級明確 w
 
-凌晨 debug 時，隔壁隊友打瞌睡一直點頭、另一個聽到錯誤就「啊？」  
+凌晨 debug 時，一個隊友打瞌睡一直點頭、另一個聽到錯誤就「啊？」  
 真的讓人無法專心思考 💢  
-想睡的拜託去旁邊睡，這句話是認真的 www
+想睡的拜託去旁邊睡，這句話是認真的 www  
+我只是想好好 debug 而已，~~我想看日出~~
 
-很感謝這次的隊友們，雖然沒有進決選，但我們成功在二十四小時內完成一個微服務，整體來說應該算完整，我覺得大家超強的。  
+很感謝這次的隊友們，我們成功在二十四小時內完成一個微服務，整體來說應該算完整，我覺得大家超強的。  
 感謝 Anorak，最後一小時緊急處理剛發現的 MQTT 連線問題，辛苦了。  
 感謝 ErEr，infra 大神，還處理了沒有人碰過的 websocket + MQTT 問題，報告辛苦了。  
 感謝 BlueBoy，古希臘掌管後端 API 的神，還有凌晨到前端支援 debug，感謝全能電神。  
 感謝 ayuki，處理 DB 設計以及想辦法讓報告能順利進行的同時，還要克服你這兩天倒楣到極致的運氣，真的很不容易。  
 感謝隊友們！！！
 
-這兩天不想再 coding 了，一個黑客松讓我在 WakaTime 榜單衝到台灣第 9 名，有點太累了。
+這兩天真的不想再 coding 了。  
+一個黑客松讓我在 WakaTime 榜單衝到台灣第 9 名，有點太累了。
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 16px 0;">
     <img src="/assets/activity/codefest-2025-fall/image-14.png" alt="WakaTime Leaderboard" />
@@ -187,11 +201,13 @@ coding 的同時，官方攝影師一直在到處拍，真的很不自在，尤�
 ---
 
 終於整理完了  
-期中週真的地獄，根本「期中月」。  
-從 10/9 開始，撐到下週才正式考完。
+期中真的地獄，根本「期中月」。  
+從 10/9 開始，撐到 11/21 才正式考完期中考。
 
 接著還有 AICUP 初賽截止、台北探索、期末報告……  
 真的每天都在被事情追著跑。
 
-好久沒打 CTF 了，~~已經一個月沒玩了~~。  
+好久沒打 CTF 了，~~已經一個多月沒玩了~~。  
 等寒假再看看吧 (╥﹏╥)
+
+最後的最後再次感謝隊友們 🙏
