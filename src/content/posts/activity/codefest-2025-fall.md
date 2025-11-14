@@ -6,7 +6,7 @@ description: "2025 臺北秋季程式設計節 參加紀錄與心得"
 image: "/assets/activity/codefest-2025-fall/cover.png"
 tags: ["Hackathon", "Codefest"]
 category: "Event Journal"
-draft: true
+draft: false
 ---
 
 # 2025 臺北秋季程式設計節 城市通微服務大黑客松
