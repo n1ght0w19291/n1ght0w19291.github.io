@@ -1,6 +1,7 @@
 ---
 title: picoMini by CMU-Africa 練習
-published: 2025-11-19
+published: 2025-11-16
+updated: 2025-11-19
 description: "picoMini by CMU-Africa 練習題目 Writeup"
 image: "/assets/picoCTF/picoMiniByCMUAfricaPractice/cover.png"
 tags:
@@ -336,6 +337,9 @@ void fun(char *name, char *cmd) {
 
 ---
 
-突然發現多了好幾個 Easy 題，順手寫一下
+突然發現多了好幾個 Easy 題，順手寫一下  
+writeup 就修一下再發 ฅ^•ﻌ•^ฅ
 
 ![](/assets/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010857298.png)
+
+學期中真的好累
