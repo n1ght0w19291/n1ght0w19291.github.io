@@ -258,7 +258,7 @@ if exact:
 
 ![](/assets/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010856828.png)
 
-在 `com.example.picobank.Login` 看到使用者 ` Johnson` 的密碼是 `tricky1990`
+在 `com.example.picobank.Login` 看到使用者 `Johnson` 的密碼是 `tricky1990`
 
 ![](/assets/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010856881.png)
 
@@ -329,8 +329,37 @@ void fun(char *name, char *cmd) {
 ### \[Medium\] Input Injection 2
 
 感覺這一題應該會跟上一題差不多  
-首先從輸出的 username 位址以及 shell 位址可以知道，需要蓋掉的長度是 `a0 - d0 = 0x30 = 48` 個 byte  
-然後從 source code 可以知道後面需要再加上指定的 shell `/bin/sh`  
+首先從輸出可以得到 username 位址以及 shell 位址，所以需要蓋掉的長度是 `a0 - d0 --> 48` 個 byte  
+然後從 source code 可以知道，在輸入 username 的時候，後面需要再加上指定的 shell `/bin/sh` 透過 heap overflow 把原本的 `/bin/pwd` 蓋過去
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+	char* username = malloc(28);
+	char* shell = malloc(28);
+
+	printf("username at %p\n", username);
+    fflush(stdout);
+	printf("shell at %p\n", shell);
+    fflush(stdout);
+
+	strcpy(shell, "/bin/pwd");
+
+	printf("Enter username: ");
+    fflush(stdout);
+	scanf("%s", username);
+
+	printf("Hello, %s. Your shell is %s.\n", username, shell);
+	system(shell);
+    fflush(stdout);
+
+	return 0;
+}
+```
+
 接下來就可以跟 shell 互動了
 
 ![](/assets/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010857254.png)
