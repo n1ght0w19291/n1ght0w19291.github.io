@@ -25,3 +25,11 @@ pnpm-debug.log*
 package-lock.json
 bun.lockb
 yarn.lock
+
+# --------------------------------
+
+/src/content/posts/AIS3EOF2026.md
+/public/assets/AIS3EOF2026/*
+/src/content/posts/tryhackme/*
+/public/assets/tryhackme/*
+
