@@ -11,6 +11,9 @@ export async function generateOGImage(title: string) {
 	const zenMaru = fs.readFileSync(
 		path.resolve("./public/fonts/ZenMaruGothic-Regular.ttf"),
 	);
+	const _genSenRoundedTW = fs.readFileSync(
+		path.resolve("./public/fonts/GenSenRounded2TW-R.otf"),
+	);
 	const notoSansTC = fs.readFileSync(
 		path.resolve("./public/fonts/NotoSansTC-Regular.ttf"),
 	);
@@ -24,7 +27,8 @@ export async function generateOGImage(title: string) {
 					height: "630px",
 					backgroundColor: "#F7FFF7",
 					color: "#53a3f2",
-					fontFamily: "Lexend, ZenMaruGothic, Noto Sans TC, sans-serif",
+					fontFamily:
+						"Lexend, ZenMaruGothic, genSenRoundedTW, Noto Sans TC, sans-serif",
 					fontSize: "60px",
 					fontWeight: "bold",
 					display: "flex",
@@ -50,6 +54,12 @@ export async function generateOGImage(title: string) {
 				{
 					name: "ZenMaruGothic",
 					data: zenMaru,
+					weight: 400 as FontWeight,
+					style: "normal",
+				},
+				{
+					name: "genSenRoundedTW",
+					data: _genSenRoundedTW,
 					weight: 400 as FontWeight,
 					style: "normal",
 				},

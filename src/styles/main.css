@@ -24,6 +24,11 @@
   src: url("/fonts/ZenMaruGothic-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "genSenRoundedTW";
+  src: url("/fonts/GenSenRounded2TW-R.otf") format("opentype");
+}
+
 /* Start https://www.cursors-4u.com */
 * {
   cursor: url(https://cur.cursors-4u.net/nature/nat-5/nat416.ani),
