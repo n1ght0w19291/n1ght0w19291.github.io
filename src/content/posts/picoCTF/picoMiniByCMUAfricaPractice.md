@@ -19,6 +19,8 @@ category: "picoCTF"
 draft: true
 ---
 
+# picoMini by CMU-Africa 練習
+
 ## General Skills
 
 ### \[Easy\] Log Hunt
