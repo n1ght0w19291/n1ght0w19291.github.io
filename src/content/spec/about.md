@@ -46,6 +46,7 @@ draft: false
 學習與挑戰紀錄
 
 - [picoCTF](https://play.picoctf.org/users/n1ght0w1)
+- [TryHackMe](https://tryhackme.com/p/n1ght0w19291)
 - [LeetCode](https://leetcode.com/u/n1ght0w1/)
 - [WakaTime](https://wakatime.com/@n1ght0w1?rank=me&page=1&country_code=TW)
 
