@@ -34,3 +34,5 @@ yarn.lock
 /public/assets/tryhackme/*
 /src/content/posts/Annual/2025AnnualReview.md
 /public/assets/Annual/*
+/src/content/posts/ASISCTFFinals2025.md
+/public/assets/ASISCTFFinals2025/*
