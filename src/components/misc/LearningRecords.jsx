@@ -1,3 +1,4 @@
+import { GitHubContributionCard } from "../../components/misc/GitHubContributionCard.jsx";
 import { LeetCodeStatus } from "./LeetcodeStatus.jsx";
 
 const learningLinks = [
@@ -21,6 +22,12 @@ const learningLinks = [
 		name: "WakaTime",
 		url: "https://wakatime.com/@n1ght0w1?rank=me&page=1&country_code=TW",
 		color: "#1e88e5",
+	},
+	{
+		name: "Github Profile",
+		url: "https://github.com/n1ght0w19291",
+		color: "#b2b2b2",
+		extraComponent: () => <GitHubContributionCard username="n1ght0w19291" />,
 	},
 ];
 
