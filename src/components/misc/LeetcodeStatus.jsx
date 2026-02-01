@@ -1,6 +1,6 @@
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -17,48 +17,94 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 	const [error, setError] = useState(null);
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 
-	const cacheKey = `leetcode-${username}-${selectedYear}`;
+	const yearKey = `lc-years-${username}`;
+	const statsKey = `lc-stats-${username}-${selectedYear}`;
+	const failKey = `lc-fail-${username}-${selectedYear}`;
 
-	// 取得活躍年份
+	const yearsLock = useRef(false);
+	const statsLock = useRef(false);
+
 	useEffect(() => {
-		const fetchYears = async () => {
-			try {
-				const res = await fetch(
-					`https://alfa-leetcode-api.onrender.com/${username}/calendar?year=${new Date().getFullYear()}`,
-				);
-				if (!res.ok) throw new Error(`API error: ${res.status}`);
-				const data = await res.json();
-				setActiveYears(data.activeYears || []);
-			} catch (err) {
-				console.error(err);
-				setError("無法取得 LeetCode 資料");
+		const cached = localStorage.getItem(yearKey);
+		if (cached) {
+			const parsed = JSON.parse(cached);
+			if (Date.now() - parsed.ts < 7 * 24 * 60 * 60 * 1000) {
+				setActiveYears(parsed.data);
+				return;
 			}
-		};
-		fetchYears();
-	}, [username]);
+		}
+		if (yearsLock.current) return;
+		yearsLock.current = true;
+		fetch(
+			`https://alfa-leetcode-api.onrender.com/${username}/calendar?year=${new Date().getFullYear()}`,
+		)
+			.then((r) => {
+				if (!r.ok) throw new Error("Failed to fetch active years");
+				return r.json();
+			})
+			.then((d) => {
+				const arr = d.activeYears || [];
+				setActiveYears(arr);
+				localStorage.setItem(
+					yearKey,
+					JSON.stringify({ ts: Date.now(), data: arr }),
+				);
+			})
+			.catch(() => {
+				if (cached) {
+					const parsed = JSON.parse(cached);
+					setActiveYears(parsed.data || []);
+				}
+			})
+			.finally(() => {
+				yearsLock.current = false;
+			});
+	}, [username, yearKey]);
 
-	// 取得年度統計
 	useEffect(() => {
 		if (!selectedYear) return;
 
-		const cached = localStorage.getItem(cacheKey);
+		const cached = localStorage.getItem(statsKey);
 		if (cached) {
-			setDaysStats(JSON.parse(cached));
-			setLoading(false);
+			const parsed = JSON.parse(cached);
+			const isCurrentYear = selectedYear === new Date().getFullYear();
+			const ttl = isCurrentYear
+				? 12 * 60 * 60 * 1000
+				: Number.POSITIVE_INFINITY;
+			if (Date.now() - parsed.ts < ttl) {
+				setDaysStats(parsed.stats);
+				setLoading(false);
+				return;
+			}
+		}
+
+		const failTs = localStorage.getItem(failKey);
+		if (failTs && Date.now() - Number(failTs) < 5 * 60 * 1000) {
+			if (cached) {
+				const parsed = JSON.parse(cached);
+				setDaysStats(parsed.stats);
+				setLoading(false);
+			} else {
+				setError("API 暫時不可用");
+				setLoading(false);
+			}
 			return;
 		}
 
-		const fetchYearData = async () => {
-			setLoading(true);
-			setError(null);
-			try {
-				const res = await fetch(
-					`https://alfa-leetcode-api.onrender.com/${username}/calendar?year=${selectedYear}`,
-				);
-				if (!res.ok) throw new Error(`API error: ${res.status}`);
-				const data = await res.json();
-				const calendar = JSON.parse(data.submissionCalendar || "{}");
+		if (statsLock.current) return;
+		statsLock.current = true;
+		setLoading(true);
+		setError(null);
 
+		fetch(
+			`https://alfa-leetcode-api.onrender.com/${username}/calendar?year=${selectedYear}`,
+		)
+			.then((r) => {
+				if (!r.ok) throw new Error("Failed to fetch calendar stats");
+				return r.json();
+			})
+			.then((data) => {
+				const calendar = JSON.parse(data.submissionCalendar || "{}");
 				const today = new Date();
 				const isCurrentYear = selectedYear === today.getFullYear();
 				let solved = 0;
@@ -68,34 +114,38 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 					if (day.getFullYear() !== selectedYear) continue;
 					if (calendar[tsStr] > 0) solved += 1;
 				}
-
+				const totalDays = selectedYear % 4 === 0 ? 366 : 365;
 				let unsolvedPast = 0;
 				let futureDays = 0;
-				const totalDays = selectedYear % 4 === 0 ? 366 : 365;
 				if (isCurrentYear) {
-					const startOfYear = new Date(selectedYear, 0, 1);
-					const daysUpToToday =
-						Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24)) + 1;
-					unsolvedPast = daysUpToToday - solved;
-					futureDays = totalDays - daysUpToToday;
+					const start = new Date(selectedYear, 0, 1);
+					const daysNow = Math.floor((today - start) / 86400000) + 1;
+					unsolvedPast = daysNow - solved;
+					futureDays = totalDays - daysNow;
 				} else {
 					unsolvedPast = totalDays - solved;
 				}
-
 				const stats = { solved, unsolvedPast, futureDays };
 				setDaysStats(stats);
-				localStorage.setItem(cacheKey, JSON.stringify(stats));
+				localStorage.setItem(
+					statsKey,
+					JSON.stringify({ ts: Date.now(), stats }),
+				);
+			})
+			.catch(() => {
+				localStorage.setItem(failKey, Date.now().toString());
+				if (cached) {
+					const parsed = JSON.parse(cached);
+					setDaysStats(parsed.stats);
+				} else {
+					setError("API 暫時不可用");
+				}
+			})
+			.finally(() => {
 				setLoading(false);
-			} catch (err) {
-				console.error(err);
-				setError("無法取得 LeetCode 統計");
-				setDaysStats({ solved: 0, unsolvedPast: 0, futureDays: 0 });
-				setLoading(false);
-			}
-		};
-
-		fetchYearData();
-	}, [username, selectedYear, cacheKey]);
+				statsLock.current = false;
+			});
+	}, [username, selectedYear, statsKey, failKey]);
 
 	if (loading) return <p>Loading...</p>;
 
@@ -107,11 +157,9 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 					padding: 20,
 					border: "1px solid #ccc",
 					borderRadius: 8,
-					backgroundColor: "var(--card-bg, #fff)",
-					color: "#d32f2f",
 				}}
 			>
-				<h4>Public LeetCode API 發生錯誤</h4>
+				<h4>LeetCode API 錯誤</h4>
 				<p>{error}</p>
 			</div>
 		);
@@ -139,13 +187,7 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 				gap: 20,
 			}}
 		>
-			<div
-				style={{
-					flex: "0 0 250px",
-					padding: 10,
-					borderRadius: 8,
-				}}
-			>
+			<div style={{ flex: "0 0 250px", padding: 10, borderRadius: 8 }}>
 				<Pie
 					data={data}
 					options={{
@@ -156,7 +198,6 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 			</div>
 			<div style={{ flex: 1 }}>
 				<h3>LeetCode {selectedYear} 解題概況</h3>
-
 				{activeYears.length > 0 && (
 					<div style={{ position: "relative", marginBottom: 12 }}>
 						<button
@@ -166,7 +207,6 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 								padding: "8px 16px",
 								borderRadius: 8,
 								border: "1px solid #ccc",
-								backgroundColor: "var(--card-bg, #fff)",
 								cursor: "pointer",
 								width: 120,
 								display: "flex",
@@ -189,21 +229,13 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 									width: "100%",
 									border: "1px solid #ccc",
 									borderRadius: 8,
-									backgroundColor: "var(--card-bg, #fff)",
+									backgroundColor: "#fff",
 									boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
 									zIndex: 10,
 								}}
 							>
 								{activeYears.map((y) => (
-									<li
-										key={y}
-										style={{
-											padding: 0,
-											margin: 0,
-											border: "none",
-											background: "none",
-										}}
-									>
+									<li key={y}>
 										<button
 											type="button"
 											onClick={() => {
@@ -217,13 +249,6 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 												backgroundColor: "transparent",
 												border: "none",
 												textAlign: "left",
-												font: "inherit",
-											}}
-											onKeyDown={(e) => {
-												if (e.key === "Enter" || e.key === " ") {
-													setSelectedYear(y);
-													setDropdownOpen(false);
-												}
 											}}
 										>
 											{y}
@@ -234,7 +259,6 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 						)}
 					</div>
 				)}
-
 				<div
 					style={{
 						fontSize: 14,
@@ -244,8 +268,8 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 						gap: 4,
 					}}
 				>
-					<div>已解題：{daysStats.solved} 天 </div>
-					<div>未解題：{daysStats.unsolvedPast} 天 </div>
+					<div>已解題：{daysStats.solved} 天</div>
+					<div>未解題：{daysStats.unsolvedPast} 天</div>
 					{daysStats.futureDays ? (
 						<div>未來：{daysStats.futureDays} 天</div>
 					) : null}
@@ -255,6 +279,4 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 	);
 };
 
-LeetCodeStatus.propTypes = {
-	username: PropTypes.string,
-};
+LeetCodeStatus.propTypes = { username: PropTypes.string };
