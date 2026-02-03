@@ -179,93 +179,110 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 	return (
 		<div
 			style={{
-				display: "flex",
-				justifyContent: "start",
-				alignItems: "center",
-				maxWidth: 600,
+				maxWidth: 700,
 				margin: "40px auto",
-				gap: 20,
+				display: "flex",
+				flexDirection: "column",
+				gap: 16,
 			}}
 		>
-			<div style={{ flex: "0 0 250px", padding: 10, borderRadius: 8 }}>
-				<Pie
-					data={data}
-					options={{
-						responsive: true,
-						plugins: { legend: { position: "bottom" } },
-					}}
-				/>
-			</div>
-			<div style={{ flex: 1 }}>
-				<h3>LeetCode {selectedYear} 解題概況</h3>
-				{activeYears.length > 0 && (
-					<div style={{ position: "relative", marginBottom: 12 }}>
-						<button
-							type="button"
-							onClick={() => setDropdownOpen(!dropdownOpen)}
+			<h3 style={{ textAlign: "center" }}>LeetCode {selectedYear} 解題概況</h3>
+
+			{activeYears.length > 0 && (
+				<div style={{ position: "relative", alignSelf: "center" }}>
+					<button
+						type="button"
+						onClick={() => setDropdownOpen(!dropdownOpen)}
+						style={{
+							padding: "8px 16px",
+							borderRadius: 8,
+							border: "1px solid #ccc",
+							cursor: "pointer",
+							width: 140,
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
+						}}
+					>
+						<span>{selectedYear}</span>
+						<span>▼</span>
+					</button>
+
+					{dropdownOpen && (
+						<ul
 							style={{
-								padding: "8px 16px",
-								borderRadius: 8,
+								position: "absolute",
+								top: "100%",
+								left: 0,
+								width: "100%",
+								margin: 0,
+								padding: "4px 0",
+								listStyle: "none",
 								border: "1px solid #ccc",
-								cursor: "pointer",
-								width: 120,
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
+								borderRadius: 8,
+								backgroundColor: "#fff",
+								boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+								zIndex: 10,
 							}}
 						>
-							<span>{selectedYear}</span>
-							<span>▼</span>
-						</button>
-						{dropdownOpen && (
-							<ul
-								style={{
-									position: "absolute",
-									top: "100%",
-									left: 0,
-									margin: 0,
-									padding: "4px 0",
-									listStyle: "none",
-									width: "100%",
-									border: "1px solid #ccc",
-									borderRadius: 8,
-									backgroundColor: "#fff",
-									boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-									zIndex: 10,
-								}}
-							>
-								{activeYears.map((y) => (
-									<li key={y}>
-										<button
-											type="button"
-											onClick={() => {
-												setSelectedYear(y);
-												setDropdownOpen(false);
-											}}
-											style={{
-												width: "100%",
-												padding: "6px 12px",
-												cursor: "pointer",
-												backgroundColor: "transparent",
-												border: "none",
-												textAlign: "left",
-											}}
-										>
-											{y}
-										</button>
-									</li>
-								))}
-							</ul>
-						)}
-					</div>
-				)}
+							{activeYears.map((y) => (
+								<li key={y}>
+									<button
+										type="button"
+										onClick={() => {
+											setSelectedYear(y);
+											setDropdownOpen(false);
+										}}
+										style={{
+											width: "100%",
+											padding: "6px 12px",
+											cursor: "pointer",
+											background: "transparent",
+											border: "none",
+											textAlign: "left",
+										}}
+									>
+										{y}
+									</button>
+								</li>
+							))}
+						</ul>
+					)}
+				</div>
+			)}
+
+			<div
+				style={{
+					display: "flex",
+					flexWrap: "wrap",
+					justifyContent: "center",
+					alignItems: "center",
+					gap: 24,
+				}}
+			>
 				<div
 					style={{
-						fontSize: 14,
-						lineHeight: 1.6,
+						width: 240,
+						height: 240,
+					}}
+				>
+					<Pie
+						data={data}
+						options={{
+							responsive: true,
+							maintainAspectRatio: false,
+							plugins: { legend: { position: "bottom" } },
+						}}
+					/>
+				</div>
+
+				<div
+					style={{
+						minWidth: 220,
 						display: "flex",
 						flexDirection: "column",
-						gap: 4,
+						gap: 6,
+						fontSize: 14,
 					}}
 				>
 					<div>已解題：{daysStats.solved} 天</div>
