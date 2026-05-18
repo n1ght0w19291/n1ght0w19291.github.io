@@ -28,13 +28,13 @@ yarn.lock
 
 # --------------------------------
 
-/src/content/posts/AIS3EOF2026.md
+/src/content/posts/AIS3EOF2026.*
 /public/assets/AIS3EOF2026/*
 /src/content/posts/tryhackme/*
 /public/assets/tryhackme/*
-/src/content/posts/Annual/2025AnnualReview.md
+/src/content/posts/Annual/2025AnnualReview.*
 /public/assets/Annual/*
-/src/content/posts/ASISCTFFinals2025.md
+/src/content/posts/ASISCTFFinals2025.*
 /public/assets/ASISCTFFinals2025/*
-/src/content/posts/Pre-Exam2026.mdx
+/src/content/posts/Pre-Exam2026.*
 /public/assets/Pre-Exam2026/*

