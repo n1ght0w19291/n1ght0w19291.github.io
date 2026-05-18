@@ -3,6 +3,20 @@ import EventCard from "./EventCard.jsx";
 
 const timelineData = [
 	{
+		date: "2026.05",
+		events: [
+			{ title: "Pre-exam 2026", result: "124 / 392" },
+			{ title: "CYBERSEC 2026 臺灣資安大會", result: "會眾" },
+		],
+	},
+	{
+		date: "2026.02",
+		events: [
+			{ title: "TSCCTF 2026", result: "50" },
+			{ title: "THJCC 2026", result: "66 / 314" },
+		],
+	},
+	{
 		date: "2026.01",
 		events: [{ title: "Scarlet CTF 2026", result: "52 / 762" }],
 	},

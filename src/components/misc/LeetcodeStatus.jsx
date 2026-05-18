@@ -165,7 +165,7 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
 		);
 
 	const data = {
-		labels: ["Completed Days", "Missed Days", "Future Days"],
+		labels: ["Active Days", "Missed Days", "Future Days"],
 		datasets: [
 			{
 				data: [daysStats.solved, daysStats.unsolvedPast, daysStats.futureDays],

@@ -19,7 +19,6 @@ import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
 import { pathsEqual, url } from "../utils/url-utils";
 import "katex/dist/katex.css";
-import { generateOGImage } from "@/pages/api/OGImage";
 
 interface Props {
 	title?: string;
@@ -27,9 +26,17 @@ interface Props {
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
+	ogImage?: string;
 }
 
-let { title, banner, description, lang, setOGTypeArticle } = Astro.props;
+let {
+	title,
+	banner,
+	description,
+	lang,
+	setOGTypeArticle,
+	ogImage: ogImageProp,
+} = Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -72,7 +79,10 @@ const bannerOffsetByPosition = {
 const bannerOffset =
 	bannerOffsetByPosition[siteConfig.banner.position || "center"];
 
-const ogImage = await generateOGImage(pageTitle ?? siteConfig.title);
+const ogImageUrl = new URL(
+	ogImageProp ?? url("/og/default.png"),
+	Astro.site,
+).toString();
 ---
 
 <!DOCTYPE html>
@@ -96,7 +106,7 @@ const ogImage = await generateOGImage(pageTitle ?? siteConfig.title);
         ) : (
         <meta property="og:type" content="website" />
         )}
-		<meta property="og:image" content={ogImage ?? ""} />
+		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 
@@ -117,6 +127,8 @@ const ogImage = await generateOGImage(pageTitle ?? siteConfig.title);
 				  media={favicon.theme && `(prefers-color-scheme: ${favicon.theme})`}
 			/>
 		))}
+		<link rel="apple-touch-icon" sizes="180x180" href={url("/favicon/apple-touch-icon.png")} />
+		<link rel="manifest" href={url("/favicon/site.webmanifest")} />
 
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
@@ -153,8 +165,6 @@ const ogImage = await generateOGImage(pageTitle ?? siteConfig.title);
 
 
 		<slot name="head"></slot>
-
-		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
