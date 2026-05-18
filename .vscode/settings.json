@@ -15,5 +15,7 @@
     "source.organizeImports.biome": "always"
   },
 
-  "frontMatter.dashboard.openOnStart": false
+  "frontMatter.dashboard.openOnStart": false,
+
+  "css.lint.unknownAtRules": "ignore"
 }

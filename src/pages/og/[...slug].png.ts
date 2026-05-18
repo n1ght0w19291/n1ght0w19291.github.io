@@ -1,7 +1,7 @@
+import { getSortedPosts } from "@utils/content-utils";
+import { generateOGImage } from "@utils/og-image";
 import type { APIRoute } from "astro";
 import { siteConfig } from "@/config";
-import { generateOGImage } from "@utils/og-image";
-import { getSortedPosts } from "@utils/content-utils";
 
 export async function getStaticPaths() {
 	const posts = await getSortedPosts();
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 
 export const GET: APIRoute<{ title: string }> = async ({ props }) => {
 	const png = await generateOGImage(props.title);
-	return new Response(png as unknown as BodyInit, {
+	return new Response(new Uint8Array(png), {
 		headers: { "Content-Type": "image/png" },
 	});
 };

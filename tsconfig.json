@@ -5,7 +5,6 @@
 		"baseUrl": ".",
 		"strictNullChecks": true,
 		"allowJs": false,
-		"declaration": true,
 		"plugins": [
 			{
 				"name": "@astrojs/ts-plugin"
@@ -18,8 +17,9 @@
 			"@utils/*": ["src/utils/*"],
 			"@i18n/*": ["src/i18n/*"],
 			"@layouts/*": ["src/layouts/*"],
-			"@/*": ["src/*"]
+			"@/*": ["src/*"],
+			"satori": ["node_modules/satori/dist/index"]
 		}
 	},
-	"include": ["src/**/*"]
+	"include": [".astro/types.d.ts", "src/**/*"]
 }
