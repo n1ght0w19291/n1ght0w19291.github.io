@@ -8,6 +8,18 @@ category: "CTF Writeup"
 draft: false
 ---
 
+import ChallengeCard from "../../components/misc/ChallengeCard.astro";
+
+<ChallengeCard
+	event="2025 AEGIS神盾盃 初賽"
+	rank={15}
+	total={40}
+	challenges={[
+		{ name: "Amnesia Dose", category: "Web" },
+		{ name: "random multi", category: "Crypto" },
+	]}
+/>
+
 ## **TL;DR**
 
 - **Web — Amnesia Dose (SQLi / Blind boolean + UNION)**  
@@ -32,10 +44,10 @@ draft: false
 有去注意過 `/news` 的奇怪文章，因為明明只有六篇，但是 pagination 有十頁。不過 id 改一改數字跟試試看有沒有 SQLi 之後就放著了，我太菜了 (╥﹏╥)
 
 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-  <img src="/assets/AEGIS2025/IMG-20250927190121922.png" style="width: 24%; height: auto;border-radius: 4px;">
-  <img src="/assets/AEGIS2025/IMG-20250927190121975.jpg" style="width: 24%; height: auto;border-radius: 4px;">
-  <img src="/assets/AEGIS2025/IMG-20250927190122022.png" style="width: 24%; height: auto;border-radius: 4px;">
-  <img src="/assets/AEGIS2025/IMG-20250927190122062.png" style="width: 24%; height: auto;border-radius: 4px;">
+  <img src="/assets/AEGIS2025/IMG-20250927190121922.png" style="width: 24%; height: auto;border-radius: 4px;" />
+  <img src="/assets/AEGIS2025/IMG-20250927190121975.jpg" style="width: 24%; height: auto;border-radius: 4px;" />
+  <img src="/assets/AEGIS2025/IMG-20250927190122022.png" style="width: 24%; height: auto;border-radius: 4px;" />
+  <img src="/assets/AEGIS2025/IMG-20250927190122062.png" style="width: 24%; height: auto;border-radius: 4px;" />
 </div>
 
 還有 `Cipher Restaurant` ，這認真是胡鬧廚房 (｡ŏ_ŏ)  
@@ -45,8 +57,8 @@ draft: false
 看到小當家出現的那一刻很懵，但沒想到最大的問題出在泡芙阿姨，又學到一個新的隱寫術工具 `OpenPuff` ，真好
 
 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-  <img src="/assets/AEGIS2025/Y.jpg" style="width: 45%; height: auto; border-radius: 4px;">
-  <img src="/assets/AEGIS2025/X.jpg" style="width: 45%; height: auto; border-radius: 4px;">
+  <img src="/assets/AEGIS2025/Y.jpg" style="width: 45%; height: auto; border-radius: 4px;" />
+  <img src="/assets/AEGIS2025/X.jpg" style="width: 45%; height: auto; border-radius: 4px;" />
 </div>
 
 寫 writeup 的時候才發現，泡芙阿姨那一張右下角是不是有 Gemini 的創作痕跡 www
