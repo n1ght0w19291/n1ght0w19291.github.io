@@ -14,7 +14,7 @@ const args = process.argv.slice(2);
 
 if (args.length === 0) {
 	console.error(`Error: No filename argument provided
-Usage: npm run new-post -- <filename>`);
+Usage: npm run new-post-mdx -- <filename>`);
 	process.exit(1);
 }
 
@@ -45,7 +45,7 @@ const content = `---
 title: ${args[0]}
 published: ${getDate()}
 description: ''
-image: ''
+image: '/assets/${args[0]}/cover.png'
 tags: []
 category: ''
 draft: false

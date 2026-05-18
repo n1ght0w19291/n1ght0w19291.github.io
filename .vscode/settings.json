@@ -7,7 +7,12 @@
   "[typescript]": { "editor.defaultFormatter": "biomejs.biome" },
   "[typescriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
   "[astro]": { "editor.defaultFormatter": "biomejs.biome" },
+  "[svelte]": { "editor.defaultFormatter": "biomejs.biome" },
   "[json]": { "editor.defaultFormatter": "biomejs.biome" },
+
+  "[mdx]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
 
   "editor.codeActionsOnSave": {
     "source.fixAll": "always",

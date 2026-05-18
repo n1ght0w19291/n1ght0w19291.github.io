@@ -1,0 +1,147 @@
+---
+interface Challenge {
+	name: string;
+	category: string;
+	difficulty?: string;
+	url?: string;
+	anchor?: string;
+}
+
+interface Props {
+	event: string;
+	rank?: number;
+	total?: number;
+	challenges: Challenge[];
+}
+
+const { event, rank, total, challenges } = Astro.props;
+
+const knownCategoryStyle: Record<
+	string,
+	{ hue: number | string; label: string }
+> = {
+	Web: { hue: 220, label: "Web" },
+	Crypto: { hue: 280, label: "Crypto" },
+	Pwn: { hue: 10, label: "Pwn" },
+	Rev: { hue: 50, label: "Rev" },
+	Forensics: { hue: 150, label: "Forensics" },
+	Misc: { hue: "var(--hue)", label: "Misc" },
+	Welcome: { hue: 185, label: "Welcome" },
+	OSINT: { hue: 30, label: "OSINT" },
+	Network: { hue: 200, label: "Network" },
+	Blockchain: { hue: 260, label: "Blockchain" },
+	AI: { hue: 315, label: "AI" },
+};
+
+function getCategoryStyle(cat: string): {
+	hue: number | string;
+	label: string;
+} {
+	return knownCategoryStyle[cat] ?? { hue: "var(--hue)", label: cat };
+}
+
+function toSlug(name: string): string {
+	return name
+		.toLowerCase()
+		.replace(/\s+/g, "-")
+		.replace(/[^\p{L}\p{N}-]/gu, "")
+		.replace(/^-+|-+$/g, "");
+}
+
+const knownOrder = [
+	"Welcome",
+	"Web",
+	"Pwn",
+	"Rev",
+	"Crypto",
+	"Forensics",
+	"OSINT",
+	"Network",
+	"Blockchain",
+	"AI",
+	"Misc",
+];
+
+const allCategories = [...new Set(challenges.map((c) => c.category))];
+const orderedCategories = [
+	...knownOrder.filter((c) => allCategories.includes(c)),
+	...allCategories.filter((c) => !knownOrder.includes(c)),
+];
+
+const grouped = orderedCategories.map((cat) => ({
+	cat,
+	items: challenges.filter((c) => c.category === cat),
+}));
+---
+
+<div class="not-prose card-base mb-6 overflow-hidden">
+
+  <!-- event header -->
+  <div class="flex items-baseline justify-between px-2 py-4">
+    <span class="font-bold text-base text-black/85 dark:text-white/85 transition truncate min-w-0">{event}</span>
+    <div class="flex items-baseline gap-3 shrink-0 pl-3">
+      {rank != null && (
+        <span class="text-xs text-black/50 dark:text-white/40 transition tabular-nums">
+          Rank: #{rank}{total != null ? ` / ${total}` : ""}
+        </span>
+      )}
+      <span class="text-xs text-black/25 dark:text-white/25 transition tabular-nums">{challenges.length} challs</span>
+    </div>
+  </div>
+
+  <div>
+    {grouped.map(({ cat, items }) => {
+      const { hue, label } = getCategoryStyle(cat);
+      const color      = `oklch(0.62 0.15 ${hue})`;
+      const colorFaint = `oklch(0.62 0.15 ${hue} / 0.07)`;
+      return (
+        <div>
+
+          <!-- category header -->
+          <div
+            class="flex items-center gap-2.5 px-6 py-2"
+            style={`background: ${colorFaint}; border-left: 2px solid ${color}; border-radius: 0.25rem`}
+          >
+            <span class="text-[0.7rem] font-bold uppercase tracking-widest transition" style={`color: ${color}`}>
+              {label}
+            </span>
+            <span class="text-[0.7rem] text-black/25 dark:text-white/25 transition">{items.length}</span>
+          </div>
+
+          <!-- challenge rows -->
+          <ul class="py-1">
+            {items.map((c) => {
+              const slug = c.anchor ?? toSlug(c.name);
+              return (
+                <li class="flex items-center gap-3 px-6 py-1.5">
+                  <span class="w-1 h-1 rounded-full shrink-0 opacity-30 transition" style={`background: ${color}`} />
+                  <a
+                    href={`#${slug}`}
+                    class="no-styling flex-1 min-w-0 truncate text-sm leading-snug text-[var(--primary)] underline decoration-dashed decoration-1 underline-offset-4"
+                  >
+                    {c.difficulty && (
+                      <span class="text-[0.7rem] text-black/35 dark:text-white/35 mr-1">[{c.difficulty}]</span>
+                    )}
+                    {c.name}
+                  </a>
+                  {c.url && (
+                    <a
+                      href={c.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="no-styling text-[0.7rem] text-[var(--primary)] opacity-40 shrink-0 leading-none"
+                    >
+                      ↗
+                    </a>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+
+        </div>
+      );
+    })}
+  </div>
+
+</div>
