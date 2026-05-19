@@ -80,6 +80,19 @@
   .float-panel-closed {
     @apply -translate-y-1 opacity-0 pointer-events-none;
   }
+  #nav-menu-panel {
+    transform-origin: top right;
+  }
+  #nav-menu-panel.float-panel-closed {
+    @apply scale-95;
+  }
+  #nav-menu-panel:not(.float-panel-closed) .nav-menu-item {
+    animation: navItemIn 0.22s ease calc(var(--item-delay, 0ms)) both;
+  }
+  @keyframes navItemIn {
+    from { opacity: 0; transform: translateX(6px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
   .search-panel mark {
     @apply bg-transparent text-[var(--primary)];
   }
