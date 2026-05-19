@@ -28,8 +28,6 @@ yarn.lock
 
 # --------------------------------
 
-/src/content/posts/AIS3EOF2026.*
-/public/assets/AIS3EOF2026/*
 /src/content/posts/tryhackme/*
 /public/assets/tryhackme/*
 /src/content/posts/Annual/2025AnnualReview.*
