@@ -12,15 +12,31 @@ draft: false
 import ChallengeCard from "../../components/misc/ChallengeCard.astro";
 
 <ChallengeCard
-	event="My First CTF & Pre-exam 2025"
-	rank={186}
-	total={389}
+	event="My First CTF"
+	rank={11}
+	total={83}
 	challenges={[
 		{ name: "Welcome", category: "Misc" },
 		{ name: "Ramen CTF", category: "Misc" },
 		{ name: "Tomorin db 🐧", category: "Web" },
-		{ name: "AIS3 Tiny Server (Misc)", category: "Misc", anchor: "ais3-tiny-server-misc" },
-		{ name: "AIS3 Tiny Server (Rev)", category: "Rev", anchor: "ais3-tiny-server-rev" },
+		{
+			name: "AIS3 Tiny Server (Misc)",
+			category: "Misc",
+			anchor: "ais3-tiny-server-misc",
+		},
+	]}
+/>
+
+<ChallengeCard
+	event="Pre-exam 2025"
+	rank={186}
+	total={389}
+	challenges={[
+		{
+			name: "AIS3 Tiny Server (Rev)",
+			category: "Rev",
+			anchor: "ais3-tiny-server-rev",
+		},
 		{ name: "web flag checker", category: "Rev" },
 	]}
 />
