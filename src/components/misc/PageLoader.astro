@@ -103,42 +103,6 @@
 				         fill="url(#lg-cone)"/>
 				<!-- 桌面光池 -->
 				<ellipse class="lamp-cone" cx="192" cy="144" rx="50" ry="14" fill="url(#lg-pool)"/>
-
-				<!-- ── Telegram 風格紙飛機 ── -->
-				<!--
-				  座標設計：機鼻朝右，折疊稜線水平，兩翼上下展開
-				  機鼻 (172,136)  上翼後端 (136,128)  折疊內角 (150,136)  下翼後端 (136,148)
-				  上翼面（亮）：機鼻 → 上後端 → 折疊內角
-				  下翼面（暗）：機鼻 → 折疊內角 → 下後端
-				  折疊稜線：機鼻 → 折疊內角（水平，最亮）
-				-->
-
-				<!-- 桌面投影 -->
-				<ellipse cx="154" cy="144" rx="21" ry="5.5"
-				         fill="#3a2510" opacity="0.20"
-				         transform="rotate(-4, 154, 144)"/>
-
-				<!-- 下翼面（折疊面，在暗側） -->
-				<polygon points="172,136 150,136 136,148" fill="#b8b4ac"/>
-
-				<!-- 上翼面（主翼，燈光照射，較亮） -->
-				<polygon points="172,136 136,128 150,136" fill="#f2efea"/>
-
-				<!-- 折疊稜線：水平中心線，最亮，是整體立體感的核心 -->
-				<line x1="172" y1="136" x2="150" y2="136"
-				      stroke="#eeeae2" stroke-width="2.8" stroke-linecap="round"/>
-
-				<!-- 上翼前緣 -->
-				<line x1="172" y1="136" x2="136" y2="128"
-				      stroke="#d8d4cc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-
-				<!-- 後緣輪廓 -->
-				<line x1="136" y1="128" x2="136" y2="148"
-				      stroke="#a8a49c" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
-
-				<!-- 機鼻高光 -->
-				<circle cx="172" cy="136" r="1.5" fill="#faf8f5"/>
-
 				<!-- ── 桌燈 ── -->
 				<!-- 燈座 -->
 				<ellipse cx="228" cy="138" rx="13" ry="5.5" fill="#78788a"/>
