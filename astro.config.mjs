@@ -167,6 +167,7 @@ export default defineConfig({
 			watch: {
 				usePolling: true,
 				interval: 100,
+				ignored: ["!**/src/content/**"],
 			},
 		},
 		build: {
