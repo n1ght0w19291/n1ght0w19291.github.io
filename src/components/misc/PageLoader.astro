@@ -1,0 +1,275 @@
+---
+---
+
+<div id="page-loader" aria-hidden="true">
+	<div class="loader-content">
+		<div class="loader-visual">
+			<svg class="loader-scene" viewBox="0 0 300 210" xmlns="http://www.w3.org/2000/svg">
+				<defs>
+					<!-- 桌燈光暈（放射狀） -->
+					<radialGradient id="lg-cone" cx="50%" cy="0%" r="100%" gradientUnits="objectBoundingBox">
+						<stop offset="0%"   stop-color="#ffe080" stop-opacity="0.55"/>
+						<stop offset="100%" stop-color="#ffe080" stop-opacity="0"/>
+					</radialGradient>
+					<!-- 桌面光池 -->
+					<radialGradient id="lg-pool" cx="50%" cy="50%" r="50%">
+						<stop offset="0%"   stop-color="#ffd87a" stop-opacity="0.35"/>
+						<stop offset="100%" stop-color="#ffd87a" stop-opacity="0"/>
+					</radialGradient>
+				</defs>
+
+				<!-- ── 房間背景 ── -->
+				<rect x="0" y="0" width="300" height="210" fill="#18162a"/>
+
+				<!-- ── 窗戶區域 ── -->
+				<!-- 夜晚天空 -->
+				<rect x="18" y="16" width="72" height="115" fill="#070a1c" rx="2"/>
+
+				<!-- 星星 -->
+				<circle class="st1" cx="30"  cy="28"  r="1.2" fill="#c8d8ff" opacity="0.75"/>
+				<circle class="st2" cx="52"  cy="22"  r="1.6" fill="#dce8ff" opacity="0.65"/>
+				<circle class="st1" cx="70"  cy="34"  r="1"   fill="#c8d8ff" opacity="0.85"/>
+				<circle class="st3" cx="38"  cy="52"  r="0.9" fill="#dce8ff" opacity="0.55"/>
+				<circle class="st2" cx="62"  cy="56"  r="1.3" fill="#c8d8ff" opacity="0.70"/>
+				<circle class="st3" cx="26"  cy="72"  r="0.9" fill="#dce8ff" opacity="0.50"/>
+				<circle class="st1" cx="76"  cy="48"  r="1.1" fill="#c8d8ff" opacity="0.80"/>
+				<circle class="st2" cx="44"  cy="88"  r="0.8" fill="#c8d8ff" opacity="0.45"/>
+				<circle class="st3" cx="68"  cy="96"  r="1"   fill="#dce8ff" opacity="0.60"/>
+				<circle class="st1" cx="34"  cy="104" r="0.8" fill="#c8d8ff" opacity="0.50"/>
+
+				<!-- 月亮（彎月） -->
+				<circle cx="74" cy="42" r="13" fill="#fff5d8"/>
+				<circle cx="79" cy="39" r="11" fill="#070a1c"/>
+
+				<!-- 窗框 -->
+				<rect x="14" y="12" width="80" height="123" fill="none" stroke="#b8a888" stroke-width="4.5" rx="3"/>
+				<!-- 橫向分隔 -->
+				<line x1="14" y1="73" x2="94" y2="73" stroke="#b8a888" stroke-width="2.5"/>
+				<!-- 縱向分隔 -->
+				<line x1="54" y1="12" x2="54" y2="135" stroke="#b8a888" stroke-width="2.5"/>
+
+				<!-- ── 窗簾 ── -->
+				<!-- 左窗簾 -->
+				<path d="M 4 8
+				         C 8 22  4 44 10 66
+				         C 16 88  8 108 12 130
+				         C 14 148 8 162 11 175
+				         L 24 175
+				         C 22 162 28 148 26 130
+				         C 22 108 30 88 24 66
+				         C 18 44 24 22 18 8 Z"
+				      fill="#5c1e1e"/>
+				<!-- 左窗簾褶皺 -->
+				<line x1="12" y1="10" x2="14" y2="173" stroke="#4a1818" stroke-width="1.2" opacity="0.6"/>
+				<line x1="17" y1="10" x2="19" y2="173" stroke="#4a1818" stroke-width="0.9" opacity="0.4"/>
+
+				<!-- 右窗簾 -->
+				<path d="M 96 8
+				         C 92 22 96 44 90 66
+				         C 84 88 92 108 88 130
+				         C 86 148 92 162 89 175
+				         L 102 175
+				         C 106 162 100 148 100 130
+				         C 96 108 104 88 98 66
+				         C 92 44 98 22 96 8 Z"
+				      fill="#5c1e1e"/>
+				<!-- 右窗簾褶皺 -->
+				<line x1="92" y1="10" x2="90" y2="173" stroke="#4a1818" stroke-width="1.2" opacity="0.6"/>
+				<line x1="97" y1="10" x2="95" y2="173" stroke="#4a1818" stroke-width="0.9" opacity="0.4"/>
+
+				<!-- ── 書桌（等距右視角） ── -->
+				<!-- 桌面 -->
+				<polygon points="85,152 248,152 265,130 102,130" fill="#7a5232"/>
+				<!-- 桌面木紋 -->
+				<line x1="108" y1="132" x2="248" y2="135" stroke="#5e3c1e" stroke-width="0.9" opacity="0.35"/>
+				<line x1="104" y1="138" x2="252" y2="141" stroke="#5e3c1e" stroke-width="0.9" opacity="0.30"/>
+				<line x1="102" y1="145" x2="246" y2="148" stroke="#5e3c1e" stroke-width="0.9" opacity="0.25"/>
+				<!-- 桌面前緣高光 -->
+				<line x1="85" y1="152" x2="248" y2="152" stroke="#9a6840" stroke-width="1.2" opacity="0.5"/>
+
+				<!-- 桌體正面 -->
+				<polygon points="85,152 248,152 248,198 85,198" fill="#4f3018"/>
+				<!-- 抽屜線條 -->
+				<line x1="138" y1="168" x2="228" y2="168" stroke="#3a2010" stroke-width="1" opacity="0.6"/>
+				<!-- 抽屜把手 -->
+				<rect x="175" y="164" width="10" height="5" rx="2.5" fill="#3a2010" opacity="0.5"/>
+
+				<!-- 桌體右側面 -->
+				<polygon points="248,152 265,130 265,178 248,198" fill="#3a2010"/>
+
+				<!-- ── 光錐（在桌面物品之前渲染） ── -->
+				<polygon class="lamp-cone"
+				         points="170,104 210,104 238,152 148,152"
+				         fill="url(#lg-cone)"/>
+				<!-- 桌面光池 -->
+				<ellipse class="lamp-cone" cx="192" cy="144" rx="50" ry="14" fill="url(#lg-pool)"/>
+
+				<!-- ── Telegram 風格紙飛機 ── -->
+				<!--
+				  座標設計：機鼻朝右，折疊稜線水平，兩翼上下展開
+				  機鼻 (172,136)  上翼後端 (136,128)  折疊內角 (150,136)  下翼後端 (136,148)
+				  上翼面（亮）：機鼻 → 上後端 → 折疊內角
+				  下翼面（暗）：機鼻 → 折疊內角 → 下後端
+				  折疊稜線：機鼻 → 折疊內角（水平，最亮）
+				-->
+
+				<!-- 桌面投影 -->
+				<ellipse cx="154" cy="144" rx="21" ry="5.5"
+				         fill="#3a2510" opacity="0.20"
+				         transform="rotate(-4, 154, 144)"/>
+
+				<!-- 下翼面（折疊面，在暗側） -->
+				<polygon points="172,136 150,136 136,148" fill="#b8b4ac"/>
+
+				<!-- 上翼面（主翼，燈光照射，較亮） -->
+				<polygon points="172,136 136,128 150,136" fill="#f2efea"/>
+
+				<!-- 折疊稜線：水平中心線，最亮，是整體立體感的核心 -->
+				<line x1="172" y1="136" x2="150" y2="136"
+				      stroke="#eeeae2" stroke-width="2.8" stroke-linecap="round"/>
+
+				<!-- 上翼前緣 -->
+				<line x1="172" y1="136" x2="136" y2="128"
+				      stroke="#d8d4cc" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+
+				<!-- 後緣輪廓 -->
+				<line x1="136" y1="128" x2="136" y2="148"
+				      stroke="#a8a49c" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+
+				<!-- 機鼻高光 -->
+				<circle cx="172" cy="136" r="1.5" fill="#faf8f5"/>
+
+				<!-- ── 桌燈 ── -->
+				<!-- 燈座 -->
+				<ellipse cx="228" cy="138" rx="13" ry="5.5" fill="#78788a"/>
+				<ellipse cx="228" cy="136" rx="13" ry="4"   fill="#9090a4" opacity="0.5"/>
+
+				<!-- 燈柱 -->
+				<rect x="224.5" y="105" width="7" height="33" rx="3.5" fill="#888898"/>
+
+				<!-- 燈臂（轉折型，有肘節） -->
+				<line x1="228" y1="105" x2="205" y2="86"
+				      stroke="#888898" stroke-width="5.5" stroke-linecap="round"/>
+				<!-- 肘節 -->
+				<circle cx="205" cy="86" r="4.5" fill="#78788a"/>
+				<!-- 燈頭臂 -->
+				<line x1="205" y1="86" x2="188" y2="100"
+				      stroke="#888898" stroke-width="5" stroke-linecap="round"/>
+
+				<!-- 燈罩 -->
+				<polygon points="176,98 200,98 208,114 170,114" fill="#c8c0a0"/>
+				<!-- 燈罩內側（亮面） -->
+				<polygon points="178,99 198,99 205,112 173,112" fill="#f0e8c8"/>
+				<!-- 燈罩上沿高光 -->
+				<line x1="176" y1="98" x2="200" y2="98" stroke="#a8a080" stroke-width="1.5" stroke-linecap="round"/>
+
+				<!-- 燈泡光點 -->
+				<circle class="bulb-glow" cx="189" cy="106" r="6" fill="#ffe8a0" opacity="0.9"/>
+				<circle cx="189" cy="106" r="3" fill="#fff8e0"/>
+			</svg>
+		</div>
+
+		<p class="loader-label">
+			Loading<span class="ldot ld1">.</span><span class="ldot ld2">.</span><span class="ldot ld3">.</span>
+		</p>
+	</div>
+</div>
+
+<style is:global>
+/* 隱藏 OverlayScrollbars 自訂滾動條 */
+body.is-loading .os-scrollbar {
+	visibility: hidden !important;
+}
+
+/* ===== Page Loader ===== */
+#page-loader {
+	position: fixed;
+	inset: 0;
+	z-index: 99999;
+	background: #100e1e;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#page-loader.done {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.loader-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.6rem;
+}
+
+/* SVG 容器：用 overflow hidden 讓書桌由下往上揭開 */
+.loader-visual {
+	width: min(320px, 90vw);
+	aspect-ratio: 300 / 210;
+	overflow: hidden;
+	border-radius: 0.5rem;
+}
+
+/* 書桌場景由下往上揭開 */
+.loader-scene {
+	width: 100%;
+	height: 100%;
+	display: block;
+	animation: scene-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes scene-rise {
+	from { transform: translateY(100%); }
+	to   { transform: translateY(0);    }
+}
+
+/* 燈光脈動 */
+.lamp-cone {
+	animation: lamp-pulse 3.5s ease-in-out infinite;
+}
+@keyframes lamp-pulse {
+	0%, 100% { opacity: 1;    }
+	50%      { opacity: 0.72; }
+}
+
+/* 燈泡閃爍 */
+.bulb-glow {
+	animation: bulb-flicker 5s ease-in-out infinite;
+}
+@keyframes bulb-flicker {
+	0%, 90%, 100% { opacity: 0.9; }
+	93%           { opacity: 0.5; }
+	96%           { opacity: 0.9; }
+}
+
+/* 星星閃爍（三組不同速率） */
+.st1 { animation: twinkle 2.6s ease-in-out infinite; }
+.st2 { animation: twinkle 3.4s ease-in-out infinite 0.7s; }
+.st3 { animation: twinkle 2.1s ease-in-out infinite 1.4s; }
+@keyframes twinkle {
+	0%, 100% { opacity: 0.55; }
+	50%      { opacity: 1;    }
+}
+
+/* Loading 文字 */
+.loader-label {
+	font-family: 'Lexend', system-ui, sans-serif;
+	font-size: 0.85rem;
+	font-weight: 400;
+	letter-spacing: 0.35em;
+	color: oklch(0.70 0.06 var(--hue, 260));
+	margin: 0;
+}
+.ldot {
+	display: inline-block;
+	animation: dot-jump 1.4s ease-in-out infinite;
+}
+.ld2 { animation-delay: 0.18s; }
+.ld3 { animation-delay: 0.36s; }
+@keyframes dot-jump {
+	0%, 60%, 100% { transform: translateY(0);   opacity: 0.3; }
+	30%           { transform: translateY(-4px); opacity: 1;   }
+}
+</style>

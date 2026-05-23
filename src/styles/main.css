@@ -5,6 +5,7 @@
   src: url("/fonts/TaipeiSansTCBeta-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -12,29 +13,31 @@
   src: url("/fonts/Iansui-Regular.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Lexend";
   src: url("/fonts/Lexend-Regular.ttf") format("truetype");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "ZenMaruGothic";
   src: url("/fonts/ZenMaruGothic-Regular.ttf") format("truetype");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "genSenRoundedTW";
   src: url("/fonts/GenSenRounded2TW-R.otf") format("opentype");
+  font-display: swap;
 }
 
-/* Start https://www.cursors-4u.com */
+/* Cursor hosted locally to avoid external network latency on first load */
 * {
-  cursor: url(https://cur.cursors-4u.net/nature/nat-5/nat416.ani),
-    url(https://cur.cursors-4u.net/nature/nat-5/nat416.png), auto !important;
+  cursor: url(/cursor/nat416.png), auto !important;
 }
-/* End https://www.cursors-4u.com */
 
 @layer components {
   .card-base {

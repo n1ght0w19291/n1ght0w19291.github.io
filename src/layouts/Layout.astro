@@ -4,6 +4,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
+import PageLoader from "@components/misc/PageLoader.astro";
 import { profileConfig, siteConfig } from "@/config";
 import {
 	AUTO_MODE,
@@ -170,6 +171,7 @@ const ogImageUrl = new URL(
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
 	>
+		<PageLoader />
 		<ConfigCarrier></ConfigCarrier>
 		<slot />
 
@@ -177,6 +179,7 @@ const ogImageUrl = new URL(
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
 	</body>
 </html>
+
 
 <style is:global define:vars={{
 	bannerOffset,
@@ -393,6 +396,23 @@ function init() {
 /* Load settings when entering the site */
 init();
 
+/* Hide page loader once the page is ready */
+document.body.classList.add('is-loading');
+function hideLoader() {
+	const loader = document.getElementById('page-loader');
+	if (loader) {
+		loader.classList.add('done');
+		loader.addEventListener('transitionend', () => {
+			document.body.classList.remove('is-loading');
+		}, { once: true });
+	}
+}
+if (document.readyState === 'complete') {
+	hideLoader();
+} else {
+	window.addEventListener('load', hideLoader, { once: true });
+}
+
 const setup = () => {
 	// TODO: temp solution to change the height of the banner
 /*
@@ -444,6 +464,19 @@ const setup = () => {
 		if (toc) {
 			toc.classList.add('toc-not-ready')
 		}
+
+		// Show loader on navigation
+		const loader = document.getElementById('page-loader');
+		if (loader) {
+			const scene = loader.querySelector<HTMLElement>('.loader-scene');
+			if (scene) {
+				scene.style.animation = 'none';
+				scene.offsetHeight; // force reflow to restart animation
+				scene.style.animation = '';
+			}
+			loader.classList.remove('done');
+			document.body.classList.add('is-loading');
+		}
 	});
 	window.swup.hooks.on('page:view', () => {
 		// hide the temp high element when the transition is done
@@ -451,6 +484,9 @@ const setup = () => {
 		if (heightExtend) {
 			heightExtend.classList.remove('hidden')
 		}
+
+		// Hide loader after new page content is in place
+		hideLoader();
 	});
 	window.swup.hooks.on('visit:end', (_visit: {to: {url: string}}) => {
 		setTimeout(() => {
