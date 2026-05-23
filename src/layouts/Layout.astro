@@ -468,12 +468,6 @@ const setup = () => {
 		// Show loader on navigation
 		const loader = document.getElementById('page-loader');
 		if (loader) {
-			const scene = loader.querySelector<HTMLElement>('.loader-scene');
-			if (scene) {
-				scene.style.animation = 'none';
-				scene.offsetHeight; // force reflow to restart animation
-				scene.style.animation = '';
-			}
 			loader.classList.remove('done');
 			document.body.classList.add('is-loading');
 		}
