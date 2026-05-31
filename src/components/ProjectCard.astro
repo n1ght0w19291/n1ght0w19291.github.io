@@ -1,0 +1,147 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import { slugifyStr } from "@/utils/slugify";
+import Datetime from "./Datetime.astro";
+import IconProject from "@/assets/icons/IconProject.svg";
+import { SITE } from "@/config";
+
+type Props = {
+  project: CollectionEntry<"projects">;
+  slug: string;
+};
+
+const { project, slug } = Astro.props;
+const { title, description, pubDatetime, coverImage, tags } = project.data;
+const href = `/projects/${slug}`;
+const headingId = `project-${slugifyStr(slug)}-title`;
+const viewTransitionName = slugifyStr(String(title).replaceAll(".", "-"));
+---
+
+<li
+  class:list={[
+    "card-glow group/card relative my-3 rounded-2xl",
+    coverImage ? "overflow-hidden" : "",
+    "border backdrop-blur-sm",
+    "transition-[border-color,background-color,box-shadow,transform] duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-none",
+    "hover:-translate-y-0.5 focus-within:-translate-y-0.5",
+    "hover:shadow-lg focus-within:shadow-lg",
+    "border-purple-500/20 bg-purple-500/5",
+    "hover:border-purple-500/40 hover:bg-purple-500/10 focus-within:border-purple-500/40 focus-within:bg-purple-500/10",
+    "hover:shadow-purple-500/10 focus-within:shadow-purple-500/10",
+  ]}
+>
+  <div
+    class="card-glow-effect pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-0 transition-opacity duration-300 motion-reduce:transition-none group-hover/card:opacity-100 group-focus-within/card:opacity-100"
+    aria-hidden="true"
+  ></div>
+
+  {coverImage && (
+    <a href={href} tabindex="-1" aria-hidden="true" class="card-cover-wrapper block" data-cover>
+      <Image
+        src={coverImage}
+        alt=""
+        class="card-cover-img"
+        loading="lazy"
+        widths={[400, 800, 1200]}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+      />
+      <div class="card-cover-overlay" aria-hidden="true"></div>
+    </a>
+  )}
+
+  <div class="relative z-5 p-4 sm:p-5">
+    <a
+      href={href}
+      class="text-lg font-semibold text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-purple-500 rounded-sm group-hover/card:text-purple-400"
+      aria-labelledby={headingId}
+    >
+      <h2 id={headingId} class="flex items-center gap-2" style={{ viewTransitionName }}>
+        <span
+          aria-hidden="true"
+          class="inline-flex items-center justify-center rounded-md bg-purple-500/10 p-1 text-purple-400/80 ring-1 ring-purple-500/20"
+        >
+          <IconProject class="size-4" />
+        </span>
+        <span class="sr-only">Project:</span>
+        {title}
+      </h2>
+      <span class="absolute -inset-4 sm:-inset-5 z-10" aria-hidden="true"></span>
+    </a>
+
+    <div class="relative z-20 mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pointer-events-none">
+      <Datetime pubDatetime={pubDatetime} />
+    </div>
+
+    <p class="relative z-20 mt-2 line-clamp-2 text-sm leading-relaxed text-foreground/75 pointer-events-auto select-text">
+      {description}
+    </p>
+
+    {SITE.showTagsInCards && tags.length > 0 && (
+      <ul class="relative z-20 mt-3 flex flex-wrap gap-1.5 pointer-events-auto">
+        {tags.slice(0, 4).map((tag: string) => (
+          <li>
+            <a
+              href={`/tags/${slugifyStr(tag)}/`}
+              class="inline-flex items-center gap-0.5 rounded-full px-2.5 py-0.5 text-xs font-medium border transition-colors duration-200 border-purple-500/25 bg-purple-500/8 text-purple-400/80 hover:border-purple-500/50 hover:bg-purple-500/15 hover:text-purple-400"
+            >
+              <span aria-hidden="true" class="opacity-60">#</span>{tag}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</li>
+
+<style>
+  .card-glow {
+    contain: paint;
+  }
+
+  .card-glow-effect {
+    background: radial-gradient(
+      350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      color-mix(in oklab, #a855f7 8%, transparent) 0%,
+      color-mix(in oklab, #a855f7 4%, transparent) 30%,
+      color-mix(in oklab, #a855f7 0.8%, transparent) 60%,
+      transparent 80%
+    );
+    will-change: opacity;
+  }
+
+  .card-cover-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1200 / 630;
+    overflow: hidden;
+    max-height: 220px;
+  }
+
+  .card-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: brightness(0.95) saturate(1.05);
+  }
+
+  :global(.group\/card:hover) .card-cover-img,
+  :global(.group\/card:focus-within) .card-cover-img {
+    transform: scale(1.03);
+    filter: brightness(1) saturate(1.1);
+  }
+
+  .card-cover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      color-mix(in oklab, var(--background) 60%, transparent) 100%
+    );
+    pointer-events: none;
+  }
+</style>

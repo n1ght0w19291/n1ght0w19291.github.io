@@ -1,0 +1,270 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { slugifyStr } from "@/utils/slugify";
+import { getEntryPath } from "@/utils/contentEntry";
+import { getReadingTime } from "@/utils/readingTime";
+import Datetime from "./Datetime.astro";
+import IconProject from "@/assets/icons/IconProject.svg";
+import IconClock from "@/assets/icons/IconClock.svg";
+import { SITE } from "@/config";
+
+type Props = {
+  variant?: "h2" | "h3";
+  featured?: boolean;
+} & (CollectionEntry<"blog"> | CollectionEntry<"projects">);
+
+const { variant: Heading = "h2", featured = false, id, data, filePath, collection, body } = Astro.props;
+
+const { title, description, pubDatetime } = data;
+const modDatetime = "modDatetime" in data ? data.modDatetime : null;
+const timezone = "timezone" in data ? data.timezone : undefined;
+const tags = "tags" in data ? data.tags : [];
+const draft = "draft" in data ? data.draft : false;
+const href = getEntryPath({ collection, id, filePath });
+const isProject = collection === "projects";
+const headingId = `${collection}-${slugifyStr(String(id))}-title`;
+const descriptionId = `${collection}-${slugifyStr(String(id))}-description`;
+const viewTransitionName = slugifyStr(String(title).replaceAll(".", "-"));
+const readingTime = body ? getReadingTime(body) : null;
+
+// Resolve cover image source
+let coverSrc: string | undefined;
+if (SITE.showCoverImages) {
+  if (isProject) {
+    const d = data as { ogImage?: { src: string } | string; coverImage?: { src: string } };
+    if (d.ogImage) {
+      coverSrc = typeof d.ogImage === "string" ? d.ogImage : d.ogImage.src;
+    } else if (d.coverImage) {
+      coverSrc = d.coverImage.src;
+    } else if (SITE.dynamicOgImage) {
+      coverSrc = `${href}/og.png`;
+    }
+  } else {
+    // Blog posts: prefer frontmatter ogImage, fallback to dynamic OG image
+    if ("ogImage" in data && data.ogImage) {
+      // ogImage may be a processed Astro image object or a plain string
+      coverSrc = typeof data.ogImage === "string" ? data.ogImage : (data.ogImage as { src: string }).src;
+    } else if (SITE.dynamicOgImage) {
+      // Fallback: dynamically generated OG image (exists in dist/ after pnpm build)
+      coverSrc = `${href}/index.png`;
+    }
+  }
+}
+---
+
+<li
+  class:list={[
+    "card-glow group/card relative my-3 rounded-2xl",
+    // Use overflow-hidden when cover image is shown so the image respects border-radius
+    coverSrc ? "overflow-hidden" : "",
+    "border backdrop-blur-sm",
+    "transition-[border-color,background-color,box-shadow,transform] duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-none",
+    "hover:-translate-y-0.5 focus-within:-translate-y-0.5",
+    "hover:shadow-lg focus-within:shadow-lg",
+
+    // Default posts styling
+    !isProject && !featured && [
+      "border-border/25 bg-muted/10",
+      "hover:border-accent/40 hover:bg-accent/5 focus-within:border-accent/40 focus-within:bg-accent/5",
+      "hover:shadow-accent/10 focus-within:shadow-accent/10",
+    ],
+
+    // Featured generic posts styling
+    !isProject && featured && [
+      "border-amber-500/30 bg-amber-500/5",
+      "hover:border-amber-500/50 hover:bg-amber-500/10 focus-within:border-amber-500/50 focus-within:bg-amber-500/10",
+      "hover:shadow-amber-500/10 focus-within:shadow-amber-500/10",
+      "shadow-[0_0_20px_-5px_rgba(245,158,11,0.15)]",
+    ],
+
+    // Project variant styling
+    isProject && !featured && [
+      "border-purple-500/20 bg-purple-500/5",
+      "hover:border-purple-500/40 hover:bg-purple-500/10 focus-within:border-purple-500/40 focus-within:bg-purple-500/10",
+      "hover:shadow-purple-500/10 focus-within:shadow-purple-500/10",
+    ],
+
+    // Featured project styling
+    isProject && featured && [
+      "border-purple-500/40 bg-purple-500/10",
+      "hover:border-purple-500/60 hover:bg-purple-500/15 focus-within:border-purple-500/60 focus-within:bg-purple-500/15",
+      "hover:shadow-purple-500/20 focus-within:shadow-purple-500/20",
+      "shadow-[0_0_20px_-5px_rgba(168,85,247,0.15)]",
+    ],
+  ]}
+>
+  <!-- Cursor-following glow -->
+  <div
+    class="card-glow-effect pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-0 transition-opacity duration-300 motion-reduce:transition-none group-hover/card:opacity-100 group-focus-within/card:opacity-100"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Cover image — wrapped in <a> for clickability; aria-hidden so screen readers skip the duplicate link -->
+  {coverSrc && (
+    <a href={href} tabindex="-1" aria-hidden="true" class="card-cover-wrapper block" data-cover>
+      <img
+        src={coverSrc}
+        alt=""
+        class="card-cover-img"
+        loading="lazy"
+        decoding="async"
+        onerror="this.closest('[data-cover]').style.display='none'"
+      />
+      <div class="card-cover-overlay" aria-hidden="true"></div>
+    </a>
+  )}
+
+  <div class="relative z-5 p-4 sm:p-5">
+    <a
+      href={href}
+      class:list={[
+        "text-lg font-semibold text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm",
+        isProject
+          ? "group-hover/card:text-purple-400 focus-visible:ring-purple-500"
+          : featured
+            ? "group-hover/card:text-amber-500 focus-visible:ring-amber-500"
+            : "group-hover/card:text-accent focus-visible:ring-accent"
+      ]}
+      aria-labelledby={headingId}
+      aria-describedby={descriptionId}
+      style={{ viewTransitionName }}
+    >
+      <Heading id={headingId} class="flex items-center gap-2">
+        {isProject && (
+          <span
+            aria-hidden="true"
+            class="inline-flex items-center justify-center rounded-md bg-purple-500/10 p-1 text-purple-400/80 ring-1 ring-purple-500/20"
+          >
+            <IconProject class="size-4" />
+          </span>
+        )}
+        {isProject && <span class="sr-only">Project:</span>}
+        {title}
+      </Heading>
+      <!-- Expand clickable area to whole card on top of everything, minus the description -->
+      <span class="absolute -inset-4 sm:-inset-5 z-10" aria-hidden="true"></span>
+    </a>
+    
+    <!-- Meta row: date + reading time + draft -->
+    <div class="relative z-20 mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pointer-events-none">
+      <Datetime pubDatetime={pubDatetime} modDatetime={modDatetime} timezone={timezone} />
+      {readingTime && (
+        <span class="flex items-center gap-1 text-sm text-foreground/60 whitespace-nowrap">
+          <IconClock class="size-4 shrink-0" aria-hidden="true" />
+          {readingTime}
+        </span>
+      )}
+      {draft && (
+        <span class="flex items-center gap-1 rounded-md border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.5 font-firacode text-xs text-amber-500/80 whitespace-nowrap">
+          <svg class="size-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+          </svg>
+          Draft
+        </span>
+      )}
+    </div>
+
+    <p
+      id={descriptionId}
+      class="relative z-20 mt-2 line-clamp-2 text-sm leading-relaxed text-foreground/75 pointer-events-auto select-text"
+    >
+      {description}
+    </p>
+
+    <!-- Tags -->
+    {SITE.showTagsInCards && tags.length > 0 && (
+      <ul class="relative z-20 mt-3 flex flex-wrap gap-1.5 pointer-events-auto">
+        {tags.slice(0, 4).map((tag: string) => (
+          <li>
+            <a
+              href={`/tags/${slugifyStr(tag)}/`}
+              class:list={[
+                "inline-flex items-center gap-0.5 rounded-full px-2.5 py-0.5",
+                "text-xs font-medium",
+                "border transition-colors duration-200",
+                isProject
+                  ? "border-purple-500/25 bg-purple-500/8 text-purple-400/80 hover:border-purple-500/50 hover:bg-purple-500/15 hover:text-purple-400"
+                  : featured
+                      ? "border-amber-500/25 bg-amber-500/8 text-amber-500/80 hover:border-amber-500/50 hover:bg-amber-500/15 hover:text-amber-500"
+                      : "border-border/30 bg-muted/15 text-foreground/60 hover:border-accent/40 hover:bg-accent/10 hover:text-accent",
+              ]}
+            >
+              <span aria-hidden="true" class="opacity-60">#</span>{tag}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</li>
+
+<style>
+  .card-glow {
+    contain: paint;
+  }
+
+  .card-glow-effect {
+    background: radial-gradient(
+      350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      color-mix(in oklab, var(--accent) 8%, transparent) 0%,
+      color-mix(in oklab, var(--accent) 4%, transparent) 30%,
+      color-mix(in oklab, var(--accent) 0.8%, transparent) 60%,
+      transparent 80%
+    );
+    will-change: opacity;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-glow-effect {
+      background: none;
+    }
+  }
+
+  /* ── Cover image ── */
+  .card-cover-wrapper {
+    position: relative;
+    width: 100%;
+    /* 1200/630 OG aspect ratio */
+    aspect-ratio: 1200 / 630;
+    overflow: hidden;
+    /* Clamp height so tall viewports don't blow up the card */
+    max-height: 220px;
+  }
+
+  .card-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    /* Subtle zoom on hover via the parent group */
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: brightness(0.95) saturate(1.05);
+  }
+
+  :global(.group\/card:hover) .card-cover-img,
+  :global(.group\/card:focus-within) .card-cover-img {
+    transform: scale(1.03);
+    filter: brightness(1) saturate(1.1);
+  }
+
+  /* Fade-to-card-background gradient at the bottom of the cover */
+  .card-cover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      color-mix(in oklab, var(--background) 60%, transparent) 100%
+    );
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-cover-img {
+      transition: none;
+    }
+  }
+</style>

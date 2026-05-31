@@ -1,0 +1,65 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PostDetails from "@/layouts/PostDetails.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import { getPath } from "@/utils/getPath";
+
+type Props = {
+  post: CollectionEntry<"blog">;
+  children: CollectionEntry<"blog">[];
+  parentPost?: CollectionEntry<"blog">;
+  siblings?: CollectionEntry<"blog">[];
+};
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog", ({ data }) => !data.draft || import.meta.env.DEV);
+
+  const postIdSet = new Set(allPosts.map(p => p.id.split("/").pop()));
+  const postBySlug = new Map(allPosts.map(p => [p.id.split("/").pop()!, p]));
+
+  const childrenByParent = new Map<string, CollectionEntry<"blog">[]>();
+  for (const post of allPosts) {
+    const { parentPost } = post.data;
+    if (!parentPost) continue;
+    if (!postIdSet.has(parentPost)) {
+      console.warn(
+        `[nested-posts] Sub-post "${post.id}" references missing parent "${parentPost}"`
+      );
+      continue;
+    }
+    if (!childrenByParent.has(parentPost)) childrenByParent.set(parentPost, []);
+    childrenByParent.get(parentPost)!.push(post);
+  }
+
+  for (const children of childrenByParent.values()) {
+    children.sort(
+      (a, b) =>
+        new Date(a.data.pubDatetime).getTime() -
+        new Date(b.data.pubDatetime).getTime()
+    );
+  }
+
+  return allPosts.map(post => {
+    const parentSlug = post.data.parentPost;
+    const parentPostEntry = parentSlug ? postBySlug.get(parentSlug) : undefined;
+    const siblings = parentSlug ? childrenByParent.get(parentSlug) : undefined;
+
+    return {
+      params: { slug: getPath(post.id, post.filePath, false) },
+      props: {
+        post,
+        children: childrenByParent.get(post.id.split("/").pop()!) ?? [],
+        parentPost: parentPostEntry,
+        siblings,
+      },
+    };
+  });
+}
+
+const { post, children, parentPost, siblings } = Astro.props;
+
+const posts = await getCollection("blog");
+const sortedPosts = getSortedPosts(posts) as CollectionEntry<"blog">[];
+---
+
+<PostDetails post={post} posts={sortedPosts} children={children} parentPost={parentPost} siblings={siblings} />

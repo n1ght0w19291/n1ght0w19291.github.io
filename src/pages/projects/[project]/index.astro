@@ -1,0 +1,153 @@
+---
+import { render, getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Datetime from "@/components/Datetime.astro";
+
+import IconProject from "@/assets/icons/IconProject.svg";
+import { slugifyStr } from "@/utils/slugify";
+import { getProjectSlug } from "@/utils/contentEntry";
+import { SITE } from "@/config";
+
+export async function getStaticPaths() {
+  if (!SITE.showProjects) return [];
+
+  const projects = await getCollection(
+    "projects",
+    ({ data }) => !data.draft || import.meta.env.DEV
+  );
+  return projects.map(project => ({
+    params: { project: getProjectSlug(project.id) },
+    props: { entry: project },
+  }));
+}
+
+const { entry } = Astro.props;
+const {
+  title,
+  description,
+  pubDatetime,
+  coverImage,
+  ogImage: initOgImage,
+  tags,
+} = entry.data;
+const slug = getProjectSlug(entry.id);
+const { Content } = await render(entry);
+
+// Resolve OG image: custom → satori-generated → Layout default
+let ogImageUrl: string | undefined;
+if (typeof initOgImage === "string") {
+  ogImageUrl = initOgImage;
+} else if (initOgImage?.src) {
+  ogImageUrl = initOgImage.src;
+}
+if (!ogImageUrl && SITE.dynamicOgImage) {
+  ogImageUrl = `/projects/${slug}/og.png`;
+}
+const ogImage = ogImageUrl
+  ? new URL(ogImageUrl, Astro.url.origin).href
+  : undefined;
+---
+
+<Layout
+  title={`${title} | Projects | ${SITE.title}`}
+  description={description}
+  ogImage={ogImage}
+  pubDatetime={pubDatetime}
+>
+  <Header />
+  {SITE.showBackButton && <Breadcrumb withBackButton />}
+  <main
+    id="main-content"
+    class:list={["relative app-layout pb-16", { "mt-8": !SITE.showBackButton }]}
+    data-pagefind-body
+  >
+    <!-- Project header -->
+    <header class="mb-10 border-b border-border/10 pt-8 pb-10">
+      <div
+        class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+      >
+        <div class="max-w-3xl">
+          <div class="mb-4 inline-flex items-center gap-2 text-purple-400">
+            <IconProject class="size-5" />
+            <span
+              class="font-firacode text-xs font-bold tracking-[0.2em] uppercase opacity-90"
+            >
+              Project
+            </span>
+          </div>
+
+          <h1
+            class="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl"
+            style={{
+              viewTransitionName: slugifyStr(
+                String(title).replaceAll(".", "-")
+              ),
+            }}
+          >
+            {title}
+          </h1>
+
+          {
+            description && (
+              <p class="mt-4 text-lg leading-relaxed text-foreground/60">
+                {description}
+              </p>
+            )
+          }
+        </div>
+
+        <div class="flex shrink-0 flex-col gap-3 md:items-end md:pb-2">
+          <div
+            class="inline-flex items-center gap-2 font-firacode text-sm text-foreground/40"
+          >
+            <Datetime pubDatetime={pubDatetime} class="mb-0 [&>svg]:hidden" />
+          </div>
+
+          {
+            tags.length > 0 && (
+              <div class="flex flex-wrap gap-x-3 gap-y-2 text-sm md:justify-end">
+                {tags.map(tag => (
+                  <a
+                    href={`/tags/${slugifyStr(tag)}/`}
+                    class="group relative inline-flex items-center font-firacode text-foreground/50 transition-colors duration-300 hover:text-purple-400"
+                  >
+                    <span class="mr-1 text-purple-400/40 transition-colors duration-300 group-hover:text-purple-400">
+                      #
+                    </span>
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </header>
+
+    <!-- Cover image -->
+    {
+      coverImage && (
+        <div class="mb-10 overflow-hidden rounded-2xl">
+          <Image
+            src={coverImage}
+            alt={title}
+            class="max-h-[60vh] w-full object-cover"
+            loading="eager"
+            widths={[800, 1200, 1600]}
+            sizes="(max-width: 1200px) 100vw, 1200px"
+          />
+        </div>
+      )
+    }
+
+    <!-- Article content -->
+    <article class="app-prose w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)">
+      <Content />
+    </article>
+  </main>
+  <Footer />
+</Layout>

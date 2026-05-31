@@ -1,0 +1,69 @@
+---
+layout: ../layouts/AboutLayout.astro
+title: "About"
+---
+
+import { LearningRecords } from "../components/misc/LearningRecords.jsx";
+import { EducationTimeline } from "../components/misc/EducationTimeline.jsx";
+import { ExperienceTimeline } from "../components/misc/ExperienceTimeline.jsx";
+import { SkillsSection } from "../components/misc/SkillsSection.jsx";
+import { GitHubCard } from "../components/misc/GitHubCard.jsx";
+
+# n1ght0w1
+
+<img
+  src="https://wakatime.com/badge/user/627e64fa-481a-41cc-989e-fee4123f4e9b.svg"
+  alt="WakaTime Badge"
+/>
+
+> 不用很厲害才開始，要先開始才會很厲害
+
+就讀臺北市立大學資訊科學系，大三。  
+目前專注於後端開發與資安技術，並積極挑戰不同的實務專案與競賽，以持續提升技術能力。
+
+大學就學期間：
+
+- **實習**
+  - 2026.03 ~ present<br/> QNAP 實習生
+
+- **專案開發**
+  - [請假系統維護](/projects/portal)
+  - [減碳系統開發](/projects/carbon-diary)
+  - [系學會網站開發](/projects/utcssa-official-website)
+
+- **其他**
+  - 參加 AIS3 2025 軟體、網頁及 IoT 安全組 結業
+  - 第十屆 AIS3 好厲駭 高階培訓模式學員
+  - 參加 AI CUP 2025 玉山人工智慧公開挑戰賽 初賽
+  - 參加 Taipei CodeFest 臺北程式設計節黑客松
+    - 2024 臺北春季程式設計節 城市儀表板大黑客松（進入決選）
+    - 2024 臺北秋季程式設計節 城市通微服務大黑客松（初賽）
+    - 2025 臺北秋季程式設計節 城市通微服務大黑客松（初賽）
+  - 大二上擔任「Java 程式設計」課程助教
+  - CPE 最高題數 4 題
+  - 臺北市立大學資訊科學系系學會
+    - 第 17 屆 技術組外聘人員、儲備幹部
+    - 第 18 屆 技術股股長
+  - 臺北市立大學學生會
+    - 第 11 屆 資訊部外聘人員
+    - 第 12 屆 資訊部部員
+
+<LearningRecords client:load />
+
+---
+
+## 學歷
+
+<EducationTimeline />
+
+---
+
+<ExperienceTimeline client:load />
+
+---
+
+<SkillsSection />
+
+---
+
+<GitHubCard repo="n1ght0w19291/n1ght0w19291" client:load />

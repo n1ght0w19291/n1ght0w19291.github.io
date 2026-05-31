@@ -1,0 +1,789 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Datetime from "@/components/Datetime.astro";
+import ShareLinks from "@/components/ShareLinks.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import BackToTopButton from "@/components/BackToTopButton.astro";
+
+import { getPath } from "@/utils/getPath";
+import { slugifyStr } from "@/utils/slugify";
+import { getReadingTime } from "@/utils/readingTime";
+import { SITE } from "@/config";
+
+type Props = {
+  post: CollectionEntry<"blog">;
+  posts: CollectionEntry<"blog">[];
+  children?: CollectionEntry<"blog">[];
+  parentPost?: CollectionEntry<"blog">;
+  siblings?: CollectionEntry<"blog">[];
+};
+
+const { post, posts, children = [], parentPost, siblings } = Astro.props;
+
+const {
+  title,
+  author,
+  description,
+  ogImage: initOgImage,
+  canonicalURL,
+  pubDatetime,
+  modDatetime,
+  timezone,
+  tags,
+  draft,
+} = post.data;
+
+const { Content } = await render(post);
+const readingTime = post.body ? getReadingTime(post.body) : null;
+
+let ogImageUrl: string | undefined;
+
+// Determine OG image source
+if (typeof initOgImage === "string") {
+  ogImageUrl = initOgImage; // Remote OG image (absolute URL)
+} else if (initOgImage?.src) {
+  ogImageUrl = initOgImage.src; // Local asset
+}
+
+// Use dynamic OG image if enabled and no remote|local ogImage
+if (!ogImageUrl && SITE.dynamicOgImage) {
+  ogImageUrl = `${getPath(post.id, post.filePath)}/index.png`;
+}
+
+// Resolve OG image URL (or fallback to SITE.ogImage / default `og.png`)
+const ogImage = ogImageUrl
+  ? new URL(ogImageUrl, Astro.url.origin).href
+  : undefined;
+
+const layoutProps = {
+  title: `${title} | ${SITE.title}`,
+  author,
+  description,
+  pubDatetime,
+  modDatetime,
+  canonicalURL,
+  ogImage,
+  scrollSmooth: true,
+};
+
+/* ========== Parent back-link ========== */
+
+const backTo = parentPost
+  ? (() => {
+      const parentHref = getPath(parentPost.id, parentPost.filePath);
+      const slug = parentHref.replace(/\/$/, "").split("/").pop() ?? "";
+      return { label: `../${slug}`, href: parentHref };
+    })()
+  : undefined;
+
+/* ========== Prev/Next Posts ========== */
+
+const navPool = (siblings ?? posts).map(({ data: { title }, id, filePath }) => ({
+  id,
+  title,
+  filePath,
+}));
+
+const currentPostIndex = navPool.findIndex(a => a.id === post.id);
+
+const prevPost = currentPostIndex !== 0 ? navPool[currentPostIndex - 1] : null;
+const nextPost =
+  currentPostIndex < navPool.length - 1 ? navPool[currentPostIndex + 1] : null;
+---
+
+<Layout {...layoutProps}>
+  <Header />
+  {SITE.showBackButton && <Breadcrumb withBackButton backTo={backTo} />}
+  <main
+    id="main-content"
+    class:list={["relative app-layout pb-12", { "mt-8": !SITE.showBackButton }]}
+    data-pagefind-body
+    {...post.data.parentPost ? { "data-pagefind-ignore": "all" } : {}}
+  >
+    <!-- Post header section -->
+    <header class="post-header relative mb-10 text-center">
+      <div class="post-hero-bg"></div>
+      <div class="relative z-10 rounded-3xl border border-border/20 bg-muted/5 px-6 py-8 backdrop-blur-md sm:px-10 sm:py-12">
+        <!-- Title -->
+        <h1
+          transition:name={slugifyStr(title)}
+          class="post-title text-3xl leading-tight font-bold tracking-tight sm:text-4xl lg:text-[2.75rem]"
+        >
+          {title}
+        </h1>
+
+        <!-- Tags as badges -->
+        <div class="mt-4 flex flex-wrap justify-center gap-2">
+          {
+            tags.map((tag: string) => (
+              <a
+                href={`/tags/${slugifyStr(tag)}/`}
+                class="post-tag-badge inline-flex items-center gap-1 rounded-full border border-accent/20 bg-accent/5 px-2.5 py-0.5 font-firacode text-xs text-accent transition-all duration-200 hover:border-accent/40 hover:bg-accent/10 hover:shadow-sm hover:shadow-accent/10"
+              >
+                <span class="opacity-50">#</span>
+                {tag}
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- Metadata row -->
+        <div
+          class="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm"
+        >
+          <!-- Author chip -->
+          <div
+            class="inline-flex items-center gap-1.5 rounded-lg border border-border/25 bg-muted/10 px-2.5 py-1 backdrop-blur-sm"
+          >
+            <svg
+              class="size-3.5 text-accent/70"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span class="opacity-70">{author}</span>
+          </div>
+
+          <!-- Date chip -->
+          <div
+            class="inline-flex items-center gap-1.5 rounded-lg border border-border/25 bg-muted/10 px-2.5 py-1 backdrop-blur-sm"
+          >
+            <svg
+              class="size-3.5 text-accent/70"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <Datetime
+              {pubDatetime}
+              {modDatetime}
+              {timezone}
+              size="sm"
+              class="opacity-70 [&>svg]:hidden"
+            />
+          </div>
+
+          <!-- Reading time chip -->
+          {readingTime && (
+            <div
+              class="inline-flex items-center gap-1.5 rounded-lg border border-border/25 bg-muted/10 px-2.5 py-1 backdrop-blur-sm"
+            >
+              <svg
+                class="size-3.5 text-accent/70"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                <path d="M12 7v5l3 3" />
+              </svg>
+              <span class="text-sm opacity-70">{readingTime}</span>
+            </div>
+          )}
+
+          <!-- Draft chip -->
+          {draft && (
+            <div
+              class="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 backdrop-blur-sm"
+              aria-label="This post is a draft"
+            >
+              <svg
+                class="size-3.5 text-amber-500/80"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+              <span class="font-firacode text-xs text-amber-500/80">Draft</span>
+            </div>
+          )}
+        </div>
+
+
+      </div>
+    </header>
+
+    <article
+      id="article"
+      class="app-prose mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
+    >
+      <Content />
+    </article>
+
+    <!-- Sub-post index (rendered when this post has children) -->
+    {children.length > 0 && (
+      <section class="sub-posts-index mt-10" data-pagefind-ignore>
+        <h2 class="sub-posts-heading">Articles in this series</h2>
+        <ol class="sub-posts-list">
+          {children.map((child, i) => {
+            const childTags = child.data.tags.filter(tag => slugifyStr(tag) !== child.data.parentPost);
+            return (
+              <li>
+                <a href={getPath(child.id, child.filePath)} class="sub-post-link group">
+                  <span class="sub-post-num">{String(i + 1).padStart(2, "0")}</span>
+                  <span class="sub-post-title group-hover:text-accent">{child.data.title}</span>
+                  {child.data.draft && (
+                    <span class="inline-flex shrink-0 items-center gap-1 rounded-md border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.5 font-firacode text-xs text-amber-500/80">
+                      <svg class="size-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                      </svg>
+                      Draft
+                    </span>
+                  )}
+                  {childTags.length > 0 && (
+                    <span class="sub-post-tags">
+                      {childTags.map(tag => (
+                        <span class="sub-post-tag">{tag}</span>
+                      ))}
+                    </span>
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+    )}
+
+    <!-- ═══════ Post footer section ═══════ -->
+    <div class="relative mt-12 mb-8 flex items-center justify-center gap-4" aria-hidden="true">
+      <div class="relative h-px flex-1 bg-linear-to-r from-transparent via-border/30 to-accent/20">
+        <div class="absolute inset-0 bg-linear-to-r from-transparent via-accent/40 to-accent/40 blur-[2px]"></div>
+      </div>
+      
+      <div class="relative z-10 flex items-center gap-2 font-firacode text-[10px] tracking-widest text-accent/40 uppercase select-none">
+        <span class="h-1.5 w-1.5 rounded-full bg-accent/50 shadow-[0_0_8px_var(--color-accent)]"></span>
+        end
+      </div>
+
+      <div class="relative h-px flex-1 bg-linear-to-l from-transparent via-border/30 to-accent/20">
+        <div class="absolute inset-0 bg-linear-to-l from-transparent via-accent/40 to-accent/40 blur-[2px]"></div>
+      </div>
+    </div>
+
+    <!-- Tags & Share row -->
+    <div
+      class="mt-6 mb-8 flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:justify-between"
+    >
+      <!-- Tags (duplicated from header — aria-hidden to avoid double indexing) -->
+      <div class="flex flex-wrap justify-center gap-2 sm:justify-start" aria-hidden="true">
+        {
+          tags.map((tag: string) => (
+            <a
+              href={`/tags/${slugifyStr(tag)}/`}
+              tabindex="-1"
+              class="inline-flex items-center gap-1 rounded-full border border-border/25 bg-muted/10 px-2.5 py-1 font-firacode text-xs transition-all duration-200 hover:border-accent/40 hover:bg-accent/5 hover:text-accent"
+            >
+              <span class="opacity-40">#</span>
+              {tag}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Share links -->
+      <ShareLinks />
+    </div>
+
+    <!-- Decorative separator before prev/next -->
+    <div class="my-6 flex items-center gap-3" aria-hidden="true">
+      <div
+        class="h-px flex-1 bg-linear-to-r from-transparent via-border/30 to-transparent"
+      >
+      </div>
+    </div>
+
+    <!-- Previous/Next Post Navigation -->
+    <div data-pagefind-ignore class="grid grid-cols-2 gap-3">
+      {
+        prevPost ? (
+          <a
+            href={getPath(prevPost.id, prevPost.filePath)}
+            class="post-nav-link group relative flex flex-col gap-1 rounded-2xl border border-border/20 px-5 py-4 transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+          >
+            <div class="post-nav-bg" />
+            <div class="flex items-center gap-1.5">
+              <svg
+                class="size-3.5 text-accent/50 transition-transform duration-300 group-hover:-translate-x-1 rtl:rotate-180"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+              </svg>
+              <span class="font-firacode text-[10px] tracking-wider text-foreground/35 uppercase">
+                Previous
+              </span>
+            </div>
+            <span class="line-clamp-2 text-sm leading-snug font-medium text-foreground/70 transition-colors duration-200 group-hover:text-accent">
+              {prevPost.title}
+            </span>
+          </a>
+        ) : (
+          <div />
+        )
+      }
+      {
+        nextPost && (
+          <a
+            href={getPath(nextPost.id, nextPost.filePath)}
+            class="post-nav-link group relative col-start-2 flex flex-col items-end gap-1 rounded-2xl border border-border/20 px-5 py-4 text-end transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+          >
+            <div class="post-nav-bg" />
+            <div class="flex items-center gap-1.5">
+              <span class="font-firacode text-[10px] tracking-wider text-foreground/35 uppercase">
+                Next
+              </span>
+              <svg
+                class="size-3.5 text-accent/50 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </div>
+            <span class="line-clamp-2 text-sm leading-snug font-medium text-foreground/70 transition-colors duration-200 group-hover:text-accent">
+              {nextPost.title}
+            </span>
+          </a>
+        )
+      }
+    </div>
+  </main>
+  <BackToTopButton />
+  <Footer />
+</Layout>
+
+<script is:inline data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Guard: avoid duplicating the bar on View Transitions re-runs
+    if (document.querySelector(".progress-container")) return;
+
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-50 h-1 w-full bg-background";
+
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    progressContainer.appendChild(progressBar);
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    const myBar = document.getElementById("myBar"); // cache ref once
+    if (!myBar) return;
+
+    let ticking = false;
+    document.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const winScroll = document.documentElement.scrollTop;
+            const height =
+              document.documentElement.scrollHeight -
+              document.documentElement.clientHeight;
+            myBar.style.width = ((winScroll / height) * 100) + "%";
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true } // lets the browser optimise scroll handling
+    );
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      link.ariaLabel = "link to heading";
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    // Pass 1: read all computed styles before touching the DOM
+    // (avoids a forced reflow on every iteration of the loop)
+    const topClasses = codeBlocks.map(cb =>
+      getComputedStyle(cb).getPropertyValue("--file-name-offset").trim() !== ""
+        ? "top-(--file-name-offset)"
+        : "-top-3"
+    );
+
+    // Pass 2: mutate DOM
+    codeBlocks.forEach((codeBlock, i) => {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClasses[i]} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codeblock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    });
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /** Lightbox: click any article image to open full-screen overlay.
+   *  Overlay is appended to <body> once and reused; image bindings are
+   *  re-applied on every run (supports data-astro-rerun re-execution).
+   *  CSS is injected via JS to avoid Astro component-scoping on dynamic elements. */
+  function attachLightbox() {
+    // Inject global styles once — Astro scopes <style> blocks so we bypass that here
+    if (!document.getElementById("lightbox-styles")) {
+      const style = document.createElement("style");
+      style.id = "lightbox-styles";
+      style.textContent = `
+        #article img:not([data-lightbox-ignore]) { cursor: pointer; }
+        #lightbox-overlay {
+          position: fixed; inset: 0; z-index: 9999;
+          display: flex; align-items: center; justify-content: center;
+          background: color-mix(in srgb, var(--background) 88%, transparent);
+          backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+          opacity: 0; pointer-events: none;
+          transition: opacity 0.25s ease;
+        }
+        #lightbox-overlay.open { opacity: 1; pointer-events: auto; }
+        #lightbox-overlay > img {
+          max-width: min(92vw, 1200px); max-height: 90vh;
+          object-fit: contain; border-radius: 0.75rem;
+          box-shadow:
+            0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent),
+            0 32px 64px -16px rgba(0,0,0,0.6),
+            0 0 80px -20px color-mix(in srgb, var(--accent) 20%, transparent);
+          transform: scale(0.96);
+          transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #lightbox-overlay.open > img { transform: scale(1); }
+      `;
+      document.head.appendChild(style);
+    }
+
+    // Build overlay once per page lifetime
+    let overlay = /** @type {HTMLElement|null} */ (document.getElementById("lightbox-overlay"));
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "lightbox-overlay";
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.setAttribute("aria-label", "Image viewer");
+      const img = document.createElement("img");
+      img.alt = "";
+      overlay.appendChild(img);
+      document.body.appendChild(overlay);
+
+      // Backdrop click — set once on the overlay element
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) closeLightbox();
+      });
+    }
+
+    const overlayImg = /** @type {HTMLImageElement} */ (overlay.querySelector("img"));
+    let escHandler = /** @type {((e: KeyboardEvent) => void) | null} */ (null);
+
+    function openLightbox(src, alt) {
+      overlayImg.src = src;
+      overlayImg.alt = alt || "";
+      overlay.classList.add("open");
+      document.body.style.overflow = "hidden";
+      escHandler = (e) => { if (e.key === "Escape") closeLightbox(); };
+      document.addEventListener("keydown", escHandler);
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove("open");
+      document.body.style.overflow = "";
+      if (escHandler) {
+        document.removeEventListener("keydown", escHandler);
+        escHandler = null;
+      }
+    }
+
+    // Bind article images; skip already-bound ones to avoid duplicate handlers
+    document.querySelectorAll("#article img:not([data-lightbox-ignore])").forEach((img) => {
+      if (img.dataset.lightboxBound) return;
+      img.dataset.lightboxBound = "1";
+      img.addEventListener("click", () => openLightbox(/** @type {HTMLImageElement} */ (img).src, img.alt));
+    });
+  }
+  attachLightbox();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+
+  /* Spoiler reveal toggle */
+  function initSpoilers() {
+    document.querySelectorAll(".spoiler").forEach(el => {
+      el.addEventListener("click", () => el.toggleAttribute("data-revealed"));
+    });
+  }
+  initSpoilers();
+  document.addEventListener("astro:after-swap", initSpoilers);
+</script>
+
+<style>
+  /* ===== Sub-post series index ===== */
+  .sub-posts-index {
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    background: color-mix(in srgb, var(--accent) 3%, transparent);
+  }
+
+  .sub-posts-heading {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--accent) 70%, var(--foreground));
+    margin-bottom: 1rem;
+  }
+
+  .sub-posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .sub-post-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--foreground);
+    transition: background 0.2s ease;
+  }
+
+  .sub-post-link:hover {
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+  }
+
+  .sub-post-num {
+    flex-shrink: 0;
+    font-family: var(--font-firacode, monospace);
+    font-size: 0.7rem;
+    color: var(--accent);
+    opacity: 0.5;
+    min-width: 1.5rem;
+  }
+
+  .sub-post-title {
+    flex: 1 1 0;
+    min-width: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+  }
+
+  .sub-post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 1;
+    max-width: 45%;
+  }
+
+  .sub-post-tag {
+    font-family: var(--font-firacode, monospace);
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--border) 25%, transparent);
+    background: color-mix(in srgb, var(--muted) 10%, transparent);
+    color: color-mix(in srgb, var(--foreground) 55%, transparent);
+    white-space: nowrap;
+  }
+
+  .post-title {
+    background: linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      color-mix(in oklab, var(--accent) 60%, var(--foreground)) 25%,
+      var(--foreground) 50%,
+      var(--foreground) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* .post-tag-badge: no backdrop-filter — parent container already has
+     backdrop-blur-md, individual badge layers add no visual benefit
+     but cost a compositing layer each */
+  .post-tag-badge {
+    /* intentionally empty — styles fully handled by Tailwind utilities */
+  }
+
+  /* Hero Aurora glow layer — gradient-only, no filter:blur (avoids repaint) */
+  .post-hero-bg {
+    position: absolute;
+    inset: -2px;
+    opacity: 0.6;
+    background:
+      radial-gradient(
+        circle at 20% 5%,
+        color-mix(in oklab, var(--accent) 12%, transparent) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        ellipse 80% 60% at 80% 95%,
+        color-mix(in oklab, var(--accent) 8%, transparent) 0%,
+        transparent 55%
+      );
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 1.5rem; /* matches rounded-3xl */
+  }
+
+  .post-nav-link {
+    /* No backdrop-filter here — .post-nav-bg already provides the
+     blur effect via filter:blur(16px), avoiding a second compositing layer */
+    background: color-mix(in srgb, var(--muted) 5%, transparent);
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .post-nav-link:hover {
+    background: color-mix(in srgb, var(--accent) 4%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .post-nav-link:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* Aurora glow layer — opacity-only transition, single blur value */
+  .post-nav-bg {
+    position: absolute;
+    inset: -1px;
+    opacity: 0.4;
+    transition: opacity 0.35s ease;
+    background:
+      radial-gradient(
+        ellipse 80% 60% at 20% 80%,
+        color-mix(in oklab, var(--accent) 12%, transparent) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 60% 70% at 80% 20%,
+        color-mix(in oklab, var(--accent) 8%, transparent) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 90% 40% at 50% 100%,
+        color-mix(in oklab, var(--accent) 6%, transparent) 0%,
+        transparent 50%
+      );
+    filter: blur(16px); /* single value — no change on hover → no repaint */
+    pointer-events: none;
+    z-index: -1;
+    border-radius: inherit;
+  }
+
+  .post-nav-link:hover .post-nav-bg {
+    opacity: 1; /* only opacity transitions — compositor-friendly */
+  }
+
+  @media (pointer: fine) {
+    .post-nav-bg {
+      will-change: opacity;
+    }
+  }
+
+</style>

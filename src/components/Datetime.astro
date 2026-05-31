@@ -1,0 +1,82 @@
+---
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import IconCalendar from "@/assets/icons/IconCalendar.svg";
+import { SITE } from "@/config";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+type Props = {
+  class?: string;
+  size?: "sm" | "lg";
+  pubDatetime: string | Date;
+  timezone?: string;
+  modDatetime?: string | Date | null;
+};
+
+const {
+  pubDatetime,
+  modDatetime,
+  size = "sm",
+  class: className = "",
+  timezone: postTimezone,
+} = Astro.props;
+
+/* ========== Formatted Datetime ========== */
+const locale = SITE.lang || "en";
+const localeCode = locale.toLowerCase().split("-")[0] || "en";
+const resolvedTimezone = postTimezone || SITE.timezone;
+
+const publishedDatetime = dayjs(pubDatetime).tz(resolvedTimezone);
+const modifiedDatetime = modDatetime ? dayjs(modDatetime).tz(resolvedTimezone) : null;
+
+const isModified = Boolean(
+  modifiedDatetime?.isValid() &&
+    publishedDatetime.isValid() &&
+    modifiedDatetime.isAfter(publishedDatetime)
+);
+
+const datetime = isModified && modifiedDatetime ? modifiedDatetime : publishedDatetime;
+
+const date = datetime.locale(localeCode).format("D MMM, YYYY");
+
+const srDate = new Intl.DateTimeFormat(locale, {
+  dateStyle: "long",
+  timeZone: resolvedTimezone,
+}).format(datetime.toDate());
+
+const updatedText = "Updated:";
+const publishedText = "Published date";
+const updatedSrText = "Updated date";
+const srLabel = isModified ? updatedSrText : publishedText;
+---
+
+<div class:list={["flex items-center gap-x-2 text-foreground/80", className]}>
+  <IconCalendar
+    aria-hidden="true"
+    class:list={[
+      "inline-block size-6 min-w-5.5",
+      { "scale-90": size === "sm" },
+    ]}
+  />
+  <span class="sr-only">{srLabel}: </span>
+  {
+    isModified && (
+      <span
+        aria-hidden="true"
+        class:list={["text-sm", { "sm:text-base": size === "lg" }]}
+      >
+        {updatedText}
+      </span>
+    )
+  }
+  <time
+    class:list={["text-sm whitespace-nowrap", { "sm:text-base": size === "lg" }]}
+    datetime={datetime.toISOString()}
+    title={srDate}
+    aria-label={`${srLabel}: ${srDate}`}
+    >{date}</time
+  >
+</div>
