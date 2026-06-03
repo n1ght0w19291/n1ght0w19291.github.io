@@ -60,7 +60,7 @@ export default async post => {
                     letterSpacing: "2px",
                     fontFamily: "Wotfard, GenSenRounded2TW-R",
                   },
-                  children: SITE.title + ".com",
+                  children: "n1ght0w19291.github.io",
                 },
               },
             },
