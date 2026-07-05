@@ -1,0 +1,54 @@
+---
+title: "IRON CTF 2024"
+description: "The writeup for IRON CTF 2024, where I ranked 29th out of 1033 teams. I solved the Web challenge 'Mango' and documented my approach here."
+pubDatetime: 2024-10-07T00:00:00Z
+tags: ["CTF Writeup"]
+draft: false
+---
+
+import ChallengeCard from "../../components/misc/ChallengeCard.astro";
+
+<ChallengeCard
+	event="IRON CTF 2024"
+	rank={29}
+	total={1033}
+	challenges={[{ name: "Mango", category: "Web" }]}
+/>
+
+之前沒有留 writeup 的習慣，或是太水的題目不知道怎麼寫就沒有留了 (╥﹏╥)
+
+![score](../../assets/images/blog/IRON2024/image.png)
+
+之前截圖的時候是 30 名，但是好像有隊伍被取消成績，就變成 29 / 1033
+
+![cert](../../assets/images/blog/IRON2024/cert.png)
+
+還贏了一個 .xyz 域名，雖然最後沒有用 www
+
+紀錄一下~
+
+---
+
+# IRON CTF 2024
+
+## Web
+
+### Mango
+
+在最底下有 Admin Login
+
+![alt text](../../assets/images/blog/IRON2024/Mango/image.png)
+
+進入 admin login 頁面後發現 url 的路徑是 `https://mango.1nf1n1ty.team/admin/login`
+
+![alt text](../../assets/images/blog/IRON2024/Mango/image-1.png)
+
+路徑在 /admin 下面，嘗試看看進到 /admin/index
+
+就找到 flag 了
+
+![alt text](../../assets/images/blog/IRON2024/Mango/image-2.png)
+
+```txt
+ironCTF{I_Said_M@nG0_N0t_M0ngo!}
+```

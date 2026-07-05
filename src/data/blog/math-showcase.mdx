@@ -1,0 +1,143 @@
+---
+title: 數學公式渲染展示
+description: 展示 KaTeX 數學公式渲染：inline、block、CTF crypto 相關公式
+pubDatetime: 2026-05-30T00:00:00Z
+draft: true
+tags:
+  - meta
+---
+
+## Inline 數學公式
+
+文字中夾帶公式：質能等價 $E = mc^2$，歐拉公式 $e^{i\pi} + 1 = 0$，黃金比例 $\varphi = \frac{1 + \sqrt{5}}{2}$。
+
+希臘字母：$\alpha$、$\beta$、$\gamma$、$\delta$、$\epsilon$、$\theta$、$\lambda$、$\mu$、$\sigma$、$\omega$。
+
+分數與根號：$\frac{a}{b}$、$\sqrt{x^2 + y^2}$、$\sqrt[3]{8} = 2$。
+
+上下標：$x^{n+1}$、$a_i$、$\sum_{i=1}^{n} x_i$、$\int_0^\infty f(x)\,dx$。
+
+---
+
+## Block 數學公式
+
+### 求和與積分
+
+$$
+\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+$$
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
+$$
+
+### 聯立方程（aligned）
+
+$$
+\begin{aligned}
+  2x + 3y &= 7 \\
+  x - y   &= 1
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+  \nabla \cdot \mathbf{E}  &= \frac{\rho}{\varepsilon_0} \\
+  \nabla \times \mathbf{B} &= \mu_0 \mathbf{J} + \mu_0\varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
+\end{aligned}
+$$
+
+### 矩陣
+
+$$
+A = \begin{pmatrix}
+  a_{11} & a_{12} & a_{13} \\
+  a_{21} & a_{22} & a_{23} \\
+  a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+$$
+
+$$
+\det(A) = \sum_{\sigma \in S_n} \text{sgn}(\sigma) \prod_{i=1}^n a_{i,\sigma(i)}
+$$
+
+---
+
+## CTF Crypto 相關公式
+
+### 模運算
+
+模逆元（Extended Euclidean）：
+
+$$
+a \cdot a^{-1} \equiv 1 \pmod{n}
+$$
+
+費馬小定理：若 $p$ 為質數，$\gcd(a, p) = 1$，則
+
+$$
+a^{p-1} \equiv 1 \pmod{p}
+$$
+
+中國剩餘定理：
+
+$$
+x \equiv a_1 \pmod{m_1},\quad x \equiv a_2 \pmod{m_2}
+\implies x \equiv a_1 M_1 y_1 + a_2 M_2 y_2 \pmod{M}
+$$
+
+### RSA
+
+公鑰 $(n, e)$，私鑰 $(n, d)$，金鑰生成關係：
+
+$$
+n = p \cdot q, \quad \phi(n) = (p-1)(q-1), \quad e \cdot d \equiv 1 \pmod{\phi(n)}
+$$
+
+加密與解密：
+
+$$
+c \equiv m^e \pmod{n}, \qquad m \equiv c^d \pmod{n}
+$$
+
+低指數攻擊（$e=3$，無 padding）：
+
+$$
+c = m^3 \implies m = \lfloor c^{1/3} \rfloor
+$$
+
+### 離散對數與 DH
+
+Diffie-Hellman：$g^{ab} \pmod{p}$
+
+$$
+A = g^a \bmod p, \quad B = g^b \bmod p, \quad K = A^b = B^a = g^{ab} \bmod p
+$$
+
+### 橢圓曲線
+
+短 Weierstrass 方程：
+
+$$
+y^2 = x^3 + ax + b \pmod{p}
+$$
+
+群律（點加法）：
+
+$$
+\lambda = \frac{y_2 - y_1}{x_2 - x_1}, \quad
+x_3 = \lambda^2 - x_1 - x_2, \quad
+y_3 = \lambda(x_1 - x_3) - y_1
+$$
+
+ECDLP：給定 $P$、$Q = kP$，求 $k$。
+
+### XOR 與資訊理論
+
+$$
+H(X) = -\sum_{x} p(x) \log_2 p(x)
+$$
+
+$$
+\text{key} = \text{ciphertext}_1 \oplus \text{ciphertext}_2 \oplus \text{plaintext}_1 \oplus \text{plaintext}_2
+$$

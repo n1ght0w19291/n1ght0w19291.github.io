@@ -1,0 +1,139 @@
+---
+title: Markdown 語法展示
+description: 展示所有自訂 Markdown 語法：callout blocks、spoiler
+pubDatetime: 2026-05-27T00:00:00Z
+draft: true
+tags:
+  - meta
+---
+
+## GFM Alert 語法（`> [!TYPE]`）
+
+> [!NOTE]
+> 這是 Note callout，使用 GFM alert 語法。
+
+> [!TIP]
+> 這是 Tip callout，適合放技巧或小提示。
+
+> [!WARNING]
+> 這是 Warning callout，提醒讀者注意某件事。
+
+> [!CAUTION]
+> 這是 Caution callout，比 Warning 更嚴重的警告。
+
+> [!IMPORTANT]
+> 這是 Important callout，強調重要資訊。
+
+---
+
+## Directive 語法（`:::type[Title]`）
+
+:::note
+這是預設標題的 note callout。
+:::
+
+:::note[自訂標題]
+這是有自訂標題的 note callout。
+
+支援多個段落，第二段在這裡。
+:::
+
+:::tip
+Tip callout — 給讀者的提示。
+:::
+
+:::warning[注意事項]
+Warning callout 支援自訂標題。
+:::
+
+:::caution
+Caution callout，紅色配色，比 warning 更嚴重。
+:::
+
+:::important
+Important callout，紫色，強調不可忽略的資訊。
+:::
+
+:::info
+Info callout，天藍色，純資訊性內容。
+:::
+
+:::success
+Success callout，綠色，表示成功或完成。
+:::
+
+:::check
+`check` 是 `success` 的別名，效果相同。
+:::
+
+:::danger
+Danger callout，深紅色，嚴重錯誤或危險。
+:::
+
+:::error
+`error` 是 `danger` 的別名。
+:::
+
+:::question
+Question callout，青色，常見問題或待解疑問。
+:::
+
+:::faq
+`faq` 是 `question` 的別名。
+:::
+
+:::abstract
+Abstract callout，青藍色，摘要或 TL;DR。
+:::
+
+:::tldr
+`tldr` 是 `abstract` 的別名。
+:::
+
+:::todo
+Todo callout，橙色，待辦事項。
+:::
+
+:::example[範例說明]
+Example callout，靛紫色，展示範例內容。
+
+```js
+console.log("Hello, world!");
+```
+
+:::
+
+:::quote[— 某個人]
+Quote callout，石灰色，引用語錄。
+:::
+
+:::bug
+Bug callout，粉紅色，已知問題或 bug 記錄。
+:::
+
+---
+
+## Spoiler 語法
+
+### Block spoiler
+
+:::spoiler
+這是預設標題的 spoiler 區塊，點擊灰色遮罩可以顯示內容。
+
+這是第二段，也會被一起隱藏。
+:::
+
+:::spoiler[劇情警告]
+這是有自訂標題的 spoiler 區塊。
+
+這裡可以放劇透、答案、或不想一開始就看到的內容。
+:::
+
+### Inline spoiler
+
+這句話裡有一個 ||隱藏的文字|| 需要點擊才能看到。
+
+答案是 ||42||，你猜到了嗎？
+
+測試 ||如果有換行  
+那|| 會怎麼樣
