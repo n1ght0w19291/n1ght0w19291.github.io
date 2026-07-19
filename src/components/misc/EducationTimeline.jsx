@@ -4,7 +4,7 @@ const educationData = [
 	{
 		id: "taipei-university",
 		name: "臺北市立大學",
-		department: "資訊科學系 大三",
+		department: "資訊科學系 升大四",
 		status: "就讀中",
 		period: "2023/09 - present",
 		img: "/assets/images/school/UT.png",
