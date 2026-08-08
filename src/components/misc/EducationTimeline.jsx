@@ -4,7 +4,9 @@ const educationData = [
 	{
 		id: "taipei-university",
 		name: "臺北市立大學",
+		englishName: "University of Taipei",
 		department: "資訊科學系 升大四",
+		englishDepartment: "Department of Computer Science, 4th Year",
 		status: "就讀中",
 		period: "2023/09 - present",
 		img: "/assets/images/school/UT.png",
@@ -12,6 +14,7 @@ const educationData = [
 	{
 		id: "zhongshan-girls-high-school",
 		name: "臺北市立中山女子高級中學",
+		englishName: "Taipei Municipal Zhong Shan Girls High School",
 		department: "普通科 高中",
 		status: "畢業",
 		period: "2019/09 - 2022/06",
@@ -59,7 +62,13 @@ export const EducationCard = ({ edu, index }) => {
 			</div>
 			<div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
 				<strong style={{ fontSize: 18, color: "var(--btn-content)" }}>{edu.name}</strong>
-				<span style={{ fontSize: 15, color: "var(--btn-content)" }}>{edu.department}</span>
+				<span style={{ fontSize: 15, color: "var(--btn-content)" }}>{edu.englishName}</span>
+				<span style={{ fontSize: 14, color: "var(--btn-content)", opacity: 0.75 }}>{edu.department}</span>
+				{
+					edu.englishDepartment && (
+						<span style={{ fontSize: 14, color: "var(--btn-content)", opacity: 0.75 }}>{edu.englishDepartment}</span>
+					)
+				}
 				<span style={{ fontSize: 14, color: "var(--btn-content)", opacity: 0.75 }}>{edu.status}</span>
 				<small style={{ fontSize: 13, color: "var(--btn-content)", opacity: 0.6 }}>{edu.period}</small>
 			</div>
@@ -71,7 +80,9 @@ EducationCard.propTypes = {
 	edu: PropTypes.shape({
 		id: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired,
+		englishName: PropTypes.string,
 		department: PropTypes.string.isRequired,
+		englishDepartment: PropTypes.string,
 		status: PropTypes.string.isRequired,
 		period: PropTypes.string.isRequired,
 		img: PropTypes.string.isRequired,

@@ -34,6 +34,12 @@ jobs:
           run_install: true
 
       - name: Build with Astro
+        env:
+          PUBLIC_SOCIAL_GITHUB: ${{ vars.PUBLIC_SOCIAL_GITHUB }}
+          PUBLIC_SOCIAL_LINKEDIN: ${{ vars.PUBLIC_SOCIAL_LINKEDIN }}
+          PUBLIC_SOCIAL_EMAIL: ${{ vars.PUBLIC_SOCIAL_EMAIL }}
+          PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.PUBLIC_GOOGLE_SITE_VERIFICATION }}
+          PUBLIC_ENABLE_RSS: ${{ vars.PUBLIC_ENABLE_RSS }}
         run: |
           NODE_ENV=production pnpm run build
 

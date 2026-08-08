@@ -81,11 +81,6 @@ export default defineConfig({
         context: "client",
         optional: true,
       }),
-      PUBLIC_SOCIAL_X: envField.string({
-        access: "public",
-        context: "client",
-        optional: true,
-      }),
       PUBLIC_SOCIAL_LINKEDIN: envField.string({
         access: "public",
         context: "client",

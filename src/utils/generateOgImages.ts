@@ -4,6 +4,7 @@ import { SITE } from "@/config";
 import postOgImage from "./og-templates/post";
 import siteOgImage from "./og-templates/site";
 import tagOgImage from "./og-templates/tag";
+import pageOgImage from "./og-templates/page";
 
 function svgBufferToPngBuffer(svg: string) {
   const resvg = new Resvg(svg);
@@ -35,6 +36,11 @@ export async function generateOgImageForSite() {
 
 export async function generateOgImageForTag(tagName: string) {
   const svg = await tagOgImage(tagName);
+  return svgBufferToPngBuffer(svg);
+}
+
+export async function generateOgImageForPage(title: string, subtitle?: string) {
+  const svg = await pageOgImage({ title, subtitle });
   return svgBufferToPngBuffer(svg);
 }
 

@@ -27,7 +27,7 @@ const tagsWithCount = tags.map(({ tag, tagName }) => ({
 const maxCount = Math.max(...tagsWithCount.map(t => t.count));
 ---
 
-<Layout title={`Tags | ${SITE.title}`}>
+<Layout title={`Tags | ${SITE.title}`} ogImage="/og/tags.png">
   <Header />
   <Breadcrumb />
   <main id="main-content" class="app-layout pb-12">

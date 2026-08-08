@@ -11,7 +11,7 @@ type Props = MarkdownLayoutProps<{ title: string }>;
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={`${frontmatter.title} | ${SITE.title}`}>
+<Layout title={`${frontmatter.title} | ${SITE.title}`} ogImage="/og/about.png">
   <Header />
   <Breadcrumb />
   <main id="main-content" class="app-layout">

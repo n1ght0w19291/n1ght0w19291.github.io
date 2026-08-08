@@ -4,7 +4,7 @@ export const SITE = {
   profile: process.env.PUBLIC_SOCIAL_GITHUB ? process.env.PUBLIC_SOCIAL_GITHUB + "/about" : "/about", // set in .env
   desc: "A space where curiosity becomes code. Exploring web development, software architecture and everything that makes the tech world spin.",
   title: "n1ght0w1's blog",
-  ogImage: "devosfera-og.webp", // located in the public folder
+  ogImage: "", // empty = use the dynamic /og.png route (src/pages/og.png.ts)
   lightAndDarkMode: true,
   postPerIndex: 6,
   postPerPage: 12,
@@ -28,6 +28,6 @@ export const SITE = {
   dynamicOgImage: true,
   dir: "ltr", // "rtl" | "auto"
   lang: "en", // html lang code. Set this empty and default will be "en"
-  timezone: "America/Guatemala", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  timezone: "Asia/Taipei", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   heroImage: "/assets/images/sky.jpg", // path to hero background image in /public (e.g. "/images/hero.jpg"), leave empty to disable
 } as const;

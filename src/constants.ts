@@ -1,7 +1,6 @@
 import type { Props } from "astro";
 import IconMail from "@/assets/icons/IconMail.svg";
 import IconGitHub from "@/assets/icons/IconGitHub.svg";
-import IconBrandX from "@/assets/icons/IconBrandX.svg";
 import IconLinkedin from "@/assets/icons/IconLinkedin.svg";
 // import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg"; #NOSONAR
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
@@ -9,7 +8,6 @@ import IconTelegram from "@/assets/icons/IconTelegram.svg";
 // import IconPinterest from "@/assets/icons/IconPinterest.svg"; #NOSONAR
 import {
   PUBLIC_SOCIAL_GITHUB,
-  PUBLIC_SOCIAL_X,
   PUBLIC_SOCIAL_LINKEDIN,
   PUBLIC_SOCIAL_EMAIL,
 } from "astro:env/client";
@@ -33,12 +31,6 @@ export const SOCIALS: Social[] = (
       href: PUBLIC_SOCIAL_GITHUB ?? "",
       linkTitle: `${SITE.title} on GitHub`,
       icon: IconGitHub,
-    },
-    {
-      name: "X",
-      href: PUBLIC_SOCIAL_X ?? "",
-      linkTitle: `${SITE.title} on X`,
-      icon: IconBrandX,
     },
     {
       name: "LinkedIn",
@@ -71,12 +63,6 @@ export const SHARE_LINKS: Social[] = [
     linkTitle: "Share this post on Facebook",
     icon: IconFacebook,
   },
-  // {
-  //   name: "X",
-  //   href: "https://x.com/intent/post?url=",
-  //   linkTitle: "Share this post on X",
-  //   icon: IconBrandX,
-  // },
   {
     name: "Telegram",
     href: "https://t.me/share/url?url=",
