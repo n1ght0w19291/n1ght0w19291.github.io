@@ -53,6 +53,9 @@ importers:
       dayjs:
         specifier: ^1.11.20
         version: 1.11.20
+      katex:
+        specifier: ^0.16.47
+        version: 0.16.47
       lodash.kebabcase:
         specifier: ^4.1.1
         version: 4.1.1
