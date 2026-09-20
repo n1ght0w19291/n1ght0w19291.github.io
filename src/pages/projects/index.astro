@@ -101,7 +101,7 @@ const projects = rawProjects.sort(
       var(--color-foreground) 3%,
       var(--color-background)
     );
-    border: 1px solid color-mix(in srgb, #a855f7 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--highlight) 12%, transparent);
   }
   @media (min-width: 640px) {
     .projects-hero {
@@ -123,7 +123,7 @@ const projects = rawProjects.sort(
     left: -10%;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, #a855f7 25%, transparent),
+      color-mix(in srgb, var(--highlight) 25%, transparent),
       transparent 70%
     );
     animation: orb-1 7s ease-in-out infinite alternate;
@@ -147,7 +147,7 @@ const projects = rawProjects.sort(
     left: 40%;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, #a855f7 12%, transparent),
+      color-mix(in srgb, var(--highlight) 12%, transparent),
       transparent 70%
     );
     animation: orb-3 11s ease-in-out infinite alternate;
@@ -184,7 +184,7 @@ const projects = rawProjects.sort(
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, #a855f7 18%, transparent),
+      color-mix(in srgb, var(--highlight) 18%, transparent),
       color-mix(in srgb, var(--color-border) 8%, transparent) 40%,
       transparent 70%
     );
@@ -201,11 +201,11 @@ const projects = rawProjects.sort(
   }
 
   .glow-text {
-    background: linear-gradient(135deg, var(--color-foreground), #a855f7);
+    background: linear-gradient(135deg, var(--color-foreground), var(--highlight));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 0 25px color-mix(in srgb, #a855f7 25%, transparent));
+    filter: drop-shadow(0 0 25px color-mix(in srgb, var(--highlight) 25%, transparent));
   }
 
   .hero-badge {
@@ -216,9 +216,9 @@ const projects = rawProjects.sort(
     border-radius: 999px;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #a855f7;
-    background: color-mix(in srgb, #a855f7 8%, transparent);
-    border: 1px solid color-mix(in srgb, #a855f7 15%, transparent);
+    color: var(--highlight);
+    background: color-mix(in srgb, var(--highlight) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--highlight) 15%, transparent);
     backdrop-filter: blur(8px);
   }
 </style>

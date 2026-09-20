@@ -25,7 +25,15 @@ const { frontmatter } = Astro.props;
         <div class="avatar-ring">
           <div class="avatar-glow"></div>
           <div class="avatar-inner">
-            <img src="/assets/images/avatar.jpg" alt="avatar" class="avatar-img" />
+            <img
+              src="/assets/images/avatar.jpg"
+              alt="avatar"
+              class="avatar-img"
+              width="320"
+              height="320"
+              fetchpriority="high"
+              decoding="async"
+            />
           </div>
         </div>
         <h1 class="hero-title">

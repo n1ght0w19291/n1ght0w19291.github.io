@@ -71,7 +71,7 @@ const ogImage = ogImageUrl
         class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
       >
         <div class="max-w-3xl">
-          <div class="mb-4 inline-flex items-center gap-2 text-purple-400">
+          <div class="mb-4 inline-flex items-center gap-2 text-highlight">
             <IconProject class="size-5" />
             <span
               class="font-firacode text-xs font-bold tracking-[0.2em] uppercase opacity-90"
@@ -113,9 +113,9 @@ const ogImage = ogImageUrl
                 {tags.map(tag => (
                   <a
                     href={`/tags/${slugifyStr(tag)}/`}
-                    class="group relative inline-flex items-center font-firacode text-foreground/50 transition-colors duration-300 hover:text-purple-400"
+                    class="group relative inline-flex items-center font-firacode text-foreground/50 transition-colors duration-300 hover:text-highlight"
                   >
-                    <span class="mr-1 text-purple-400/40 transition-colors duration-300 group-hover:text-purple-400">
+                    <span class="mr-1 text-highlight/40 transition-colors duration-300 group-hover:text-highlight">
                       #
                     </span>
                     {tag}

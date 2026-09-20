@@ -18,6 +18,10 @@ if (!/\.(md|mdx)$/i.test(fileName)) {
 
 const targetDir = "./src/data/blog";
 const fullPath = path.join(targetDir, fileName);
+const assetsDir = path.join(
+  "./src/assets/images/blog",
+  fileName.slice(0, -path.extname(fileName).length)
+);
 
 if (fs.existsSync(fullPath)) {
   console.error(`Error: File ${fullPath} already exists`);
@@ -40,4 +44,6 @@ draft: false
 `;
 
 fs.writeFileSync(fullPath, content);
+fs.mkdirSync(assetsDir, { recursive: true });
 console.log(`Post ${fullPath} created`);
+console.log(`Assets folder ${assetsDir} created`);

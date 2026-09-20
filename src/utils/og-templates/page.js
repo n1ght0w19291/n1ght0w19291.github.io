@@ -22,9 +22,9 @@ export default async ({ title, subtitle }) => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0f172a", // Dark background (Slate 900)
+          backgroundColor: "#171411", // Dark background (Slate 900)
           backgroundImage:
-            "radial-gradient(circle at 25px 25px, #1e293b 2%, transparent 0%), radial-gradient(circle at 75px 75px, #1e293b 2%, transparent 0%)",
+            "radial-gradient(circle at 25px 25px, #2a211a 2%, transparent 0%), radial-gradient(circle at 75px 75px, #2a211a 2%, transparent 0%)",
           backgroundSize: "100px 100px",
           color: "white",
           position: "relative",
@@ -40,7 +40,7 @@ export default async ({ title, subtitle }) => {
                 right: "-80px",
                 width: "550px",
                 height: "550px",
-                background: "linear-gradient(140deg, #6366f1, #a855f7)",
+                background: "linear-gradient(140deg, #b87858, #e9b58c)",
                 filter: "blur(110px)",
                 opacity: 0.3,
                 borderRadius: "100%",
@@ -57,7 +57,7 @@ export default async ({ title, subtitle }) => {
                 left: "-80px",
                 width: "450px",
                 height: "450px",
-                background: "linear-gradient(140deg, #3b82f6, #6366f1)",
+                background: "linear-gradient(140deg, #8acfc0, #b87858)",
                 filter: "blur(110px)",
                 opacity: 0.3,
                 borderRadius: "100%",
@@ -104,7 +104,7 @@ export default async ({ title, subtitle }) => {
                     style: {
                       width: "80px",
                       height: "6px",
-                      backgroundColor: "#818cf8",
+                      backgroundColor: "#e9b58c",
                       borderRadius: "4px",
                       margin: "30px 0",
                     },
@@ -117,7 +117,7 @@ export default async ({ title, subtitle }) => {
                   props: {
                     style: {
                       fontSize: 32,
-                      color: "#cbd5e1",
+                      color: "#d6c7b6",
                       maxWidth: "80%",
                       margin: 0,
                       lineHeight: 1.4,
@@ -150,7 +150,7 @@ export default async ({ title, subtitle }) => {
                 props: {
                   style: {
                     fontSize: 24,
-                    color: "#94a3b8",
+                    color: "#a99582",
                     fontWeight: 600,
                     letterSpacing: "1px",
                   },

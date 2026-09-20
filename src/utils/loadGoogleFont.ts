@@ -5,7 +5,7 @@ async function loadGoogleFonts(): Promise<
   Array<{ name: string; data: ArrayBuffer; weight: number; style: string }>
 > {
   const wotfardPath = path.resolve("./src/assets/fonts/wotfard.ttf");
-  const gsrPath = path.resolve("./src/assets/fonts/gen-sen-rounded-tw.otf");
+  const gsrPath = path.resolve("./src/assets/fonts/gen-sen-rounded-tw-subset.ttf");
 
   const wotfardData = fs.readFileSync(wotfardPath);
   const gsrData = fs.readFileSync(gsrPath);

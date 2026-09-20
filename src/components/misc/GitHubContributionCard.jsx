@@ -1,46 +1,71 @@
-export const GitHubContributionCard = () => {
-	return (
-		<div
-			style={{
-				maxWidth: 800,
-				margin: "auto",
-				textAlign: "center",
-				width: "100%",
-				border: "1px solid var(--line-color)",
-				borderRadius: 6,
-				backgroundColor: "var(--card-bg-light)",
-			}}
-		>
-			<img
-				src="https://ghchart.rshah.org/n1ght0w19291"
-				alt="GitHub Contributions"
-				style={{
-					width: "100%",
-					padding: "0px 10px",
-				}}
-			/>
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
-			<div
-				style={{
-					margin: "10px 0px",
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					gap: 6,
-					fontSize: 14,
-					width: "100%",
-					color: "var(--btn-content)",
-					opacity: 0.6,
-				}}
-			>
-				<span>Less</span>
-				<div style={{ width: 14, height: 14, backgroundColor: "#ebedf0", border: "1px solid #ccc" }} />
-				<div style={{ width: 14, height: 14, backgroundColor: "#c6e48b" }} />
-				<div style={{ width: 14, height: 14, backgroundColor: "#7bc96f" }} />
-				<div style={{ width: 14, height: 14, backgroundColor: "#239a3b" }} />
-				<div style={{ width: 14, height: 14, backgroundColor: "#196127" }} />
-				<span>More</span>
-			</div>
-		</div>
-	);
+const levels = [
+  { label: "Quiet", className: "is-quiet" },
+  { label: "Steady", className: "is-steady" },
+  { label: "Active", className: "is-active" },
+  { label: "Peak", className: "is-peak" },
+];
+
+export const GitHubContributionCard = ({ username = "n1ght0w19291" }) => {
+  const [theme, setTheme] = useState("light");
+  const chartTheme = theme === "dark" ? "dark:8acfc0" : "light:4f9186";
+  const chartUrl = `https://ghchart.xqsit94.in/${chartTheme}/${username}`;
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const updateTheme = () => {
+      setTheme(root.dataset.theme === "dark" ? "dark" : "light");
+    };
+
+    updateTheme();
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="learning-widget learning-widget--github">
+      <div className="github-contribution__chart-panel">
+        <div className="github-contribution__chart-heading">
+          <span>Last 12 months</span>
+          <span>Daily contributions</span>
+        </div>
+        <div className="github-contribution__chart-frame">
+          <img
+            className="github-contribution__image"
+            src={chartUrl}
+            alt={`${username} 的 GitHub 過去 12 個月貢獻紀錄`}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div
+          className="github-contribution__legend"
+          aria-label="Contribution levels"
+        >
+          <span>Less</span>
+          <div className="github-contribution__levels">
+            {levels.map(level => (
+              <span
+                className={`github-contribution__level ${level.className}`}
+                key={level.label}
+                title={level.label}
+              />
+            ))}
+          </div>
+          <span>More</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+GitHubContributionCard.propTypes = {
+  username: PropTypes.string,
 };

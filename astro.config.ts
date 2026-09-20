@@ -22,6 +22,12 @@ import { SITE } from "./src/config";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+  // Prefetch same-origin pages on hover to make intentional navigation feel
+  // instant, without downloading every page during the initial render.
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "hover",
+  },
   integrations: [
     react(),
     mdx({
@@ -116,7 +122,8 @@ export default defineConfig({
       options: {
         variants: [
           {
-            src: ["./src/assets/fonts/gen-sen-rounded-tw.otf"],
+            // Subset of the full CJK font (~15 MB); regenerate when adding new characters.
+            src: ["./src/assets/fonts/gen-sen-rounded-tw-subset.woff2"],
           },
         ],
       },

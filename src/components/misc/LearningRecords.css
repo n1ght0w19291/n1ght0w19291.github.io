@@ -1,0 +1,874 @@
+.learning-records {
+  --learning-ink: var(--btn-content);
+  --learning-muted: color-mix(in srgb, var(--learning-ink) 62%, transparent);
+  --learning-soft: color-mix(
+    in srgb,
+    var(--learning-ink) 5%,
+    var(--color-background)
+  );
+  --learning-border: color-mix(in srgb, var(--line-color) 76%, transparent);
+  --learning-accent: var(--primary);
+  max-width: 960px;
+  margin: clamp(3.5rem, 8vw, 6.5rem) auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  color: var(--learning-ink);
+}
+
+.learning-records__header {
+  margin-bottom: clamp(2rem, 5vw, 3.25rem);
+}
+
+.learning-records__eyebrow,
+.learning-records__sub-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--learning-accent);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.learning-records__eyebrow {
+  margin-bottom: 0.9rem;
+}
+
+.learning-records__eyebrow > span {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--learning-accent);
+  box-shadow: 0 0 0 0.25rem
+    color-mix(in srgb, var(--learning-accent) 15%, transparent);
+}
+
+.learning-records__heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.learning-records h2,
+.learning-records h3 {
+  color: var(--learning-ink);
+}
+
+.learning-records h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 4vw, 2.35rem);
+  letter-spacing: -0.03em;
+}
+
+.learning-records__heading p {
+  max-width: 38rem;
+  margin: 0.7rem 0 0;
+  color: var(--learning-muted);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.learning-records__range {
+  flex-shrink: 0;
+  padding-bottom: 0.25rem;
+  color: var(--learning-muted);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.learning-records__overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 2rem;
+  overflow: hidden;
+  border: 1px solid var(--learning-border);
+  border-radius: 1rem;
+  background: var(--learning-border);
+}
+
+.learning-records__overview div {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 1rem 1.1rem;
+  background: var(--learning-soft);
+}
+
+.learning-records__overview strong {
+  color: var(--learning-ink);
+  font-family: var(--font-firacode, monospace);
+  font-size: 1.25rem;
+}
+
+.learning-records__overview span,
+.learning-records__subheading > span {
+  overflow: hidden;
+  color: var(--learning-muted);
+  font-size: 0.8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.learning-records__featured {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.learning-records__feature {
+  min-width: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: transform 180ms ease;
+}
+
+.learning-records__feature:hover {
+  transform: none;
+}
+
+.learning-records__feature-header {
+  padding: 1rem 1.15rem 0.85rem;
+  border-bottom: 1px solid var(--learning-border);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--record-accent) 9%, transparent),
+    transparent 68%
+  );
+}
+
+.learning-records__feature-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.learning-records__feature-label {
+  overflow: hidden;
+  color: var(--record-accent);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.learning-records__feature-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  color: var(--learning-muted);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+
+.learning-records__feature-status > span {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: var(--record-accent);
+  box-shadow: 0 0 0 0.2rem
+    color-mix(in srgb, var(--record-accent) 14%, transparent);
+}
+
+.learning-records__feature-header .learning-records__link {
+  margin-top: 0.35rem;
+  padding: 0.7rem 0 0.45rem;
+}
+
+.learning-records__feature-header .learning-records__link::before {
+  left: -1.15rem;
+}
+
+.learning-records__feature-header .learning-records__mark {
+  width: 2.35rem;
+  height: 2.35rem;
+}
+
+.learning-records__feature-note {
+  margin: 0.35rem 0 0;
+  color: var(--learning-muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.learning-records__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+  padding: 1.1rem 1.15rem;
+  color: var(--learning-ink);
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.learning-records__link::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0.2rem;
+  background: var(--record-accent);
+  content: "";
+}
+
+.learning-records__link:hover,
+.learning-records__link:focus-visible {
+  background: color-mix(in srgb, var(--record-accent) 7%, transparent);
+  color: var(--learning-ink);
+  outline: none;
+}
+
+.learning-records__mark {
+  display: grid;
+  width: 2.55rem;
+  height: 2.55rem;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--record-accent) 38%, transparent);
+  border-radius: 0.7rem;
+  background: color-mix(in srgb, var(--record-accent) 13%, transparent);
+  color: var(--record-accent);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+}
+
+.learning-records__link-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.learning-records__link-copy strong {
+  color: inherit;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.learning-records__link-copy > span {
+  overflow: hidden;
+  color: var(--learning-muted);
+  font-size: 0.76rem;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.learning-records__arrow {
+  flex-shrink: 0;
+  color: var(--record-accent);
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+
+.learning-records__link:hover .learning-records__arrow,
+.learning-records__link:focus-visible .learning-records__arrow {
+  transform: translate(0.15rem, -0.15rem);
+}
+
+.learning-records__insight {
+  display: flex;
+  min-height: 15.5rem;
+  align-items: center;
+  margin: 0;
+  padding: 1rem 1.15rem 1.15rem;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.learning-records__insight > div {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.learning-records__insight h3,
+.learning-widget__title {
+  display: none;
+}
+
+.learning-widget--leetcode {
+  width: 100% !important;
+  gap: 0.8rem !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.leetcode-status__topbar,
+.leetcode-status__identity,
+.leetcode-status__status {
+  display: flex;
+  align-items: center;
+}
+
+.leetcode-status__topbar {
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.leetcode-status__identity {
+  min-width: 0;
+  gap: 0.6rem;
+}
+
+.leetcode-status__mark {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--record-accent) 38%, transparent);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--record-accent) 12%, transparent);
+  color: var(--record-accent);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: -0.08em;
+}
+
+.leetcode-status__identity > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.leetcode-status__eyebrow {
+  color: var(--record-accent);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.leetcode-status__identity strong {
+  overflow: hidden;
+  color: var(--learning-ink);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leetcode-status__status {
+  gap: 0.35rem;
+  flex-shrink: 0;
+  color: var(--learning-muted);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+
+.leetcode-status__status > span {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: var(--record-accent);
+  box-shadow: 0 0 0 0.2rem
+    color-mix(in srgb, var(--record-accent) 14%, transparent);
+}
+
+.leetcode-status__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.leetcode-status__metrics > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.45rem;
+  min-width: 0;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid var(--learning-border);
+  border-radius: 0.45rem;
+  background: var(--learning-soft);
+}
+
+.leetcode-status__metrics span {
+  overflow: hidden;
+  color: var(--learning-muted);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.55rem;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leetcode-status__metrics strong {
+  color: var(--learning-ink);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.9rem;
+}
+
+.learning-widget__year-picker {
+  align-self: flex-start !important;
+}
+
+.learning-widget__year-picker > button {
+  width: auto !important;
+  min-width: 7rem;
+  padding: 0.42rem 0.65rem !important;
+  border-color: var(--learning-border) !important;
+  border-radius: 0.5rem !important;
+  background: var(--learning-soft) !important;
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.7rem;
+}
+
+.learning-widget__year-picker > ul {
+  z-index: 2;
+  border-color: var(--learning-border) !important;
+  background: var(--color-background) !important;
+}
+
+.learning-widget__chart-area {
+  justify-content: space-between !important;
+  gap: 0.8rem !important;
+  width: 100%;
+}
+
+.learning-widget__chart {
+  width: clamp(8.5rem, 18vw, 11.5rem) !important;
+  height: clamp(8.5rem, 18vw, 11.5rem) !important;
+  flex-shrink: 0;
+}
+
+.learning-widget__stats {
+  min-width: 0 !important;
+  flex: 1;
+  gap: 0.45rem !important;
+  font-size: 0.75rem !important;
+}
+
+.learning-widget__stats > div {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--learning-border);
+  border-radius: 0.45rem;
+  background: var(--learning-soft);
+}
+
+.leetcode-status__stat {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.45rem;
+}
+
+.leetcode-status__stat-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex-shrink: 0;
+  border-radius: 0.12rem;
+  background: var(--record-accent);
+}
+
+.leetcode-status__stat--active .leetcode-status__stat-dot {
+  background: var(--highlight);
+}
+
+.leetcode-status__stat--future .leetcode-status__stat-dot {
+  background: var(--muted-foreground);
+}
+
+.leetcode-status__stat-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.08rem;
+}
+
+.leetcode-status__stat-copy strong {
+  color: var(--learning-ink);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.leetcode-status__stat-copy small {
+  overflow: hidden;
+  color: var(--learning-muted);
+  font-size: 0.58rem;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leetcode-status__stat b {
+  color: var(--learning-ink);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.95rem;
+}
+
+.learning-widget--github {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  width: 100% !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.github-contribution__topbar,
+.github-contribution__identity,
+.github-contribution__profile-link,
+.github-contribution__signal,
+.github-contribution__chart-heading,
+.github-contribution__legend,
+.github-contribution__levels {
+  display: flex;
+  align-items: center;
+}
+
+.github-contribution__topbar {
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.github-contribution__identity {
+  min-width: 0;
+  gap: 0.6rem;
+}
+
+.github-contribution__icon {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--record-accent) 38%, transparent);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--record-accent) 12%, transparent);
+  color: var(--record-accent);
+}
+
+.github-contribution__icon svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.github-contribution__identity > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.github-contribution__eyebrow,
+.github-contribution__signal-label {
+  color: var(--record-accent);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.github-contribution__identity strong {
+  overflow: hidden;
+  color: var(--learning-ink);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.github-contribution__profile-link {
+  gap: 0.25rem;
+  flex-shrink: 0;
+  color: var(--learning-muted);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.62rem;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.github-contribution__profile-link span:last-child {
+  color: var(--record-accent);
+  font-size: 0.9rem;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+
+.github-contribution__profile-link:hover,
+.github-contribution__profile-link:focus-visible {
+  color: var(--learning-ink);
+  outline: none;
+}
+
+.github-contribution__profile-link:hover span:last-child,
+.github-contribution__profile-link:focus-visible span:last-child {
+  transform: translate(0.12rem, -0.12rem);
+}
+
+.github-contribution__signal {
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--record-accent) 22%, transparent);
+  border-radius: 0.6rem;
+  background: linear-gradient(
+    110deg,
+    color-mix(in srgb, var(--record-accent) 10%, transparent),
+    transparent 76%
+  );
+}
+
+.github-contribution__signal > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.github-contribution__signal strong {
+  overflow: hidden;
+  color: var(--learning-ink);
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.github-contribution__signal-mark {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.17rem;
+  height: 1.25rem;
+  padding-right: 0.1rem;
+}
+
+.github-contribution__signal-mark i {
+  display: block;
+  width: 0.22rem;
+  border-radius: 0.2rem;
+  background: var(--record-accent);
+  opacity: 0.35;
+}
+
+.github-contribution__signal-mark i:nth-child(1) {
+  height: 0.38rem;
+}
+
+.github-contribution__signal-mark i:nth-child(2) {
+  height: 0.7rem;
+  opacity: 0.5;
+}
+
+.github-contribution__signal-mark i:nth-child(3) {
+  height: 1rem;
+  opacity: 0.68;
+}
+
+.github-contribution__signal-mark i:nth-child(4) {
+  height: 0.58rem;
+  opacity: 0.82;
+}
+
+.github-contribution__signal-mark i:nth-child(5) {
+  height: 1.25rem;
+}
+
+.github-contribution__chart-panel {
+  min-width: 0;
+  padding: 0.7rem 0.75rem 0.58rem;
+  border: 1px solid var(--learning-border);
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--color-background) 74%, transparent);
+}
+
+.github-contribution__chart-heading {
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.45rem;
+  color: var(--learning-muted);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.57rem;
+  letter-spacing: 0.04em;
+}
+
+.github-contribution__chart-heading span:last-child {
+  opacity: 0.72;
+}
+
+.github-contribution__chart-frame {
+  width: 100%;
+  overflow: hidden;
+}
+
+.github-contribution__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 3.25rem;
+  object-fit: contain;
+  object-position: center;
+}
+
+.github-contribution__legend {
+  justify-content: flex-end;
+  gap: 0.34rem;
+  margin-top: 0.42rem;
+  color: var(--learning-muted);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.55rem;
+}
+
+.github-contribution__levels {
+  gap: 0.2rem;
+}
+
+.github-contribution__level {
+  display: block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid
+    color-mix(in srgb, var(--highlight) 16%, var(--learning-border));
+  border-radius: 0.12rem;
+  background: var(--learning-soft);
+}
+
+.github-contribution__level.is-steady {
+  background: color-mix(in srgb, var(--highlight) 32%, var(--color-background));
+}
+
+.github-contribution__level.is-active {
+  background: color-mix(in srgb, var(--highlight) 62%, var(--color-background));
+}
+
+.github-contribution__level.is-peak {
+  border-color: color-mix(in srgb, var(--highlight) 45%, transparent);
+  background: var(--highlight);
+}
+
+.learning-records__platforms {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.learning-records__subheading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--learning-border);
+}
+
+.learning-records__sub-eyebrow {
+  margin-bottom: 0.35rem;
+  font-size: 0.65rem;
+}
+
+.learning-records h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.learning-records__link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.learning-records__link.is-compact {
+  border: 1px solid var(--learning-border);
+  border-radius: 0 0.85rem 0.85rem 0;
+  background: var(--learning-soft);
+}
+
+@media (max-width: 680px) {
+  .learning-records {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding-inline: 1rem;
+  }
+
+  .learning-records__heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .learning-records__range {
+    padding: 0;
+  }
+
+  .learning-records__overview,
+  .learning-records__featured,
+  .learning-records__link-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-records__overview div {
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+  }
+
+  .learning-records__link-copy > span {
+    white-space: normal;
+  }
+
+  .learning-records__feature-header {
+    padding-inline: 1rem;
+  }
+
+  .learning-records__insight {
+    padding-inline: 1rem;
+  }
+
+  .leetcode-status__metrics > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.5rem 0.45rem;
+  }
+
+  .learning-records__feature-header .learning-records__link::before {
+    left: -1rem;
+  }
+
+  .learning-widget__chart-area {
+    flex-direction: column !important;
+  }
+
+  .learning-widget__chart {
+    width: 11rem !important;
+    height: 11rem !important;
+  }
+
+  .learning-widget__stats {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learning-records__feature,
+  .learning-records__arrow {
+    transition: none;
+  }
+}

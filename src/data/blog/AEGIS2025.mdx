@@ -8,6 +8,7 @@ draft: false
 ---
 
 import ChallengeCard from "../../components/misc/ChallengeCard.astro";
+import ResponsiveImage from "../../components/ResponsiveImage.astro";
 import img922 from "../../assets/images/blog/AEGIS2025/IMG-20250927190121922.png";
 import img975 from "../../assets/images/blog/AEGIS2025/IMG-20250927190121975.jpg";
 import img022 from "../../assets/images/blog/AEGIS2025/IMG-20250927190122022.png";
@@ -49,10 +50,10 @@ import imgY from "../../assets/images/blog/AEGIS2025/Y.jpg";
 有去注意過 `/news` 的奇怪文章，因為明明只有六篇，但是 pagination 有十頁。不過 id 改一改數字跟試試看有沒有 SQLi 之後就放著了，我太菜了 (╥﹏╥)
 
 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-  <img src={img922.src} style="width: 24%; height: auto;border-radius: 4px;" />
-  <img src={img975.src} style="width: 24%; height: auto;border-radius: 4px;" />
-  <img src={img022.src} style="width: 24%; height: auto;border-radius: 4px;" />
-  <img src={img062.src} style="width: 24%; height: auto;border-radius: 4px;" />
+  <ResponsiveImage src={img922} alt="AEGIS challenge screenshot" sizes="(max-width: 768px) 24vw, 240px" style="width: 24%; height: auto; border-radius: 4px;" />
+  <ResponsiveImage src={img975} alt="AEGIS challenge screenshot" sizes="(max-width: 768px) 24vw, 240px" style="width: 24%; height: auto; border-radius: 4px;" />
+  <ResponsiveImage src={img022} alt="AEGIS challenge screenshot" sizes="(max-width: 768px) 24vw, 240px" style="width: 24%; height: auto; border-radius: 4px;" />
+  <ResponsiveImage src={img062} alt="AEGIS challenge screenshot" sizes="(max-width: 768px) 24vw, 240px" style="width: 24%; height: auto; border-radius: 4px;" />
 </div>
 
 還有 `Cipher Restaurant` ，這認真是胡鬧廚房 (｡ŏ_ŏ)  
@@ -62,8 +63,8 @@ import imgY from "../../assets/images/blog/AEGIS2025/Y.jpg";
 看到小當家出現的那一刻很懵，但沒想到最大的問題出在泡芙阿姨，又學到一個新的隱寫術工具 `OpenPuff` ，真好
 
 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-  <img src={imgY.src} style="width: 45%; height: auto; border-radius: 4px;" />
-  <img src={imgX.src} style="width: 45%; height: auto; border-radius: 4px;" />
+  <ResponsiveImage src={imgY} alt="Cipher Restaurant screenshot" sizes="(max-width: 768px) 45vw, 420px" style="width: 45%; height: auto; border-radius: 4px;" />
+  <ResponsiveImage src={imgX} alt="Cipher Restaurant screenshot" sizes="(max-width: 768px) 45vw, 420px" style="width: 45%; height: auto; border-radius: 4px;" />
 </div>
 
 寫 writeup 的時候才發現，泡芙阿姨那一張右下角是不是有 Gemini 的創作痕跡 www

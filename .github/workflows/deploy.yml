@@ -27,6 +27,16 @@ jobs:
         with:
           node-version: 22
 
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements-fonts.txt
+
+      - name: Install font tooling
+        run: python -m pip install --disable-pip-version-check -r scripts/requirements-fonts.txt
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
         with:
@@ -42,6 +52,12 @@ jobs:
           PUBLIC_ENABLE_RSS: ${{ vars.PUBLIC_ENABLE_RSS }}
         run: |
           NODE_ENV=production pnpm run build
+
+      - name: Verify deployed images
+        run: pnpm run images:verify
+
+      - name: Verify performance budgets
+        run: pnpm run performance:verify
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5

@@ -8,6 +8,7 @@ draft: false
 ---
 
 import ChallengeCard from "../../components/misc/ChallengeCard.astro";
+import ResponsiveImage from "../../components/ResponsiveImage.astro";
 import DjangoImg from "../../assets/images/blog/AIS3EOF2026/Django.png";
 import FunImg from "../../assets/images/blog/AIS3EOF2026/fun_solved.png";
 
@@ -30,7 +31,7 @@ import FunImg from "../../assets/images/blog/AIS3EOF2026/fun_solved.png";
 三天一直在坐牢，有摸過其他題目，像是`SaaS`、`CookieMonster Viewer`、`Welcome To The Django`、`Impure`還有前兩題 Crypto，但最後都沒有解出來  
 尤其是 `Welcome To The Django` 那題，最後才去看，把 secret key 撈出來之後，不知道要用在哪裡 💀
 
-<img src={DjangoImg.src} style={{ maxWidth: "70%", height: "auto" }} />
+<ResponsiveImage src={DjangoImg} alt="Welcome To The Django screenshot" style="max-width: 70%; height: auto;" />
 
 之後再去看看大佬們的 writeup
 
@@ -160,7 +161,7 @@ print(decoded_flag.decode(errors="ignore"))
 EOF{si1Ks0Ng_15_g0oD_T0}
 ```
 
-<img src={FunImg.src} style={{ maxWidth: "50%", height: "auto" }} />
+<ResponsiveImage src={FunImg} alt="fun challenge flag screenshot" style="max-width: 50%; height: auto;" />
 
 ---
 

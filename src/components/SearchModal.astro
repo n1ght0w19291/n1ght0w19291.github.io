@@ -4,7 +4,6 @@
  * Utilizes Pagefind for fast, static indexing and searching capabilities.
  * Includes visual elements like cursors glows, sparkles, and keyboard navigation.
  */
-import "@pagefind/default-ui/css/ui.css";
 ---
 
 <!-- Search Modal Overlay -->
@@ -244,9 +243,12 @@ import "@pagefind/default-ui/css/ui.css";
         window.requestIdleCallback || ((cb: () => void) => setTimeout(cb, 1));
       onIdle(async () => {
         if (signal.aborted) return;
-        
+
         // Ensure Pagefind UI does not re-initialize on the same element
         if (container.querySelector(".pagefind-ui")) return;
+
+        await loadPagefindStyles();
+        if (signal.aborted) return;
 
         // @ts-expect-error — Missing types for @pagefind/default-ui package.
         const { PagefindUI } = await import("@pagefind/default-ui");
@@ -281,6 +283,21 @@ import "@pagefind/default-ui/css/ui.css";
             input?.focus();
           }, 200);
         }
+      });
+    }
+
+    function loadPagefindStyles() {
+      const existing = document.getElementById("pagefind-ui-styles");
+      if (existing) return Promise.resolve();
+
+      return new Promise<void>(resolve => {
+        const link = document.createElement("link");
+        link.id = "pagefind-ui-styles";
+        link.rel = "stylesheet";
+        link.href = "/pagefind/pagefind-ui.css";
+        link.onload = () => resolve();
+        link.onerror = () => resolve();
+        document.head.appendChild(link);
       });
     }
 

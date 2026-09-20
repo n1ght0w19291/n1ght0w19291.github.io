@@ -1,5 +1,4 @@
 ---
-import "@pagefind/default-ui/css/ui.css";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -130,6 +129,8 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
       // Prevent double initialization
       if (pageFindSearch.childElementCount > 0) return;
 
+      await loadPagefindStyles();
+
       // @ts-expect-error — Missing types for @pagefind/default-ui package.
       const { PagefindUI } = await import("@pagefind/default-ui");
 
@@ -173,6 +174,21 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
           history.replaceState(history.state, "", window.location.pathname);
         }
       }
+    });
+  }
+
+  function loadPagefindStyles() {
+    const existing = document.getElementById("pagefind-ui-styles");
+    if (existing) return Promise.resolve();
+
+    return new Promise<void>(resolve => {
+      const link = document.createElement("link");
+      link.id = "pagefind-ui-styles";
+      link.rel = "stylesheet";
+      link.href = "/pagefind/pagefind-ui.css";
+      link.onload = () => resolve();
+      link.onerror = () => resolve();
+      document.head.appendChild(link);
     });
   }
 

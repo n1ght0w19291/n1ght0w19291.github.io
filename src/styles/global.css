@@ -1,21 +1,59 @@
 @import "tailwindcss";
 @import "./typography.css";
-@import "katex/dist/katex.min.css";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+/* Keep the route swap quick without removing Astro's view transitions. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 160ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0ms;
+  }
+}
+
 ::selection {
-  background-color: color-mix(in srgb, var(--accent) 30%, transparent);
-  color: var(--foreground);
+  background-color: var(--selection-background);
+  color: var(--selection-foreground);
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background-color: var(--selection-background);
+  color: var(--selection-foreground);
+  text-shadow: none;
 }
 
 :root,
 html[data-theme="light"] {
-  --background: #f2f5ec;
-  --foreground: #353538;
-  --accent: #1158d1;
-  --muted: #bbc789;
-  --border: #7cadff;
+  --background: #fbf7f1;
+  --foreground: #4a3d34;
+  --accent: #b87858;
+  --highlight: #4f9186;
+  --muted: #f0e5d8;
+  --border: #ddc9b8;
+  --muted-foreground: #806e60;
+  --surface: #fffaf4;
+  --selection-background: #e8cbb8;
+  --selection-foreground: #4a3d34;
+  --callout-note: #908174;
+  --callout-tip: #4f9186;
+  --callout-warning: #b87858;
+  --callout-caution: #c7787b;
+  --callout-important: #9c89c4;
+  --callout-info: #6593ad;
+  --callout-success: #719d7c;
+  --callout-danger: #c87972;
+  --callout-question: #4f9186;
+  --callout-abstract: #69a1aa;
+  --callout-todo: #c58a64;
+  --callout-example: #9584ba;
+  --callout-quote: #908174;
+  --callout-bug: #b5799c;
   /* Component compatibility vars */
   --primary: var(--accent);
   --line-color: var(--border);
@@ -26,11 +64,30 @@ html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
-  --background: #10131a;
-  --foreground: #f6f7f8;
-  --accent: #008fec;
-  --muted: #212f3f;
-  --border: #2264e3;
+  --background: #1f1915;
+  --foreground: #f7ede1;
+  --accent: #e9b58c;
+  --highlight: #8acfc0;
+  --muted: #33271f;
+  --border: #705645;
+  --muted-foreground: #c8af99;
+  --surface: #2a211b;
+  --selection-background: #6f5546;
+  --selection-foreground: #fff5e8;
+  --callout-note: #c7b8aa;
+  --callout-tip: #8acfc0;
+  --callout-warning: #e9b58c;
+  --callout-caution: #f0a4a7;
+  --callout-important: #cdbbe9;
+  --callout-info: #9ac7dc;
+  --callout-success: #a9d6ab;
+  --callout-danger: #f0a3a0;
+  --callout-question: #8acfc0;
+  --callout-abstract: #96d9df;
+  --callout-todo: #e9ad82;
+  --callout-example: #c6b3e6;
+  --callout-quote: #c7b8aa;
+  --callout-bug: #dfa5c7;
   /* Component compatibility vars */
   --primary: var(--accent);
   --line-color: var(--border);
@@ -47,7 +104,9 @@ html[data-theme="dark"] {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
+  --color-highlight: var(--highlight);
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
 }
 
@@ -73,7 +132,7 @@ i {
     @apply overflow-y-scroll scroll-smooth;
   }
   body {
-    @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/75 selection:text-background;
+    @apply flex min-h-svh flex-col bg-background font-app text-foreground;
   }
   a,
   button {
@@ -95,6 +154,44 @@ i {
 
 .active-nav {
   @apply text-accent;
+}
+
+/* Keep costly visual effects off small or reduced-motion surfaces. */
+@media (max-width: 640px), (prefers-reduced-motion: reduce) {
+  .site-grain,
+  .site-cursor-glow,
+  .aurora-mouse,
+  .aurora-mouse-follow,
+  .tag-aurora,
+  .tag-border-glow,
+  .post-aurora,
+  .post-border-glow,
+  .year-aurora,
+  .card-aurora,
+  .card-border-glow {
+    display: none !important;
+  }
+
+  .header-scrolled-filter,
+  .footer-wrapper,
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  [style*="backdrop-filter"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */

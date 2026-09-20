@@ -26,9 +26,9 @@ const viewTransitionName = slugifyStr(String(title).replaceAll(".", "-"));
     "transition-[border-color,background-color,box-shadow,transform] duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-none",
     "hover:-translate-y-0.5 focus-within:-translate-y-0.5",
     "hover:shadow-lg focus-within:shadow-lg",
-    "border-purple-500/20 bg-purple-500/5",
-    "hover:border-purple-500/40 hover:bg-purple-500/10 focus-within:border-purple-500/40 focus-within:bg-purple-500/10",
-    "hover:shadow-purple-500/10 focus-within:shadow-purple-500/10",
+    "border-highlight/20 bg-highlight/5",
+    "hover:border-highlight/40 hover:bg-highlight/10 focus-within:border-highlight/40 focus-within:bg-highlight/10",
+    "hover:shadow-highlight/10 focus-within:shadow-highlight/10",
   ]}
 >
   <div
@@ -53,13 +53,13 @@ const viewTransitionName = slugifyStr(String(title).replaceAll(".", "-"));
   <div class="relative z-5 p-4 sm:p-5">
     <a
       href={href}
-      class="text-lg font-semibold text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-purple-500 rounded-sm group-hover/card:text-purple-400"
+      class="text-lg font-semibold text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-highlight rounded-sm group-hover/card:text-highlight"
       aria-labelledby={headingId}
     >
       <h2 id={headingId} class="flex items-center gap-2" style={{ viewTransitionName }}>
         <span
           aria-hidden="true"
-          class="inline-flex items-center justify-center rounded-md bg-purple-500/10 p-1 text-purple-400/80 ring-1 ring-purple-500/20"
+          class="inline-flex items-center justify-center rounded-md bg-highlight/10 p-1 text-highlight/80 ring-1 ring-highlight/20"
         >
           <IconProject class="size-4" />
         </span>
@@ -83,7 +83,7 @@ const viewTransitionName = slugifyStr(String(title).replaceAll(".", "-"));
           <li>
             <a
               href={`/tags/${slugifyStr(tag)}/`}
-              class="inline-flex items-center gap-0.5 rounded-full px-2.5 py-0.5 text-xs font-medium border transition-colors duration-200 border-purple-500/25 bg-purple-500/8 text-purple-400/80 hover:border-purple-500/50 hover:bg-purple-500/15 hover:text-purple-400"
+              class="inline-flex items-center gap-0.5 rounded-full px-2.5 py-0.5 text-xs font-medium border transition-colors duration-200 border-highlight/25 bg-highlight/8 text-highlight/80 hover:border-highlight/50 hover:bg-highlight/15 hover:text-highlight"
             >
               <span aria-hidden="true" class="opacity-60">#</span>{tag}
             </a>
@@ -102,9 +102,9 @@ const viewTransitionName = slugifyStr(String(title).replaceAll(".", "-"));
   .card-glow-effect {
     background: radial-gradient(
       350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      color-mix(in oklab, #a855f7 8%, transparent) 0%,
-      color-mix(in oklab, #a855f7 4%, transparent) 30%,
-      color-mix(in oklab, #a855f7 0.8%, transparent) 60%,
+      color-mix(in oklab, var(--highlight) 8%, transparent) 0%,
+      color-mix(in oklab, var(--highlight) 4%, transparent) 30%,
+      color-mix(in oklab, var(--highlight) 0.8%, transparent) 60%,
       transparent 80%
     );
     will-change: opacity;

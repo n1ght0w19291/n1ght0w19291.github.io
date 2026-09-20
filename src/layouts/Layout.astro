@@ -210,6 +210,50 @@ const showGrain = SITE.backdropEffects.grain;
     </script>
   </head>
   <body>
+    <div
+      id="route-loading"
+      class="route-loading"
+      role="status"
+      aria-label="Loading page"
+      aria-hidden="true"
+      transition:persist
+    >
+      <div class="route-loading-progress" aria-hidden="true"></div>
+      <div class="route-loading-grid" aria-hidden="true"></div>
+      <div class="route-loading-glow route-loading-glow-one" aria-hidden="true"></div>
+      <div class="route-loading-glow route-loading-glow-two" aria-hidden="true"></div>
+
+      <div class="route-loading-shell">
+        <div class="route-loading-header">
+          <span class="route-loading-kicker">
+            <span class="route-loading-status-dot" aria-hidden="true"></span>
+            NAVIGATION SYSTEM
+          </span>
+          <span class="route-loading-code" aria-hidden="true">0x01</span>
+        </div>
+
+        <div class="route-loading-brand">
+          <div class="route-loading-mark" aria-hidden="true">
+            <span class="route-loading-mark-ring"></span>
+            <span class="route-loading-mark-core"></span>
+          </div>
+          <div class="route-loading-copy">
+            <strong>{SITE.title}</strong>
+            <span>Preparing next page<span class="route-loading-dots">...</span></span>
+          </div>
+        </div>
+
+        <div class="route-loading-track" aria-hidden="true">
+          <span></span>
+        </div>
+
+        <div class="route-loading-footer">
+          <span>ROUTE TRANSITION</span>
+          <span>PLEASE WAIT</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Global decorative backdrop (grid, glow, cursor glow, noise) -->
     <div class="site-backdrop pointer-events-none" aria-hidden="true" transition:persist>
       <div class="site-grid"></div>
@@ -246,6 +290,323 @@ const showGrain = SITE.backdropEffects.grain;
       rgba(0, 0, 0, 0.3) 70%,
       transparent 100%
     );
+  }
+
+  .route-loading {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(
+        circle at 50% 35%,
+        color-mix(in srgb, var(--accent) 9%, transparent),
+        transparent 34%
+      ),
+      color-mix(in srgb, var(--background) 94%, transparent);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 160ms ease,
+      visibility 160ms ease;
+  }
+
+  .route-loading.is-loading {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .route-loading-grid {
+    position: absolute;
+    inset: -25%;
+    z-index: -2;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--accent) 12%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--accent) 12%, transparent) 1px, transparent 1px);
+    background-size: 54px 54px;
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 68%);
+    opacity: 0.32;
+    transform: perspective(500px) rotateX(58deg) translateY(18%);
+  }
+
+  .route-loading-glow {
+    position: absolute;
+    z-index: -1;
+    width: 22rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 13%, transparent);
+    filter: blur(70px);
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  .route-loading-glow-one {
+    top: 12%;
+    left: 18%;
+  }
+
+  .route-loading-glow-two {
+    right: 14%;
+    bottom: 8%;
+    background: color-mix(in srgb, var(--highlight, var(--accent)) 11%, transparent);
+  }
+
+  .route-loading-progress {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 28%;
+    height: 3px;
+    transform-origin: left center;
+    z-index: 3;
+    background: linear-gradient(90deg, var(--accent), var(--highlight, var(--accent)));
+    box-shadow:
+      0 0 12px color-mix(in srgb, var(--accent) 70%, transparent),
+      0 0 28px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .route-loading.is-loading .route-loading-progress {
+    animation: route-loading-progress 1.25s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .route-loading-shell {
+    position: relative;
+    width: min(88vw, 420px);
+    border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+    border-radius: 1.35rem;
+    padding: 1.25rem;
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--background) 96%, transparent),
+        color-mix(in srgb, var(--muted) 52%, transparent)
+      );
+    box-shadow:
+      0 24px 80px color-mix(in srgb, var(--foreground) 16%, transparent),
+      inset 0 1px 0 color-mix(in srgb, white 18%, transparent);
+    color: var(--foreground);
+  }
+
+  .route-loading-shell::before {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 45%, transparent),
+      transparent 42%,
+      color-mix(in srgb, var(--highlight, var(--accent)) 28%, transparent)
+    );
+    content: "";
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .route-loading-header,
+  .route-loading-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: color-mix(in srgb, var(--foreground) 56%, transparent);
+    font-family: var(--font-firacode), monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+  }
+
+  .route-loading-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .route-loading-status-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--highlight, var(--accent));
+    box-shadow: 0 0 12px color-mix(in srgb, var(--highlight, var(--accent)) 80%, transparent);
+  }
+
+  .route-loading.is-loading .route-loading-status-dot {
+    animation: route-loading-pulse 900ms ease-in-out infinite;
+  }
+
+  .route-loading-code {
+    color: var(--accent);
+    opacity: 0.75;
+  }
+
+  .route-loading-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0 1.75rem;
+  }
+
+  .route-loading-mark {
+    position: relative;
+    display: grid;
+    width: 3.75rem;
+    height: 3.75rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--accent) 65%, transparent);
+    border-radius: 1.1rem;
+    background: color-mix(in srgb, var(--accent) 9%, transparent);
+    box-shadow:
+      0 0 0 7px color-mix(in srgb, var(--accent) 5%, transparent),
+      0 0 34px color-mix(in srgb, var(--accent) 20%, transparent);
+    transform: rotate(45deg);
+  }
+
+  .route-loading-mark-ring {
+    position: absolute;
+    inset: 0.7rem;
+    border: 1px dashed color-mix(in srgb, var(--accent) 70%, transparent);
+    border-radius: 0.55rem;
+  }
+
+  .route-loading-mark-core {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 0.15rem;
+    background: linear-gradient(135deg, var(--accent), var(--highlight, var(--accent)));
+    box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 75%, transparent);
+  }
+
+  .route-loading.is-loading .route-loading-mark-ring {
+    animation: route-loading-orbit 1.8s linear infinite;
+  }
+
+  .route-loading-copy {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+
+  .route-loading-copy strong {
+    overflow: hidden;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    letter-spacing: -0.02em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .route-loading-copy > span {
+    color: color-mix(in srgb, var(--foreground) 58%, transparent);
+    font-family: var(--font-firacode), monospace;
+    font-size: 0.72rem;
+  }
+
+  .route-loading-dots {
+    display: inline-block;
+    width: 1.3rem;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+
+  .route-loading.is-loading .route-loading-dots {
+    animation: route-loading-dots 1.1s steps(4, end) infinite;
+  }
+
+  .route-loading-track {
+    height: 0.35rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--foreground) 9%, transparent);
+  }
+
+  .route-loading-track span {
+    display: block;
+    width: 42%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent), var(--highlight, var(--accent)));
+    box-shadow: 0 0 15px color-mix(in srgb, var(--accent) 65%, transparent);
+  }
+
+  .route-loading.is-loading .route-loading-track span {
+    animation: route-loading-track 1.25s ease-in-out infinite;
+  }
+
+  .route-loading-footer {
+    margin-top: 0.9rem;
+    font-size: 0.58rem;
+  }
+
+  .route-loading-footer span:last-child {
+    color: color-mix(in srgb, var(--accent) 75%, transparent);
+  }
+
+  @keyframes route-loading-pulse {
+    50% {
+      opacity: 0.35;
+      transform: scale(0.7);
+    }
+  }
+
+  @keyframes route-loading-orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes route-loading-progress {
+    0% {
+      transform: scaleX(0.15);
+    }
+    50% {
+      transform: scaleX(1);
+    }
+    100% {
+      transform: translateX(190%) scaleX(0.35);
+    }
+  }
+
+  @keyframes route-loading-dots {
+    0%,
+    20% {
+      width: 0;
+    }
+    45%,
+    75% {
+      width: 1.3rem;
+    }
+    100% {
+      width: 0;
+    }
+  }
+
+  @keyframes route-loading-track {
+    0% {
+      transform: translateX(-120%);
+    }
+    55%,
+    100% {
+      transform: translateX(250%);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .route-loading-shell {
+      width: min(88vw, 360px);
+      padding: 1rem;
+    }
+
+    .route-loading-brand {
+      margin-block: 1.5rem;
+    }
   }
 
   .site-grid {
@@ -312,6 +673,34 @@ const showGrain = SITE.backdropEffects.grain;
     contain: paint;
   }
 </style>
+
+<script>
+  function setRouteLoading(isLoading: boolean) {
+    const loader = document.querySelector<HTMLElement>("#route-loading");
+    if (!loader) return;
+
+    loader.classList.toggle("is-loading", isLoading);
+    loader.setAttribute("aria-hidden", String(!isLoading));
+    document.documentElement.classList.toggle(
+      "route-loading-active",
+      isLoading
+    );
+  }
+
+  // Show feedback as soon as Astro starts fetching the next document.
+  document.addEventListener("astro:before-preparation", () =>
+    setRouteLoading(true)
+  );
+
+  // Hide it as soon as the new DOM has been swapped in. Keep page-load as a
+  // fallback for browsers or navigations that skip the normal swap lifecycle.
+  document.addEventListener("astro:after-swap", () =>
+    setRouteLoading(false)
+  );
+  document.addEventListener("astro:page-load", () =>
+    setRouteLoading(false)
+  );
+</script>
 
 {
   showCursorGlow && (

@@ -7,7 +7,6 @@ import Footer from "@/components/Footer.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Card from "@/components/Card.astro";
 import Pagination from "@/components/Pagination.astro";
-import "@pagefind/default-ui/css/ui.css";
 import type { ContentEntry } from "@/utils/contentEntry";
 import getSortedPosts from "@/utils/getSortedPosts";
 import { SITE } from "@/config";
@@ -140,6 +139,8 @@ const totalPosts = page.total;
       if (signal.aborted) return;
       if (container.childElementCount > 0) return;
 
+      await loadPagefindStyles();
+
       // @ts-expect-error PagefindUI does not export ESM compatible types in this dynamic import
       const { PagefindUI } = await import("@pagefind/default-ui");
 
@@ -202,6 +203,21 @@ const totalPosts = page.total;
       // Use capture mode to intercept before the global modal listener
       document.addEventListener("keydown", handleCmdK, { signal, capture: true });
 
+    });
+  }
+
+  function loadPagefindStyles() {
+    const existing = document.getElementById("pagefind-ui-styles");
+    if (existing) return Promise.resolve();
+
+    return new Promise<void>(resolve => {
+      const link = document.createElement("link");
+      link.id = "pagefind-ui-styles";
+      link.rel = "stylesheet";
+      link.href = "/pagefind/pagefind-ui.css";
+      link.onload = () => resolve();
+      link.onerror = () => resolve();
+      document.head.appendChild(link);
     });
   }
 

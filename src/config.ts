@@ -29,5 +29,5 @@ export const SITE = {
   dir: "ltr", // "rtl" | "auto"
   lang: "en", // html lang code. Set this empty and default will be "en"
   timezone: "Asia/Taipei", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  heroImage: "/assets/images/sky.jpg", // path to hero background image in /public (e.g. "/images/hero.jpg"), leave empty to disable
+  heroImage: "/assets/images/sky.webp", // optimized hero background image in /public, leave empty to disable
 } as const;

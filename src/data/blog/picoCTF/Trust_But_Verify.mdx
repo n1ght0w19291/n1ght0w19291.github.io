@@ -1,0 +1,34 @@
+---
+title: "Trust But Verify"
+description: ""
+pubDatetime: 2026-09-20T16:07:31.000Z
+tags: ["picoCTF", "Artificial Intelligence"]
+parentPost: "picoctf"
+draft: false
+---
+
+import FLAG from "../../../assets/images/blog/picoCTF/Trust_But_Verify/image.png";
+import ResponsiveImage from "../../../components/ResponsiveImage.astro";
+
+# Trust But Verify
+
+這是透過與 AI Companion（ARIA）進行互動式文字冒險（Interactive Fiction），完成三個場景的「AI 輸出驗證（Verification）」，最終取得隱藏的 Flag。
+
+1. Scene 1: The Statistic (AI 幻覺與數據查證)
+   - 問題: AI 提供了一個誇大的數據「每年 500 萬公噸塑膠進入海洋」並宣稱來自 UNEP 2022 報告。
+   - 操作: 選擇 b（Ask ARIA for the exact source link before using it）。
+   - 結果: AI 承認該資料來源為幻覺（Hallucination），無法提供真實連結。
+2. Scene 2: The Code (程式碼邏輯審查)
+   - 問題: AI 生成了一段 計算平均值的 Python 腳本，但混入了邏輯錯誤（+ 1）。
+   - 操作: 選擇 b（Read through it carefully before running）。
+   - 結果: 找出程式碼中的邏輯漏洞並加以修正，避免直接執行錯誤指令。
+3. Scene 3: The Citation (細節事實查核)
+   - 問題: AI 提供了一個看似真實且詳細的學術文獻引用（Dr. Heather Leslie），但年份與結論描述有微小偏差。
+   - 操作: 選擇 b（Verify it anyway）。
+   - 結果: 完成事實查核並修正細節，AI 提示「Trust but verify」的核心精神，並在結尾釋出 Flag。
+
+<ResponsiveImage
+  src={FLAG}
+  style="width: 75%; height: auto; border-radius: 4px;"
+  alt="flag"
+/>

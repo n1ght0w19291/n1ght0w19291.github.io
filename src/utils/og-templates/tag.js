@@ -20,9 +20,9 @@ export default async tagName => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0f172a",
+          backgroundColor: "#171411",
           backgroundImage:
-            "radial-gradient(circle at 25px 25px, #1e293b 2%, transparent 0%), radial-gradient(circle at 75px 75px, #1e293b 2%, transparent 0%)",
+            "radial-gradient(circle at 25px 25px, #2a211a 2%, transparent 0%), radial-gradient(circle at 75px 75px, #2a211a 2%, transparent 0%)",
           backgroundSize: "100px 100px",
           color: "white",
           position: "relative",
@@ -38,7 +38,7 @@ export default async tagName => {
                 right: "-80px",
                 width: "550px",
                 height: "550px",
-                background: "linear-gradient(140deg, #008fec, #6366f1)",
+                background: "linear-gradient(140deg, #4f9186, #b87858)",
                 filter: "blur(110px)",
                 opacity: 0.35,
                 borderRadius: "100%",
@@ -55,7 +55,7 @@ export default async tagName => {
                 left: "-80px",
                 width: "450px",
                 height: "450px",
-                background: "linear-gradient(140deg, #3b82f6, #0ea5e9)",
+                background: "linear-gradient(140deg, #8acfc0, #14b8a6)",
                 filter: "blur(110px)",
                 opacity: 0.25,
                 borderRadius: "100%",
@@ -93,7 +93,7 @@ export default async tagName => {
                           style: {
                             fontSize: 80,
                             fontWeight: 900,
-                            color: "#008fec",
+                            color: "#4f9186",
                             opacity: 0.7,
                             lineHeight: 1,
                             marginRight: "4px",
@@ -127,7 +127,7 @@ export default async tagName => {
                     style: {
                       width: "80px",
                       height: "5px",
-                      backgroundColor: "#008fec",
+                      backgroundColor: "#4f9186",
                       borderRadius: "4px",
                       margin: "28px 0",
                       opacity: 0.7,
@@ -141,7 +141,7 @@ export default async tagName => {
                   props: {
                     style: {
                       fontSize: 32,
-                      color: "#94a3b8",
+                      color: "#a99582",
                       margin: 0,
                       lineHeight: 1.4,
                       fontWeight: 400,
@@ -173,7 +173,7 @@ export default async tagName => {
                 props: {
                   style: {
                     fontSize: 22,
-                    color: "#94a3b8",
+                    color: "#a99582",
                     fontWeight: 600,
                     letterSpacing: "1px",
                   },

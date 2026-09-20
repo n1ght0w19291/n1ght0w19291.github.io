@@ -14,7 +14,7 @@ export default async post => {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          backgroundColor: "#0f172a", // Dark background (Slate 900)
+          backgroundColor: "#171411", // Dark background (Slate 900)
           color: "white",
           padding: "80px",
           position: "relative",
@@ -30,7 +30,7 @@ export default async post => {
                 right: "-100px",
                 width: "600px",
                 height: "600px",
-                background: "linear-gradient(140deg, #6366f1, #a855f7)",
+                background: "linear-gradient(140deg, #b87858, #e9b58c)",
                 filter: "blur(100px)",
                 opacity: 0.4,
                 borderRadius: "100%",
@@ -56,7 +56,7 @@ export default async post => {
                   style: {
                     fontSize: 24,
                     fontWeight: "bold",
-                    color: "#e2e8f0",
+                    color: "#f2e8dc",
                     letterSpacing: "2px",
                     fontFamily: "Wotfard, GenSenRounded2TW-R",
                   },
@@ -116,7 +116,7 @@ export default async post => {
                     style: {
                       width: "60px",
                       height: "4px",
-                      backgroundColor: "#818cf8",
+                      backgroundColor: "#e9b58c",
                       marginRight: "24px",
                     },
                   },
@@ -126,7 +126,7 @@ export default async post => {
                   props: {
                     style: {
                       fontSize: 32,
-                      color: "#cbd5e1",
+                      color: "#d6c7b6",
                       fontFamily: "Wotfard, GenSenRounded2TW-R",
                     },
                     children: [
