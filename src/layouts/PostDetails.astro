@@ -603,7 +603,8 @@ const nextPost =
 
   /* Spoiler reveal toggle */
   function initSpoilers() {
-    document.querySelectorAll(".spoiler").forEach(el => {
+    document.querySelectorAll(".spoiler:not([data-spoiler-bound])").forEach(el => {
+      el.setAttribute("data-spoiler-bound", "true");
       el.addEventListener("click", () => el.toggleAttribute("data-revealed"));
     });
   }

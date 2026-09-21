@@ -746,23 +746,53 @@
   display: block;
   width: 0.55rem;
   height: 0.55rem;
-  border: 1px solid
-    color-mix(in srgb, var(--highlight) 16%, var(--learning-border));
+  border: 1px solid color-mix(in srgb, var(--learning-ink) 8%, transparent);
   border-radius: 0.12rem;
-  background: var(--learning-soft);
+  background: #ebedf0;
+}
+
+.github-contribution__level.is-empty {
+  background: #ebedf0;
+}
+
+.github-contribution__level.is-quiet {
+  background: #cadeda;
 }
 
 .github-contribution__level.is-steady {
-  background: color-mix(in srgb, var(--highlight) 32%, var(--color-background));
+  background: #4f9186;
 }
 
 .github-contribution__level.is-active {
-  background: color-mix(in srgb, var(--highlight) 62%, var(--color-background));
+  background: #3f746b;
 }
 
 .github-contribution__level.is-peak {
-  border-color: color-mix(in srgb, var(--highlight) 45%, transparent);
-  background: var(--highlight);
+  background: #2f5750;
+}
+
+html[data-theme="dark"] .github-contribution__level {
+  border-color: color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+html[data-theme="dark"] .github-contribution__level.is-empty {
+  background: #0d1116;
+}
+
+html[data-theme="dark"] .github-contribution__level.is-quiet {
+  background: #293e39;
+}
+
+html[data-theme="dark"] .github-contribution__level.is-steady {
+  background: #527c73;
+}
+
+html[data-theme="dark"] .github-contribution__level.is-active {
+  background: #8acfc0;
+}
+
+html[data-theme="dark"] .github-contribution__level.is-peak {
+  background: #adddd2;
 }
 
 .learning-records__platforms {
@@ -797,7 +827,8 @@
 
 .learning-records__link.is-compact {
   border: 1px solid var(--learning-border);
-  border-radius: 0 0.85rem 0.85rem 0;
+  border-radius: 0.85rem;
+  overflow: hidden;
   background: var(--learning-soft);
 }
 

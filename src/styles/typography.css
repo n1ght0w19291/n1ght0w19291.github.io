@@ -88,12 +88,13 @@
       }
     }
 
-    code {
-      @apply rounded-md bg-muted/15 px-1.5 py-0.5 font-firacode text-sm wrap-break-word text-foreground shadow-sm shadow-black/5 before:content-none after:content-none;
+    :not(pre) > code {
+      @apply rounded-md border border-border/70 bg-muted/50 px-1.5 py-0.5 font-firacode text-[0.9em] font-medium wrap-break-word text-foreground shadow-sm shadow-black/10 before:content-none after:content-none;
     }
 
     .astro-code code {
-      @apply flex-[1_0_100%] bg-inherit p-0;
+      /* Code blocks already get their surface from the outer pre. */
+      @apply flex-[1_0_100%] rounded-none border-0 bg-inherit p-0 shadow-none;
     }
 
     blockquote {

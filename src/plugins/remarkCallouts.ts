@@ -1,5 +1,6 @@
 import type { Root } from "mdast";
 import type { Plugin } from "unified";
+import type { Node } from "unist";
 import { visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
 
@@ -46,21 +47,40 @@ const DEFAULT_LABELS: Record<string, string> = {
   bug: "Bug",
 };
 
+type DirectiveData = {
+  directiveLabel?: boolean;
+  hName?: string;
+  hProperties?: Record<string, string | string[]>;
+};
+
+type DirectiveChild = Node & {
+  data?: DirectiveData;
+  children?: DirectiveChild[];
+  value?: string;
+};
+
+type ContainerDirective = Node & {
+  name?: string;
+  children: DirectiveChild[];
+  data?: DirectiveData;
+};
+
 const remarkCallouts: Plugin<[], Root> = () => (tree: Root) => {
-  visit(tree, "containerDirective", (node: any) => {
-    const name = node.name?.toLowerCase();
+  visit(tree, "containerDirective", node => {
+    const directive = node as ContainerDirective;
+    const name = directive.name?.toLowerCase();
 
     if (name === "spoiler") {
-      const labelNode = node.children.find(
-        (c: any) => c.data?.directiveLabel === true
+      const labelNode = directive.children.find(
+        child => child.data?.directiveLabel === true
       );
       const label = labelNode ? toString(labelNode) : "Spoiler";
-      node.children = node.children.filter(
-        (c: any) => c.data?.directiveLabel !== true
+      directive.children = directive.children.filter(
+        child => child.data?.directiveLabel !== true
       );
-      node.data = node.data ?? {};
-      node.data.hName = "div";
-      node.data.hProperties = {
+      directive.data = directive.data ?? {};
+      directive.data.hName = "div";
+      directive.data.hProperties = {
         class: "spoiler",
         "data-spoiler": "block",
         "data-spoiler-label": label,
@@ -68,23 +88,23 @@ const remarkCallouts: Plugin<[], Root> = () => (tree: Root) => {
       return;
     }
 
-    const canonical = ALIAS_MAP[name];
+    const canonical = name ? ALIAS_MAP[name] : undefined;
     if (!canonical) return;
 
-    const labelNode = node.children.find(
-      (c: any) => c.data?.directiveLabel === true
+    const labelNode = directive.children.find(
+      child => child.data?.directiveLabel === true
     );
     const label = labelNode
       ? toString(labelNode)
       : DEFAULT_LABELS[canonical];
-    const bodyChildren = node.children.filter(
-      (c: any) => c.data?.directiveLabel !== true
+    const bodyChildren = directive.children.filter(
+      child => child.data?.directiveLabel !== true
     );
 
-    node.data = node.data ?? {};
-    node.data.hName = "aside";
-    node.data.hProperties = { "data-callout": canonical };
-    node.children = [
+    directive.data = directive.data ?? {};
+    directive.data.hName = "aside";
+    directive.data.hProperties = { "data-callout": canonical };
+    directive.children = [
       {
         type: "paragraph",
         data: {
@@ -92,7 +112,7 @@ const remarkCallouts: Plugin<[], Root> = () => (tree: Root) => {
           hProperties: { className: ["callout-title"] },
         },
         children: [{ type: "text", value: label }],
-      } as any,
+      },
       ...bodyChildren,
     ];
   });

@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
 const levels = [
+  { label: "None", className: "is-empty" },
   { label: "Quiet", className: "is-quiet" },
   { label: "Steady", className: "is-steady" },
   { label: "Active", className: "is-active" },

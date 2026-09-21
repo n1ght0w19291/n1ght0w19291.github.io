@@ -43,6 +43,9 @@ jobs:
           version: latest
           run_install: true
 
+      - name: Lint source code
+        run: pnpm run lint
+
       - name: Build with Astro
         env:
           PUBLIC_SOCIAL_GITHUB: ${{ vars.PUBLIC_SOCIAL_GITHUB }}

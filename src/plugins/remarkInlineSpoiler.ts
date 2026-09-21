@@ -1,5 +1,6 @@
 import type { Root } from "mdast";
 import type { Plugin } from "unified";
+import type { Node } from "unist";
 import { visit } from "unist-util-visit";
 
 const SPOILER_RE = /\|\|([\s\S]+?)\|\|/g;
@@ -12,6 +13,7 @@ function splitSpoilerLines(s: string): string[] {
 }
 
 type Child = { type: string; value?: string; [key: string]: unknown };
+type ParagraphNode = Node & { children: Child[] };
 
 function childToFlat(child: Child): string {
   if (child.type === "text") return child.value ?? "";
@@ -52,12 +54,13 @@ function appendPlainSlice(
 }
 
 const remarkInlineSpoiler: Plugin<[], Root> = () => (tree: Root) => {
-  visit(tree, "paragraph", (node: any) => {
+  visit(tree, "paragraph", node => {
+    const paragraph = node as ParagraphNode;
     type Segment = { start: number; end: number; original: Child };
     const segments: Segment[] = [];
     let flat = "";
 
-    for (const child of node.children as Child[]) {
+    for (const child of paragraph.children) {
       const start = flat.length;
       flat += childToFlat(child);
       segments.push({ start, end: flat.length, original: child });
@@ -90,7 +93,7 @@ const remarkInlineSpoiler: Plugin<[], Root> = () => (tree: Root) => {
     }
     if (!matched) return;
     appendPlainSlice(newChildren, flat.slice(cursor), segments, cursor);
-    node.children = newChildren;
+    paragraph.children = newChildren;
   });
 };
 

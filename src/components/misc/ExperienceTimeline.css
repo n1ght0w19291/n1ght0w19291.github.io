@@ -287,6 +287,28 @@
   overflow-wrap: anywhere;
 }
 
+.event-card__period {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.4rem;
+  color: var(--timeline-muted);
+  font-family: var(--font-firacode, monospace);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.event-card__period-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  flex-shrink: 0;
+  color: var(--timeline-accent);
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.35;
+}
+
 .event-card__result {
   display: inline-flex;
   align-items: center;

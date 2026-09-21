@@ -8,6 +8,14 @@ const timelineData = [
     events: [
       {
         title: "2026 神盾盃資安競賽 初賽",
+        period: {
+          ranges: [
+            {
+              start: "2026-09-17",
+              end: "2026-09-19",
+            },
+          ],
+        },
         result: "9 / 56",
         note: "團體賽 - 隊伍名稱：好想進決賽喔\n進入決賽",
       },
@@ -16,15 +24,48 @@ const timelineData = [
   {
     date: "2026.05",
     events: [
-      { title: "Pre-exam 2026", result: "124 / 392", note: "個人賽" },
-      { title: "CYBERSEC 2026 臺灣資安大會", note: "會眾" },
+      {
+        title: "Pre-exam 2026",
+        period: {
+          ranges: [
+            {
+              start: "2026-05-16",
+              end: "2026-05-18",
+            },
+          ],
+        },
+        result: "124 / 392",
+        note: "個人賽 - 帳號名稱：n1ght0w1",
+      },
+      {
+        title: "CYBERSEC 2026 臺灣資安大會",
+        period: {
+          ranges: [
+            {
+              start: "2026-05-05",
+            },
+          ],
+        },
+        note: "會眾",
+      },
     ],
   },
   {
     date: "2026.02",
     events: [
       { title: "TSCCTF 2026", result: "50" },
-      { title: "THJCC 2026", result: "66 / 314" },
+      {
+        title: "THJCC 2026",
+        period: {
+          ranges: [
+            {
+              start: "2026-02-21",
+              end: "2026-02-22",
+            },
+          ],
+        },
+        result: "66 / 314",
+      },
     ],
   },
   {
@@ -35,7 +76,19 @@ const timelineData = [
     date: "2025.12",
     events: [
       { title: "ASIS CTF Finals 2025", result: "194 / 476" },
-      { title: "AIS3 EOF 2026 初賽", result: "31" },
+      {
+        title: "AIS3 EOF 2026 初賽",
+        period: {
+          ranges: [
+            {
+              start: "2025-12-20",
+              end: "2025-12-22",
+            },
+          ],
+        },
+        result: "31",
+        note: "團體賽 - 隊伍名稱：還沒想好但先報名",
+      },
     ],
   },
   {
@@ -52,17 +105,33 @@ const timelineData = [
     date: "2025.09",
     events: [
       { title: "AI CUP 2025 玉山人工智慧公開挑戰賽 初賽", result: "102 / 790" },
-      { title: "2025 AEGIS 神盾盃 初賽", result: "15 / 40" },
+      {
+        title: "2025 AEGIS 神盾盃 初賽",
+        result: "15 / 40",
+        note: "團體賽 - 隊伍名稱：TURKEY YAKI",
+      },
     ],
   },
   {
     date: "2025.08",
     events: [
-      { title: "TFC CTF 2025", result: "359 / 1791" },
-      { title: "HITCON CTF 2025", result: "67 / 1289" },
+      {
+        title: "TFC CTF 2025",
+        result: "359 / 1791",
+        note: "團體賽 - 隊伍名稱：$heb@n9",
+      },
+      {
+        title: "HITCON CTF 2025",
+        result: "67 / 1289",
+        note: "團體賽 - 隊伍名稱：Shebang",
+      },
       { title: "SekaiCTF 2025", result: "441 / 1060" },
       { title: "HITCON 2025", note: "會眾" },
-      { title: "WHY2025 CTF", result: "102 / 1806" },
+      {
+        title: "WHY2025 CTF",
+        result: "102 / 1806",
+        note: "團體賽 - 隊伍名稱：$heb@n9",
+      },
       { title: "COSCUP x RubyConf TW 2025", note: "會眾" },
     ],
   },
