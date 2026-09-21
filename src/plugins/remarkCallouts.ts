@@ -1,6 +1,5 @@
 import type { Root } from "mdast";
 import type { Plugin } from "unified";
-import type { Node } from "unist";
 import { visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
 
@@ -53,16 +52,20 @@ type DirectiveData = {
   hProperties?: Record<string, string | string[]>;
 };
 
-type DirectiveChild = Node & {
+type DirectiveChild = {
+  type: string;
   data?: DirectiveData;
   children?: DirectiveChild[];
   value?: string;
+  [key: string]: unknown;
 };
 
-type ContainerDirective = Node & {
+type ContainerDirective = {
+  type: string;
   name?: string;
   children: DirectiveChild[];
   data?: DirectiveData;
+  [key: string]: unknown;
 };
 
 const remarkCallouts: Plugin<[], Root> = () => (tree: Root) => {
@@ -72,11 +75,11 @@ const remarkCallouts: Plugin<[], Root> = () => (tree: Root) => {
 
     if (name === "spoiler") {
       const labelNode = directive.children.find(
-        child => child.data?.directiveLabel === true
+        (child: DirectiveChild) => child.data?.directiveLabel === true
       );
       const label = labelNode ? toString(labelNode) : "Spoiler";
       directive.children = directive.children.filter(
-        child => child.data?.directiveLabel !== true
+        (child: DirectiveChild) => child.data?.directiveLabel !== true
       );
       directive.data = directive.data ?? {};
       directive.data.hName = "div";
@@ -92,13 +95,13 @@ const remarkCallouts: Plugin<[], Root> = () => (tree: Root) => {
     if (!canonical) return;
 
     const labelNode = directive.children.find(
-      child => child.data?.directiveLabel === true
+      (child: DirectiveChild) => child.data?.directiveLabel === true
     );
     const label = labelNode
       ? toString(labelNode)
       : DEFAULT_LABELS[canonical];
     const bodyChildren = directive.children.filter(
-      child => child.data?.directiveLabel !== true
+      (child: DirectiveChild) => child.data?.directiveLabel !== true
     );
 
     directive.data = directive.data ?? {};

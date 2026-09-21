@@ -1,6 +1,5 @@
 import type { Root } from "mdast";
 import type { Plugin } from "unified";
-import type { Node } from "unist";
 import { visit } from "unist-util-visit";
 
 const SPOILER_RE = /\|\|([\s\S]+?)\|\|/g;
@@ -13,7 +12,11 @@ function splitSpoilerLines(s: string): string[] {
 }
 
 type Child = { type: string; value?: string; [key: string]: unknown };
-type ParagraphNode = Node & { children: Child[] };
+type ParagraphNode = {
+  type: string;
+  children: Child[];
+  [key: string]: unknown;
+};
 
 function childToFlat(child: Child): string {
   if (child.type === "text") return child.value ?? "";
