@@ -246,6 +246,18 @@ const { frontmatter } = Astro.props;
     height: 110px;
     border-radius: 50%;
     padding: 3px;
+    background: transparent;
+    isolation: isolate;
+  }
+
+  /* Keep the rotating decoration separate from the avatar content. Nested
+     counter-rotating transforms can visibly jitter while mobile browsers
+     re-composite the page during a scroll. */
+  .avatar-ring::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
     background: conic-gradient(
       from 0deg,
       var(--color-accent),
@@ -255,6 +267,8 @@ const { frontmatter } = Astro.props;
       var(--color-accent)
     );
     animation: ring-spin 6s linear infinite;
+    pointer-events: none;
+    z-index: 0;
   }
 
   @keyframes ring-spin {
@@ -292,6 +306,8 @@ const { frontmatter } = Astro.props;
   }
 
   .avatar-inner {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -299,7 +315,6 @@ const { frontmatter } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: ring-spin 6s linear infinite reverse;
   }
 
   .avatar-img {
