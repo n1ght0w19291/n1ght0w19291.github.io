@@ -94,7 +94,11 @@ const timelineData = [
   {
     date: "2025.11",
     events: [
-      { title: "2025 臺北秋季程式設計節 城市通微服務大黑客松", result: "初賽" },
+      {
+        title: "2025 臺北秋季程式設計節 城市通微服務大黑客松",
+        result: "初賽",
+        note: "團體賽 - 隊伍名稱：還真是高高在上阿",
+      },
     ],
   },
   {
@@ -122,6 +126,14 @@ const timelineData = [
       },
       {
         title: "HITCON CTF 2025",
+        period: {
+          ranges: [
+            {
+              start: "2025-08-15",
+              end: "2025-08-16",
+            },
+          ],
+        },
         result: "67 / 1289",
         note: "團體賽 - 隊伍名稱：Shebang",
       },
@@ -145,14 +157,47 @@ const timelineData = [
   {
     date: "2025.05",
     events: [
-      { title: "Pre-exam 2025", result: "186 / 389" },
-      { title: "MyFirstCTF 2025", result: "11 / 83 | 潛力獎" },
+      {
+        title: "Pre-exam 2025",
+        period: {
+          ranges: [
+            {
+              start: "2025-05-24",
+              end: "2025-05-26",
+            },
+          ],
+        },
+        result: "186 / 389",
+      },
+      {
+        title: "MyFirstCTF 2025",
+        period: {
+          ranges: [
+            {
+              start: "2025-05-24",
+            },
+          ],
+        },
+        result: "11 / 83 | 潛力獎",
+      },
     ],
   },
   {
     date: "2025.03",
     events: [
-      { title: "picoCTF 2025", result: "231 / 10460" },
+      {
+        title: "picoCTF 2025",
+        period: {
+          ranges: [
+            {
+              start: "2025-03-07",
+              end: "2025-03-17",
+            },
+          ],
+        },
+        result: "231 / 10460",
+        note: "團體賽 - 隊伍名稱：I L0V3 0TT3R5",
+      },
       { title: "PearlCTF 2025", result: "44 / 1024" },
     ],
   },
@@ -171,7 +216,17 @@ const timelineData = [
     date: "2024.11",
     events: [
       { title: "INTIGRITI 1337UP LIVE 2024", result: "66 / 1061" },
-      { title: "臺北市立大學 113.1 全校程式設計實作競賽", result: "佳作" },
+      {
+        title: "臺北市立大學 113.1 全校程式設計實作競賽",
+        period: {
+          ranges: [
+            {
+              start: "2024-11-12",
+            },
+          ],
+        },
+        result: "佳作",
+      },
       { title: "2024 Haunted Brewery", result: "40 / 340" },
     ],
   },
@@ -182,8 +237,32 @@ const timelineData = [
   {
     date: "2024.09",
     events: [
-      { title: "PatriotCTF", result: "162 / 1360" },
-      { title: "2024 臺北秋季程式設計節 城市通微服務大黑客松", result: "初賽" },
+      {
+        title: "PatriotCTF",
+        period: {
+          ranges: [
+            {
+              start: "2024-09-20",
+              end: "2024-09-22",
+            },
+          ],
+        },
+        result: "162 / 1360",
+        note: "團體賽 - 隊伍名稱：I love seaotter",
+      },
+      {
+        title: "2024 臺北秋季程式設計節 城市通微服務大黑客松",
+        period: {
+          ranges: [
+            {
+              start: "2024-09-07",
+              end: "2024-09-08",
+            },
+          ],
+        },
+        result: "初賽",
+        note: '團體賽 - 隊伍名稱：<script>alert("水獭")</script>',
+      },
     ],
   },
   {
@@ -191,7 +270,16 @@ const timelineData = [
     events: [
       {
         title: "2024 臺北春季程式設計節 城市儀表板大黑客松",
+        period: {
+          ranges: [
+            {
+              start: "2024-05-11",
+              end: "2024-05-12",
+            },
+          ],
+        },
         result: "進入決選",
+        note: "團體賽 - 隊伍名稱：水獭說的都",
       },
     ],
   },
