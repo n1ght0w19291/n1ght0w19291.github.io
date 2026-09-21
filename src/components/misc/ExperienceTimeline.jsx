@@ -103,12 +103,36 @@ const timelineData = [
   },
   {
     date: "2025.10",
-    events: [{ title: "114年度資安技能金盾獎", result: "初賽" }],
+    events: [
+      {
+        title: "114年度資安技能金盾獎",
+        period: {
+          ranges: [
+            {
+              start: "2025-10-18",
+            },
+          ],
+        },
+        result: "初賽",
+      },
+    ],
   },
   {
     date: "2025.09",
     events: [
-      { title: "AI CUP 2025 玉山人工智慧公開挑戰賽 初賽", result: "102 / 790" },
+      {
+        title: "AI CUP 2025 玉山人工智慧公開挑戰賽 初賽",
+        period: {
+          ranges: [
+            {
+              start: "2025-09-24",
+              end: "2025-11-12",
+            },
+          ],
+        },
+        result: "102 / 790",
+        note: "個人參賽",
+      },
       {
         title: "2025 AEGIS 神盾盃 初賽",
         result: "15 / 40",
@@ -126,6 +150,12 @@ const timelineData = [
       },
       {
         title: "HITCON CTF 2025",
+        result: "67 / 1289",
+        note: "團體賽 - 隊伍名稱：Shebang",
+      },
+      { title: "SekaiCTF 2025", result: "441 / 1060" },
+      {
+        title: "HITCON 2025",
         period: {
           ranges: [
             {
@@ -134,11 +164,8 @@ const timelineData = [
             },
           ],
         },
-        result: "67 / 1289",
-        note: "團體賽 - 隊伍名稱：Shebang",
+        note: "會眾",
       },
-      { title: "SekaiCTF 2025", result: "441 / 1060" },
-      { title: "HITCON 2025", note: "會眾" },
       {
         title: "WHY2025 CTF",
         result: "102 / 1806",
@@ -150,8 +177,30 @@ const timelineData = [
   {
     date: "2025.07",
     events: [
-      { title: "AIS3 2025", result: "軟體、網頁及 IoT 安全組 結業" },
-      { title: "No Hack No CTF 2025", result: "28 / 473" },
+      {
+        title: "AIS3 2025",
+        period: {
+          ranges: [
+            {
+              start: "2025-07-28",
+              end: "2025-08-03",
+            },
+          ],
+        },
+        result: "軟體、網頁及 IoT 安全組 結業",
+      },
+      {
+        title: "No Hack No CTF 2025",
+        period: {
+          ranges: [
+            {
+              start: "2025-07-05",
+              end: "2025-07-07",
+            },
+          ],
+        },
+        result: "28 / 473",
+      },
     ],
   },
   {
