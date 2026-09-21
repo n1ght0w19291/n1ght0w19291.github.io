@@ -1,7 +1,10 @@
+import { createRequire } from "node:module";
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
-import { glob } from "astro/loaders";
 import { SITE } from "@/config";
+
+const loadAstroModule = createRequire(import.meta.url);
+const { glob } = loadAstroModule("astro/loaders");
 
 export const BLOG_PATH = "src/data/blog";
 export const PROJECT_PATH = "src/data/project";

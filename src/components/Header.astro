@@ -75,28 +75,28 @@ const isActive = (path: string) => {
           <ul class="hidden sm:flex sm:flex-row sm:items-center sm:gap-1">
             <li>
               <a
-                href="/posts"
+                href="/posts/"
                 class:list={["nav-link", { "nav-active": isActive("/posts") }]}
                 >Posts</a
               >
             </li>
             <li>
               <a
-                href="/tags"
+                href="/tags/"
                 class:list={["nav-link", { "nav-active": isActive("/tags") }]}
                 >Tags</a
               >
             </li>
             <li>
               <a
-                href="/about"
+                href="/about/"
                 class:list={["nav-link", { "nav-active": isActive("/about") }]}
                 >About</a
               >
             </li>
             <li class="flex items-center">
               <a
-                href="/search"
+                href="/search/"
                 class:list={["nav-link", { "nav-active": isActive("/search") }]}
                 title="Go to Search">Search</a
               >
@@ -105,7 +105,7 @@ const isActive = (path: string) => {
               SITE.showArchives && (
                 <li>
                   <LinkButton
-                    href="/archives"
+                    href="/archives/"
                     class:list={[
                       "nav-link",
                       { "nav-active": isActive("/archives") },
@@ -123,7 +123,7 @@ const isActive = (path: string) => {
               SITE.showProjects && (
                 <li>
                   <LinkButton
-                    href="/projects"
+                    href="/projects/"
                     class:list={[
                       "nav-link",
                       { "nav-active": isActive("/projects") },

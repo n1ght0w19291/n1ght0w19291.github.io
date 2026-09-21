@@ -13,7 +13,7 @@ type Props = {
 
 const { project, slug } = Astro.props;
 const { title, description, pubDatetime, coverImage, tags } = project.data;
-const href = `/projects/${slug}`;
+const href = `/projects/${slug}/`;
 const headingId = `project-${slugifyStr(slug)}-title`;
 const viewTransitionName = slugifyStr(String(title).replaceAll(".", "-"));
 ---

@@ -1,3 +1,5 @@
+/// <reference types="astro/client" />
+
 interface Window {
   theme?: {
     themeValue: string;

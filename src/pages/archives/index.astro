@@ -29,18 +29,18 @@ const [blogPosts, projectPosts] = await Promise.all([
 const posts = [...blogPosts, ...projectPosts];
 
 const months = [
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agosto",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 const totalPosts = posts.length;
@@ -71,7 +71,7 @@ const yearGroups = Object.entries(
           <span class="hero-badge">{totalPosts} posts</span>
           <span class="hero-badge"
             >{yearGroups.length}
-            {yearGroups.length === 1 ? "año" : "años"}</span
+            {yearGroups.length === 1 ? "year" : "years"}</span
           >
         </div>
       </div>

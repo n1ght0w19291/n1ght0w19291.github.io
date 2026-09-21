@@ -8,7 +8,11 @@ import { SITE } from "@/config";
 const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
 ---
 
-<Layout title={`Search | ${SITE.title}`} ogImage="/og/search.png">
+<Layout
+  title={`Search | ${SITE.title}`}
+  ogImage="/og/search.png"
+  robots="noindex, follow"
+>
   <Header />
   <Breadcrumb />
   <main id="main-content" class="search-page app-layout pb-12">

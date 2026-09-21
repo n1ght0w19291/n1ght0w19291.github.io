@@ -13,6 +13,7 @@ type Props = {
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
+  robots?: string;
   pubDatetime?: Date;
   modDatetime?: Date | null;
   scrollSmooth?: boolean;
@@ -25,6 +26,7 @@ const {
   description = SITE.desc,
   ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
   canonicalURL: canonicalURLProp,
+  robots,
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
@@ -87,6 +89,7 @@ const showGrain = SITE.backdropEffects.grain;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#fbf7f1" />
 
     <!-- Load Fonts -->
     <!-- Only preload the primary body font. Others load async to avoid bandwidth contention. -->
@@ -102,6 +105,7 @@ const showGrain = SITE.backdropEffects.grain;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={author} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph / Facebook -->
@@ -133,12 +137,12 @@ const showGrain = SITE.backdropEffects.grain;
     }
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
-    <meta property="twitter:creator" content={SITE.author} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+    <meta name="twitter:creator" content={SITE.author} />
 
     <!-- Google JSON-LD Structured data (only on blog posts) -->
     {
