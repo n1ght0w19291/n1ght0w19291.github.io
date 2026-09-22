@@ -13,8 +13,11 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
     unsolvedPast: 0,
     futureDays: 0,
   });
+  const [yearsLoading, setYearsLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [errorKey, setErrorKey] = useState(null);
+  const [readyStatsKey, setReadyStatsKey] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const yearKey = `lc-years-${username}`;
@@ -25,11 +28,13 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
   const statsLock = useRef(false);
 
   useEffect(() => {
+    setYearsLoading(true);
     const cached = localStorage.getItem(yearKey);
     if (cached) {
       const parsed = JSON.parse(cached);
       if (Date.now() - parsed.ts < 7 * 24 * 60 * 60 * 1000) {
         setActiveYears(parsed.data);
+        setYearsLoading(false);
         return;
       }
     }
@@ -58,12 +63,15 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
       })
       .finally(() => {
         yearsLock.current = false;
+        setYearsLoading(false);
       });
   }, [username, yearKey]);
 
   useEffect(() => {
     if (!selectedYear) return;
 
+    setError(null);
+    setErrorKey(null);
     const cached = localStorage.getItem(statsKey);
     if (cached) {
       const parsed = JSON.parse(cached);
@@ -73,6 +81,7 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
         : Number.POSITIVE_INFINITY;
       if (Date.now() - parsed.ts < ttl) {
         setDaysStats(parsed.stats);
+        setReadyStatsKey(statsKey);
         setLoading(false);
         return;
       }
@@ -83,9 +92,11 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
       if (cached) {
         const parsed = JSON.parse(cached);
         setDaysStats(parsed.stats);
+        setReadyStatsKey(statsKey);
         setLoading(false);
       } else {
         setError("API 暫時不可用");
+        setErrorKey(statsKey);
         setLoading(false);
       }
       return;
@@ -94,7 +105,6 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
     if (statsLock.current) return;
     statsLock.current = true;
     setLoading(true);
-    setError(null);
 
     fetch(
       `https://alfa-leetcode-api.onrender.com/${username}/calendar?year=${selectedYear}`
@@ -127,6 +137,7 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
         }
         const stats = { solved, unsolvedPast, futureDays };
         setDaysStats(stats);
+        setReadyStatsKey(statsKey);
         localStorage.setItem(
           statsKey,
           JSON.stringify({ ts: Date.now(), stats })
@@ -137,8 +148,10 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
         if (cached) {
           const parsed = JSON.parse(cached);
           setDaysStats(parsed.stats);
+          setReadyStatsKey(statsKey);
         } else {
           setError("API 暫時不可用");
+          setErrorKey(statsKey);
         }
       })
       .finally(() => {
@@ -147,17 +160,7 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
       });
   }, [username, selectedYear, statsKey, failKey]);
 
-  if (loading)
-    return (
-      <p
-        className="learning-widget__loading"
-        style={{ textAlign: "center", color: "var(--btn-content)" }}
-      >
-        Loading...
-      </p>
-    );
-
-  if (error)
+  if (error && errorKey === statsKey)
     return (
       <div
         className="learning-widget learning-widget--leetcode learning-widget--error"
@@ -172,6 +175,17 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
         <h4>LeetCode API 錯誤</h4>
         <p>{error}</p>
       </div>
+    );
+
+  if (loading || yearsLoading || readyStatsKey !== statsKey)
+    return (
+      <p
+        className="learning-widget__loading"
+        role="status"
+        style={{ textAlign: "center", color: "var(--btn-content)" }}
+      >
+        Loading...
+      </p>
     );
 
   const data = {
