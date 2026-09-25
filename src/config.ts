@@ -3,7 +3,7 @@ export const SITE = {
   author: "n1ght0w1",
   // Use the GitHub profile while running Astro's dev server.
   profile: "/about/",
-  desc: "A space where curiosity becomes code. Exploring web development, software architecture and everything that makes the tech world spin.",
+  desc: "CTF write-ups, cybersecurity notes, and software projects by n1ght0w1.",
   title: "n1ght0w1's blog",
   ogImage: "", // empty = use the dynamic /og.png route (src/pages/og.png.ts)
   lightAndDarkMode: true,

@@ -27,7 +27,11 @@ const tagsWithCount = tags.map(({ tag, tagName }) => ({
 const maxCount = Math.max(...tagsWithCount.map(t => t.count));
 ---
 
-<Layout title={`Tags | ${SITE.title}`} ogImage="/og/tags.png">
+<Layout
+  title={`Tags | ${SITE.title}`}
+  description="Browse blog posts by topic, from CTF challenges to software projects."
+  ogImage="/og/tags.png"
+>
   <Header />
   <Breadcrumb />
   <main id="main-content" class="app-layout pb-12">
@@ -42,8 +46,7 @@ const maxCount = Math.max(...tagsWithCount.map(t => t.count));
           <span class="glow-text">Tags</span>
         </h1>
         <p class="mt-3 max-w-lg text-foreground/70 italic">
-          Explore all blog topics. Each tag is a universe of
-          content.
+          Browse posts by topic.
         </p>
         <div class="mt-4 flex items-center gap-2 text-sm text-foreground/50">
           <span class="hero-badge">
