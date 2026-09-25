@@ -478,6 +478,7 @@
 }
 
 .leetcode-status__stat-dot {
+  position: relative;
   width: 0.5rem;
   height: 0.5rem;
   flex-shrink: 0;

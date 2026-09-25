@@ -316,7 +316,7 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
           }}
         >
           <div className="leetcode-status__stat leetcode-status__stat--active">
-            <span className="leetcode-status__stat-dot" aria-hidden="true" />
+            <span className="leetcode-status__stat-dot diffusing-indicator" aria-hidden="true" />
             <span className="leetcode-status__stat-copy">
               <strong>Active days</strong>
               <small>有提交的日子</small>
@@ -324,7 +324,7 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
             <b>{daysStats.solved}</b>
           </div>
           <div className="leetcode-status__stat leetcode-status__stat--missed">
-            <span className="leetcode-status__stat-dot" aria-hidden="true" />
+            <span className="leetcode-status__stat-dot diffusing-indicator" aria-hidden="true" />
             <span className="leetcode-status__stat-copy">
               <strong>Missed days</strong>
               <small>已過去但沒有提交</small>
@@ -333,7 +333,7 @@ export const LeetCodeStatus = ({ username = "n1ght0w1" }) => {
           </div>
           {daysStats.futureDays ? (
             <div className="leetcode-status__stat leetcode-status__stat--future">
-              <span className="leetcode-status__stat-dot" aria-hidden="true" />
+              <span className="leetcode-status__stat-dot diffusing-indicator" aria-hidden="true" />
               <span className="leetcode-status__stat-copy">
                 <strong>Future days</strong>
                 <small>今年剩餘天數</small>

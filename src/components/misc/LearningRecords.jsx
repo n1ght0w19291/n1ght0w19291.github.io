@@ -112,7 +112,7 @@ export const LearningRecords = () => {
                   {item.panelLabel}
                 </span>
                 <span className="learning-records__feature-status">
-                  <span aria-hidden="true" />
+                  <span className="diffusing-indicator" aria-hidden="true" />
                   {item.panelStatus}
                 </span>
               </div>

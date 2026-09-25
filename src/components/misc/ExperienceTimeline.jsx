@@ -423,7 +423,7 @@ export const ExperienceTimeline = () => {
     <section className="experience-timeline" aria-labelledby="experience-title">
       <header className="experience-timeline__header">
         <div className="experience-timeline__eyebrow">
-          <span aria-hidden="true" />
+          <span className="diffusing-indicator" aria-hidden="true" />
           ACTIVITY LOG
         </div>
 

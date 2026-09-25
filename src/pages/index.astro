@@ -11,6 +11,7 @@ import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import { SITE } from "@/config";
 import { SOCIALS } from "@/constants";
+import BreathingLight from "@/components/BreathingLight.astro";
 
 const [blogPosts, projectPosts] = await Promise.all([
   getCollection("blog"),
@@ -52,10 +53,7 @@ const recentPosts = sortedPosts.filter(
         <div class="relative z-10">
           <!-- Terminal prompt badge -->
           <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-border/40 bg-muted/20 px-3.5 py-1.5 font-firacode text-xs sm:text-sm">
-            <span class="relative flex h-2 w-2">
-              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"></span>
-              <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
-            </span>
+            <BreathingLight color="var(--accent)" />
             <span class="text-accent">{SITE.heroTerminalPrompt.prefix}</span>
             {SITE.heroTerminalPrompt.path}
             <span class="opacity-40">{SITE.heroTerminalPrompt.suffix}</span>

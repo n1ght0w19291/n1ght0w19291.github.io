@@ -7,6 +7,8 @@ import Datetime from "@/components/Datetime.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
+import RelatedPostCard from "@/components/RelatedPostCard.astro";
+import ResourceLinks from "@/components/ResourceLinks.astro";
 import "katex/dist/katex.min.css";
 
 import { getPath } from "@/utils/getPath";
@@ -35,6 +37,8 @@ const {
   timezone,
   tags,
   draft,
+  references,
+  furtherReading,
 } = post.data;
 
 const { Content } = await render(post);
@@ -93,6 +97,36 @@ const currentPostIndex = navPool.findIndex(a => a.id === post.id);
 const prevPost = currentPostIndex !== 0 ? navPool[currentPostIndex - 1] : null;
 const nextPost =
   currentPostIndex < navPool.length - 1 ? navPool[currentPostIndex + 1] : null;
+
+const relatedExcludedIds = new Set([
+  post.id,
+  parentPost?.id,
+  ...children.map(child => child.id),
+  ...(siblings ?? []).map(sibling => sibling.id),
+]);
+const postTagSlugs = new Set(tags.map(tag => slugifyStr(tag)));
+const relatedPosts = posts
+  .filter(candidate => !relatedExcludedIds.has(candidate.id))
+  .map(candidate => ({
+    post: candidate,
+    sharedTagCount: new Set(
+      candidate.data.tags
+        .map(tag => slugifyStr(tag))
+        .filter(tag => postTagSlugs.has(tag))
+    ).size,
+  }))
+  .filter(candidate => candidate.sharedTagCount > 0)
+  .sort((a, b) => b.sharedTagCount - a.sharedTagCount)
+  .slice(0, 3)
+  .map(({ post: relatedPost }) => ({
+    post: relatedPost,
+    sharedTags: [
+      ...new Set(
+        relatedPost.data.tags
+          .filter(tag => postTagSlugs.has(slugifyStr(tag)))
+      ),
+    ],
+  }));
 ---
 
 <Layout {...layoutProps}>
@@ -238,6 +272,21 @@ const nextPost =
       <Content />
     </article>
 
+    {references && references.length > 0 && (
+      <ResourceLinks
+        id="references-heading"
+        heading="References"
+        links={references}
+      />
+    )}
+    {furtherReading && furtherReading.length > 0 && (
+      <ResourceLinks
+        id="further-reading-heading"
+        heading="Further reading"
+        links={furtherReading}
+      />
+    )}
+
     <!-- Sub-post index (rendered when this post has children) -->
     {children.length > 0 && (
       <section class="sub-posts-index mt-10" data-pagefind-ignore>
@@ -281,7 +330,7 @@ const nextPost =
       </div>
       
       <div class="relative z-10 flex items-center gap-2 font-firacode text-[10px] tracking-widest text-accent/40 uppercase select-none">
-        <span class="h-1.5 w-1.5 rounded-full bg-accent/50 shadow-[0_0_8px_var(--color-accent)]"></span>
+        <span class="diffusing-indicator h-1.5 w-1.5 rounded-full bg-accent/50 shadow-[0_0_8px_var(--color-accent)]"></span>
         end
       </div>
 
@@ -387,6 +436,26 @@ const nextPost =
         )
       }
     </div>
+
+    {relatedPosts.length > 0 && (
+      <section
+        class="mt-10"
+        data-pagefind-ignore
+        aria-labelledby="related-posts-heading"
+      >
+        <h2
+          id="related-posts-heading"
+          class="mb-3 text-lg font-semibold tracking-tight"
+        >
+          Related articles
+        </h2>
+        <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {relatedPosts.map(({ post: relatedPost, sharedTags }) => (
+            <RelatedPostCard post={relatedPost} sharedTags={sharedTags} />
+          ))}
+        </ul>
+      </section>
+    )}
   </main>
   <BackToTopButton />
   <Footer />

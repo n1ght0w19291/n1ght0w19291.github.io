@@ -1,0 +1,55 @@
+---
+interface Props {
+  color?: string;
+  diffuse?: boolean;
+}
+
+const { color = "var(--accent)", diffuse = true } = Astro.props;
+---
+
+<span
+  class="breathing-light"
+  style={`--breathing-light-color: ${color};`}
+  aria-hidden="true"
+>
+  {diffuse && <span class="breathing-light__diffusion"></span>}
+  <span class="breathing-light__core"></span>
+</span>
+
+<style>
+  .breathing-light {
+    position: relative;
+    display: inline-flex;
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: none;
+  }
+
+  .breathing-light__core,
+  .breathing-light__diffusion {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: var(--breathing-light-color);
+  }
+
+  .breathing-light__diffusion {
+    animation: breathing-light-ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+    opacity: 0.6;
+  }
+
+  @keyframes breathing-light-ping {
+    75%,
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .breathing-light__diffusion {
+      animation: none;
+      opacity: 0;
+    }
+  }
+</style>

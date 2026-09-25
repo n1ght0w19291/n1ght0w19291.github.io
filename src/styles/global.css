@@ -156,6 +156,40 @@ i {
   @apply text-accent;
 }
 
+/* Shared expanding halo for small status and navigation indicators. */
+.diffusing-indicator {
+  position: relative;
+}
+
+.diffusing-indicator::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  pointer-events: none;
+  animation: diffusing-indicator-ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes diffusing-indicator-ping {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diffusing-indicator::before {
+    animation: none;
+    opacity: 0;
+  }
+}
+
 /* Keep costly visual effects off small or reduced-motion surfaces. */
 @media (max-width: 640px), (prefers-reduced-motion: reduce) {
   .site-grain,

@@ -1,0 +1,35 @@
+---
+type ResourceLink = {
+  title?: string;
+  url: string;
+};
+
+type Props = {
+  id: string;
+  heading: string;
+  links: ResourceLink[];
+};
+
+const { id, heading, links } = Astro.props;
+---
+
+<section
+  class="mt-10 rounded-2xl border border-border/20 bg-muted/5 p-5 sm:p-6"
+  aria-labelledby={id}
+>
+  <h2 id={id} class="text-lg font-semibold">{heading}</h2>
+  <ol class="mt-4 list-decimal space-y-2 ps-5 text-sm">
+    {links.map(link => (
+      <li class="ps-1">
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="break-all text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent"
+        >
+          {link.title || link.url}
+        </a>
+      </li>
+    ))}
+  </ol>
+</section>

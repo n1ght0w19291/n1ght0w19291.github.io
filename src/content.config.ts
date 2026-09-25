@@ -9,6 +9,16 @@ const { glob } = loadAstroModule("astro/loaders");
 export const BLOG_PATH = "src/data/blog";
 export const PROJECT_PATH = "src/data/project";
 
+const resourceLinkSchema = z.object({
+  title: z.string().optional(),
+  url: z
+    .string()
+    .url()
+    .refine(url => /^https?:\/\//i.test(url), {
+      message: "Resource URLs must use HTTP or HTTPS",
+    }),
+});
+
 const blog = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${BLOG_PATH}` }),
   schema: ({ image }) =>
@@ -25,6 +35,8 @@ const blog = defineCollection({
       canonicalURL: z.string().optional(),
       timezone: z.string().optional(),
       parentPost: z.string().optional(),
+      references: z.array(resourceLinkSchema).optional(),
+      furtherReading: z.array(resourceLinkSchema).optional(),
     }),
 });
 
