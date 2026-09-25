@@ -2,25 +2,54 @@
 title: "picoMini by CMU-Africa 練習"
 description: "picoMini by CMU-Africa 練習題目 Writeup"
 pubDatetime: 2025-11-16T09:00:00+08:00
-tags:
-  [
-    "picoCTF",
-    "Misc",
-    "Forensics",
-    "Web",
-    "Crypto",
-    "Reverse",
-    "pwnable",
-  ]
+modDatetime: 2026-09-26T00:21:00+08:00
+tags: ["picoCTF", "Misc", "Forensics", "Web", "Crypto", "Reverse", "pwnable"]
 parentPost: "picoctf"
-draft: true
+draft: false
 ---
+
+import ChallengeCard from "../../../components/misc/ChallengeCard.astro";
+
+<ChallengeCard
+  event="picoMini by CMU-Africa 練習"
+  challenges={[
+    { name: "Log Hunt", category: "General Skills", difficulty: "Easy" },
+    { name: "Riddle Registry", category: "Forensics", difficulty: "Easy" },
+    { name: "Hidden in plainsight", category: "Forensics", difficulty: "Easy" },
+    { name: "Flag in Flame", category: "Forensics", difficulty: "Easy" },
+    { name: "Corrupted file", category: "Forensics", difficulty: "Easy" },
+    { name: "Crack the Gate 1", category: "Web", difficulty: "Easy" },
+    { name: "Crack the Gate 2", category: "Web", difficulty: "Medium" },
+    { name: "byp4ss3d", category: "Web", difficulty: "Medium" },
+    { name: "Crack the Power", category: "Crypto", difficulty: "Medium" },
+    {
+      name: "M1n10n'5_53cr37",
+      category: "Reverse Engineering",
+      difficulty: "Medium",
+    },
+    {
+      name: "Pico Bank",
+      category: "Reverse Engineering",
+      difficulty: "Medium",
+    },
+    {
+      name: "Input Injection 1",
+      category: "Binary Exploitation",
+      difficulty: "Medium",
+    },
+    {
+      name: "Input Injection 2",
+      category: "Binary Exploitation",
+      difficulty: "Medium",
+    },
+  ]}
+/>
 
 # picoMini by CMU-Africa 練習
 
 ## General Skills
 
-### \[Easy\] Log Hunt
+### Log Hunt
 
 下載`server.log`  
 可以看到有一行 `INFO FLAGPART:` 後面接著 flag
@@ -31,7 +60,7 @@ draft: true
 
 ## Forensics
 
-### \[Easy\] Riddle Registry
+### Riddle Registry
 
 先把 `confidential.pdf` 下載下來  
 打開之後有幾行文字被劃掉了
@@ -46,7 +75,7 @@ draft: true
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010855741.png)
 
-### \[Easy\] Hidden in plainsight
+### Hidden in plainsight
 
 下載到一張 `img.jpg`
 
@@ -68,7 +97,7 @@ draft: true
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010855996.png)
 
-### \[Easy\] Flag in Flame
+### Flag in Flame
 
 下載 `log.txt`  
 把檔案拿去做 base64 decode 之後是一張 PNG
@@ -79,13 +108,13 @@ draft: true
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010856104.png)
 
-### \[Easy\] Corrupted file
+### Corrupted file
 
 打開下載下來的 `file` 可以發現這好像是一張 `.jpg`
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010856147.png)
 
-`.jpg` 的 magic number 應該要是 `ff d8 ff e0`，但現在是 `5c 78 ff e0`，修正 magic number
+JPEG 通常以 `ff d8 ff` 開頭；這個檔案目前是 `5c 78 ff e0`，所以把前兩個錯誤位元組改回 `ff d8`
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010856193.png)
 
@@ -95,7 +124,7 @@ draft: true
 
 ## Web
 
-### \[Easy\] Crack the Gate 1
+### Crack the Gate 1
 
 題目已知 email 是 `ctf-player@picoctf.org`，但不知道密碼  
 在註解的地方可以看到很像 caesar cipher的文字，並且下面有 `Remove before pushing to production!`
@@ -126,8 +155,8 @@ document
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         console.log(data);
         if (data.success) {
           prompt("Login successful!\nFlag:", data.flag);
@@ -135,7 +164,7 @@ document
           alert("Invalid credentials");
         }
       })
-      .catch((error) => console.error("Error:", error));
+      .catch(error => console.error("Error:", error));
   });
 ```
 
@@ -147,7 +176,7 @@ curl -X POST "http://amiable-citadel.picoctf.net:51576/login"   -H "X-Dev-Access
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010856402.png)
 
-### \[Medium\] Crack the Gate 2
+### Crack the Gate 2
 
 這一題有基本的速率限制機制，會阻止來自相同來源的重複失敗嘗試，同時又給了一個 `passwords.txt` 要去 brute force 密碼，所以需要更改 `X-Forwarded-For` 讓每一次 request 都是不同的來源 IP
 
@@ -173,20 +202,20 @@ for password in password_list:
         "password": password
     }
 
-    r = requests.post(url, headers=headers, data=data)
+    r = requests.post(url, headers=headers, data=data)
+    result = r.json()
 
-    print(f"[IP: {fake_ip}] Try password: {password} → {r.status_code}")
-    print(r.text)
+    print(f"[IP: {fake_ip}] Try password: {password} → {r.status_code}")
+    print(result)
 
-    if "false" not in r.text:
-        print(f"Success! The password is: {password}")
-        print(r.text)
-        break
+    if result.get("success") is True:
+        print(f"Success! The password is: {password}")
+        break
 ```
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010856445.png)
 
-### \[Medium\] byp4ss3d
+### byp4ss3d
 
 這一題可以上傳圖片，加上是 `.php`，所以可以嘗試上傳 web shell
 
@@ -194,12 +223,12 @@ for password in password_list:
 
 先上傳 `.htaccess` 讓圖片也可以被當作 php 去執行
 
-![alt text](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/image.png)
+![.htaccess 將 JPG 副檔名設定為 PHP 執行](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/image.png)
 
 然後上傳 `.php.jpg`，內容是簡單的 web shell  
 Windows 一直把我的檔案辨識成異常檔案，所以我只能在虛擬機裡面操作
 
-![alt text](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/image-1.png)
+![以 GET 參數 cmd 執行系統指令的 PHP web shell](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/image-1.png)
 
 到 `/images/test.php.jpg` 後面加上 `?cmd=` 就可以執行指令了
 
@@ -215,7 +244,7 @@ Windows 一直把我的檔案辨識成異常檔案，所以我只能在虛擬機
 
 ## Cryptography
 
-### \[Medium\] Crack the Power
+### Crack the Power
 
 這題的 e 很小，如果 `m^e < n`，則不需要 mod， `c = m^e` ，只需要對 c 取 20 次整數根，嘗試 Small e Attack。
 
@@ -240,7 +269,7 @@ if exact:
 
 ## Reverse Engineering
 
-### \[Medium\] M1n10n'5_53cr37
+### M1n10n'5_53cr37
 
 用 jadx 去打開下載下來的 `minions.apk`  
 在 `resources.arsc:/res/values/strings.xml` 裡面找到一個很像 base64 字串
@@ -251,7 +280,7 @@ if exact:
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010856782.png)
 
-### \[Medium\] Pico Bank
+### Pico Bank
 
 從首頁下載 `pico-bank.apk`
 
@@ -283,7 +312,7 @@ if exact:
 
 ## Binary Exploitation
 
-### \[Medium\] Input Injection 1
+### Input Injection 1
 
 ```c
 #include <string.h>
@@ -325,7 +354,7 @@ void fun(char *name, char *cmd) {
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010857207.png)
 
-### \[Medium\] Input Injection 2
+### Input Injection 2
 
 感覺這一題應該會跟上一題差不多  
 首先從輸出可以得到 username 位址以及 shell 位址，所以需要蓋掉的長度是 `a0 - d0 --> 48` 個 byte  
@@ -366,7 +395,10 @@ int main(void) {
 ---
 
 突然發現多了好幾個 Easy 題，順手寫一下  
-writeup 就修一下再發 ฅ^•ﻌ•^ฅ
+想說解題過程修一下再發  
+但是想起來的時候已經快過一年 ฅ^•ﻌ•^ฅ  
+picoCTF 網站現在也改名為 CyLab Security Academy 了  
+還是直接發好了w
 
 ![](../../../assets/images/blog/picoCTF/picoMiniByCMUAfricaPractice/IMG-20251119010857298.png)
 

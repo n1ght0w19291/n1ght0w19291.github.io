@@ -1,126 +1,232 @@
 ---
 interface Challenge {
-	name: string;
-	category: string;
-	difficulty?: string;
-	url?: string;
-	anchor?: string;
+  name: string;
+  category: string;
+  difficulty?: string;
+  url?: string;
+  anchor?: string;
 }
 
 interface Props {
-	event: string;
-	rank?: number;
-	total?: number;
-	challenges: Challenge[];
+  event: string;
+  rank?: number;
+  total?: number;
+  challenges: Challenge[];
 }
 
 const { event, rank, total, challenges } = Astro.props;
 
 const knownCategoryStyle: Record<
-	string,
-	{ hue: number | string; label: string }
+  string,
+  { hue: number | string; label: string }
 > = {
-	Web: { hue: 220, label: "Web" },
-	Crypto: { hue: 280, label: "Crypto" },
-	Pwn: { hue: 10, label: "Pwn" },
-	Rev: { hue: 50, label: "Rev" },
-	Forensics: { hue: 150, label: "Forensics" },
-	Misc: { hue: 120, label: "Misc" },
-	Welcome: { hue: 185, label: "Welcome" },
-	OSINT: { hue: 30, label: "OSINT" },
-	Network: { hue: 200, label: "Network" },
-	Blockchain: { hue: 260, label: "Blockchain" },
-	AI: { hue: 315, label: "AI" },
+  Web: { hue: 220, label: "Web" },
+  Crypto: { hue: 280, label: "Crypto" },
+  Pwn: { hue: 10, label: "Pwn" },
+  Rev: { hue: 50, label: "Rev" },
+  Forensics: { hue: 150, label: "Forensics" },
+  Misc: { hue: 120, label: "Misc" },
+  Welcome: { hue: 185, label: "Welcome" },
+  OSINT: { hue: 30, label: "OSINT" },
+  Network: { hue: 200, label: "Network" },
+  Blockchain: { hue: 260, label: "Blockchain" },
+  AI: { hue: 315, label: "AI" },
+  PPC: { hue: 35, label: "PPC" },
 };
 
+const categoryAliases: Record<string, string> = {
+  // Reverse engineering
+  re: "Rev",
+  rev: "Rev",
+  reverse: "Rev",
+  reversing: "Rev",
+  "reverse engineering": "Rev",
+  "reverse-engineering": "Rev",
+  "reverse eng": "Rev",
+  // Binary exploitation
+  pwn: "Pwn",
+  binexp: "Pwn",
+  pwnable: "Pwn",
+  "binary exploitation": "Pwn",
+  "binary-exploitation": "Pwn",
+  "binary exploit": "Pwn",
+  "pwn binary exploitation": "Pwn",
+  // Web
+  webapp: "Web",
+  "web app": "Web",
+  "web application": "Web",
+  "web exploitation": "Web",
+  "web exploit": "Web",
+  "web security": "Web",
+  // Cryptography
+  crypto: "Crypto",
+  cryptography: "Crypto",
+  // Forensics
+  forensic: "Forensics",
+  stego: "Forensics",
+  steganography: "Forensics",
+  // Miscellaneous and general skills
+  misc: "Misc",
+  miscellaneous: "Misc",
+  general: "Misc",
+  "general skill": "Misc",
+  "general skills": "Misc",
+  "general-skills": "Misc",
+  "general skill(s)": "Misc",
+  // Open source intelligence
+  osint: "OSINT",
+  "open source intelligence": "OSINT",
+  "open-source intelligence": "OSINT",
+  // Networking
+  net: "Network",
+  networking: "Network",
+  "network analysis": "Network",
+  // Blockchain / smart contracts
+  blockchain: "Blockchain",
+  web3: "Blockchain",
+  "smart contract": "Blockchain",
+  "smart contracts": "Blockchain",
+  // Artificial intelligence
+  ai: "AI",
+  ml: "AI",
+  "artificial intelligence": "AI",
+  "machine learning": "AI",
+  "deep learning": "AI",
+  "ai ml": "AI",
+  // Programming and coding challenges
+  programming: "PPC",
+  "programming and coding": "PPC",
+  "professional programming and coding": "PPC",
+};
+
+function normalizeCategory(category: string): string {
+  const normalized = category.trim().replace(/[\s_/-]+/g, " ");
+  const lookup = normalized.toLowerCase();
+  const alias = categoryAliases[lookup];
+  if (alias) return alias;
+
+  return (
+    Object.keys(knownCategoryStyle).find(
+      known => known.toLowerCase() === lookup
+    ) ?? normalized
+  );
+}
+
 function getCategoryStyle(cat: string): {
-	hue: number | string;
-	label: string;
+  hue: number | string;
+  chroma: number;
+  label: string;
 } {
-	return knownCategoryStyle[cat] ?? { hue: 120, label: cat };
+  const canonicalCategory = normalizeCategory(cat);
+  const style = knownCategoryStyle[canonicalCategory];
+  return style
+    ? { ...style, chroma: 0.15, label: cat }
+    : { hue: 0, chroma: 0, label: cat };
 }
 
 function toSlug(name: string): string {
-	return name
-		.toLowerCase()
-		.replace(/\s+/g, "-")
-		.replace(/[^\p{L}\p{N}-]/gu, "")
-		.replace(/^-+|-+$/g, "");
+  return name
+    .toLowerCase()
+    // Match the GitHub-style heading slugs Astro generates: punctuation is
+    // removed, underscores are preserved, and whitespace becomes hyphens.
+    .replace(/[^\p{L}\p{N}\p{M}\s_-]/gu, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 const knownOrder = [
-	"Welcome",
-	"Web",
-	"Pwn",
-	"Rev",
-	"Crypto",
-	"Forensics",
-	"OSINT",
-	"Network",
-	"Blockchain",
-	"AI",
-	"Misc",
+  "Welcome",
+  "Web",
+  "Pwn",
+  "Rev",
+  "Crypto",
+  "Forensics",
+  "OSINT",
+  "Network",
+  "Blockchain",
+  "AI",
+  "PPC",
+  "Misc",
 ];
 
-const allCategories = [...new Set(challenges.map((c) => c.category))];
-const orderedCategories = [
-	...knownOrder.filter((c) => allCategories.includes(c)),
-	...allCategories.filter((c) => !knownOrder.includes(c)),
-];
+const allCategories = [...new Set(challenges.map(c => c.category))];
+const categoryOrder = new Map(
+  knownOrder.map((category, index) => [category, index] as const)
+);
+const orderedCategories = allCategories.sort((a, b) => {
+  const aOrder = categoryOrder.get(normalizeCategory(a)) ?? knownOrder.length;
+  const bOrder = categoryOrder.get(normalizeCategory(b)) ?? knownOrder.length;
+  return aOrder - bOrder;
+});
 
-const grouped = orderedCategories.map((cat) => ({
-	cat,
-	items: challenges.filter((c) => c.category === cat),
+const grouped = orderedCategories.map(cat => ({
+  cat,
+  items: challenges.filter(c => c.category === cat),
 }));
 ---
 
 <div class="not-prose card-base mb-6 overflow-hidden">
-
   <!-- event header -->
   <div class="flex items-baseline justify-between px-2 py-4">
-    <span class="font-bold text-base text-black/85 dark:text-white/85 transition truncate min-w-0">{event}</span>
+    <span class="font-bold text-base text-black/85 dark:text-white/85 transition truncate min-w-0">
+      {event}
+    </span>
     <div class="flex items-baseline gap-3 shrink-0 pl-3">
       {rank != null && (
         <span class="text-xs text-black/50 dark:text-white/40 transition tabular-nums">
-          Rank: #{rank}{total != null ? ` / ${total}` : ""}
+          Rank: #{rank}
+          {total != null ? ` / ${total}` : ""}
         </span>
       )}
-      <span class="text-xs text-black/25 dark:text-white/25 transition tabular-nums">{challenges.length} challs</span>
+      <span class="text-xs text-black/25 dark:text-white/25 transition tabular-nums">
+        {challenges.length} challs
+      </span>
     </div>
   </div>
 
   <div>
     {grouped.map(({ cat, items }) => {
-      const { hue, label } = getCategoryStyle(cat);
-      const color      = `oklch(0.62 0.15 ${hue})`;
-      const colorFaint = `oklch(0.62 0.15 ${hue} / 0.07)`;
+      const { hue, chroma, label } = getCategoryStyle(cat);
+      const color = `oklch(0.62 ${chroma} ${hue})`;
+      const colorFaint = `oklch(0.62 ${chroma} ${hue} / 0.07)`;
       return (
         <div>
-
           <!-- category header -->
           <div
             class="flex items-center gap-2.5 px-6 py-2"
             style={`background: ${colorFaint}; border-left: 2px solid ${color}; border-radius: 0.25rem`}
           >
-            <span class="text-[0.7rem] font-bold uppercase tracking-widest transition" style={`color: ${color}`}>
+            <span
+              class="text-[0.7rem] font-bold uppercase tracking-widest transition"
+              style={`color: ${color}`}
+            >
               {label}
             </span>
-            <span class="text-[0.7rem] text-black/25 dark:text-white/25 transition">{items.length}</span>
+            <span class="text-[0.7rem] text-black/25 dark:text-white/25 transition">
+              {items.length}
+            </span>
           </div>
 
           <!-- challenge rows -->
           <ul class="py-1">
-            {items.map((c) => {
+            {items.map(c => {
               const slug = c.anchor ?? toSlug(c.name);
               return (
                 <li class="flex items-center gap-3 px-6 py-1.5">
-                  <span class="w-1 h-1 rounded-full shrink-0 opacity-30 transition" style={`background: ${color}`} />
+                  <span
+                    class="w-1 h-1 rounded-full shrink-0 opacity-30 transition"
+                    style={`background: ${color}`}
+                  />
                   <a
                     href={`#${slug}`}
                     class="no-styling flex-1 min-w-0 truncate text-sm leading-snug text-[var(--primary)] underline decoration-dashed decoration-1 underline-offset-4"
                   >
                     {c.difficulty && (
-                      <span class="text-[0.7rem] text-black/35 dark:text-white/35 mr-1">[{c.difficulty}]</span>
+                      <span class="text-[0.7rem] text-black/35 dark:text-white/35 mr-1">
+                        [{c.difficulty}]
+                      </span>
                     )}
                     {c.name}
                   </a>
@@ -138,10 +244,8 @@ const grouped = orderedCategories.map((cat) => ({
               );
             })}
           </ul>
-
         </div>
       );
     })}
   </div>
-
 </div>
