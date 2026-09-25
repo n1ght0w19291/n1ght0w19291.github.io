@@ -53,7 +53,11 @@ const timelineData = [
   {
     date: "2026.02",
     events: [
-      { title: "TSCCTF 2026", result: "50" },
+      {
+        title: "TSCCTF 2026",
+        result: "50 / 115",
+        note: "個人賽 - 帳號名稱：n1ght0w1",
+      },
       {
         title: "THJCC 2026",
         period: {
@@ -65,17 +69,28 @@ const timelineData = [
           ],
         },
         result: "66 / 314",
+        note: "個人賽 - 帳號名稱：n1ght0w1",
       },
     ],
   },
   {
     date: "2026.01",
-    events: [{ title: "Scarlet CTF 2026", result: "52 / 762" }],
+    events: [
+      {
+        title: "Scarlet CTF 2026",
+        result: "52 / 762",
+        note: "團體賽 - 隊伍名稱：$heb@n9",
+      },
+    ],
   },
   {
     date: "2025.12",
     events: [
-      { title: "ASIS CTF Finals 2025", result: "194 / 476" },
+      {
+        title: "ASIS CTF Finals 2025",
+        result: "194 / 476",
+        note: "個人參賽 - 隊伍名稱：NotFound",
+      },
       {
         title: "AIS3 EOF 2026 初賽",
         period: {
@@ -114,6 +129,7 @@ const timelineData = [
           ],
         },
         result: "初賽",
+        note: "團體賽",
       },
     ],
   },
@@ -153,7 +169,11 @@ const timelineData = [
         result: "67 / 1289",
         note: "團體賽 - 隊伍名稱：Shebang",
       },
-      { title: "SekaiCTF 2025", result: "441 / 1060" },
+      {
+        title: "SekaiCTF 2025",
+        result: "441 / 1060",
+        note: "個人參賽 - 隊伍名稱：NotFound",
+      },
       {
         title: "HITCON 2025",
         period: {
@@ -200,6 +220,7 @@ const timelineData = [
           ],
         },
         result: "28 / 473",
+        note: "個人參賽 - 隊伍名稱：NotFound",
       },
     ],
   },
@@ -217,6 +238,7 @@ const timelineData = [
           ],
         },
         result: "186 / 389",
+        note: "個人賽 - 帳號名稱：pinzhen0910",
       },
       {
         title: "MyFirstCTF 2025",
@@ -227,6 +249,7 @@ const timelineData = [
             },
           ],
         },
+        note: "個人賽 - 帳號名稱：pinzhen0910",
         result: "11 / 83 | 潛力獎",
       },
     ],
@@ -247,24 +270,46 @@ const timelineData = [
         result: "231 / 10460",
         note: "團體賽 - 隊伍名稱：I L0V3 0TT3R5",
       },
-      { title: "PearlCTF 2025", result: "44 / 1024" },
+      {
+        title: "PearlCTF 2025",
+        result: "44 / 1024",
+        note: "團體賽 - 隊伍名稱：I L0V3 0TT3R5",
+      },
     ],
   },
   {
     date: "2025.01",
     events: [
-      { title: "TSCCTF2025", result: "85 / 509" },
-      { title: "IrisCTF2025", result: "242 / 1064" },
+      {
+        title: "TSCCTF2025",
+        result: "85 / 509",
+        note: "個人賽 - 帳號名稱：pinzhen0910",
+      },
+      {
+        title: "IrisCTF2025",
+        result: "242 / 1064",
+        note: "團體賽 - 隊伍名稱：I L0V3 0TT3R5",
+      },
     ],
   },
   {
     date: "2024.12",
-    events: [{ title: "0xL4ugh CTF", result: "104 / 308" }],
+    events: [
+      {
+        title: "0xL4ugh CTF",
+        result: "104 / 308",
+        note: "團體賽 - 隊伍名稱：I L0V3 0TT3R5",
+      },
+    ],
   },
   {
     date: "2024.11",
     events: [
-      { title: "INTIGRITI 1337UP LIVE 2024", result: "66 / 1061" },
+      {
+        title: "INTIGRITI 1337UP LIVE 2024",
+        result: "66 / 1061",
+        note: "團體賽 - 隊伍名稱：I L0V3 0TT3R5",
+      },
       {
         title: "臺北市立大學 113.1 全校程式設計實作競賽",
         period: {
@@ -275,13 +320,24 @@ const timelineData = [
           ],
         },
         result: "佳作",
+        note: "校內個人賽",
       },
-      { title: "2024 Haunted Brewery", result: "40 / 340" },
+      {
+        title: "2024 Haunted Brewery (Hackers N' Hops)",
+        result: "40 / 340",
+        note: "團體賽 - 隊伍名稱：I L0V3 0TT3R5",
+      },
     ],
   },
   {
     date: "2024.10",
-    events: [{ title: "IRON CTF 2024", result: "29 / 1033" }],
+    events: [
+      {
+        title: "IRON CTF 2024",
+        result: "29 / 1033",
+        note: "團體賽 - 隊伍名稱：I love otters",
+      },
+    ],
   },
   {
     date: "2024.09",
@@ -334,7 +390,13 @@ const timelineData = [
   },
   {
     date: "2022",
-    events: [{ title: "GICS 資安女婕思 資安闖天關 高中職組", result: "初賽" }],
+    events: [
+      {
+        title: "GICS 資安女婕思 資安闖天關 高中職組",
+        result: "初賽",
+        note: "團體賽",
+      },
+    ],
   },
 ];
 
