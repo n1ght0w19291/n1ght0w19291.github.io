@@ -394,3 +394,50 @@ i {
   background: color-mix(in srgb, var(--accent) 15%, transparent);
   box-shadow: 0 4px 15px color-mix(in srgb, var(--accent) 15%, transparent);
 }
+
+/* Site-wide styled replacements for browser-native title tooltips. */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  position: absolute;
+  z-index: 1000;
+  inset-inline-start: 50%;
+  inset-block-end: calc(100% + 0.65rem);
+  width: max-content;
+  max-width: min(18rem, calc(100vw - 2rem));
+  padding: 0.45rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-radius: 0.7rem;
+  background: color-mix(in srgb, var(--background) 88%, transparent);
+  color: var(--foreground);
+  box-shadow: 0 10px 30px color-mix(in srgb, #000 18%, transparent);
+  content: attr(data-tooltip);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0.25rem) scale(0.97);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+@media (max-width: 640px) {
+  [data-tooltip]::after {
+    display: none;
+  }
+}
