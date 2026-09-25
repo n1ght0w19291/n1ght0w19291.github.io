@@ -11,6 +11,7 @@ dayjs.extend(timezone);
 type Props = {
   class?: string;
   size?: "sm" | "lg";
+  showBoth?: boolean;
   pubDatetime: string | Date;
   timezone?: string;
   modDatetime?: string | Date | null;
@@ -20,6 +21,7 @@ const {
   pubDatetime,
   modDatetime,
   size = "sm",
+  showBoth = false,
   class: className = "",
   timezone: postTimezone,
 } = Astro.props;
@@ -40,12 +42,18 @@ const isModified = Boolean(
 
 const datetime = isModified && modifiedDatetime ? modifiedDatetime : publishedDatetime;
 
-const date = datetime.locale(localeCode).format("D MMM, YYYY");
+const publishedDate = publishedDatetime.locale(localeCode).format("D MMM, YYYY");
+const modifiedDate = modifiedDatetime?.locale(localeCode).format("D MMM, YYYY");
 
-const srDate = new Intl.DateTimeFormat(locale, {
-  dateStyle: "long",
-  timeZone: resolvedTimezone,
-}).format(datetime.toDate());
+const formatSrDate = (value: dayjs.Dayjs) =>
+  new Intl.DateTimeFormat(locale, {
+    dateStyle: "long",
+    timeZone: resolvedTimezone,
+  }).format(value.toDate());
+
+const publishedSrDate = formatSrDate(publishedDatetime);
+const modifiedSrDate = modifiedDatetime ? formatSrDate(modifiedDatetime) : null;
+const srDate = formatSrDate(datetime);
 
 const updatedText = "Updated:";
 const publishedText = "Published date";
@@ -54,29 +62,79 @@ const srLabel = isModified ? updatedSrText : publishedText;
 ---
 
 <div class:list={["flex items-center gap-x-2 text-foreground/80", className]}>
-  <IconCalendar
-    aria-hidden="true"
-    class:list={[
-      "inline-block size-6 min-w-5.5",
-      { "scale-90": size === "sm" },
-    ]}
-  />
-  <span class="sr-only">{srLabel}: </span>
-  {
-    isModified && (
-      <span
+  {showBoth && isModified && modifiedDatetime && modifiedDate && modifiedSrDate ? (
+    <>
+      <IconCalendar
         aria-hidden="true"
-        class:list={["text-sm", { "sm:text-base": size === "lg" }]}
+        class:list={[
+          "inline-block size-6 min-w-5.5",
+          { "scale-90": size === "sm" },
+        ]}
+      />
+      <p
+        role="group"
+        aria-label="Publication and update dates"
+        class="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5"
       >
-        {updatedText}
-      </span>
-    )
-  }
-  <time
-    class:list={["text-sm whitespace-nowrap", { "sm:text-base": size === "lg" }]}
-    datetime={datetime.toISOString()}
-    title={srDate}
-    aria-label={`${srLabel}: ${srDate}`}
-    >{date}</time
-  >
+        <time
+          class:list={[
+            "text-sm font-semibold text-foreground/90 whitespace-nowrap",
+            { "sm:text-base": size === "lg" },
+          ]}
+          datetime={publishedDatetime.toISOString()}
+          title={publishedSrDate}
+          aria-label={`Published date: ${publishedSrDate}`}
+        >
+          {publishedDate}
+        </time>
+        <span class="inline-flex items-center gap-1 text-xs font-medium whitespace-nowrap text-accent-foreground">
+          <span aria-hidden="true" class="text-muted-foreground">&middot;</span>
+          Updated
+          <time
+            class:list={[
+              "font-semibold text-foreground/90",
+              { "sm:text-base": size === "lg" },
+            ]}
+            datetime={modifiedDatetime.toISOString()}
+            title={modifiedSrDate}
+            aria-label={`Updated date: ${modifiedSrDate}`}
+          >
+            {modifiedDate}
+          </time>
+        </span>
+      </p>
+    </>
+  ) : (
+    <>
+      <IconCalendar
+        aria-hidden="true"
+        class:list={[
+          "inline-block size-6 min-w-5.5",
+          { "scale-90": size === "sm" },
+        ]}
+      />
+      <span class="sr-only">{srLabel}: </span>
+      {
+        isModified && (
+          <span
+            aria-hidden="true"
+            class:list={["text-sm", { "sm:text-base": size === "lg" }]}
+          >
+            {updatedText}
+          </span>
+        )
+      }
+      <time
+        class:list={[
+          "text-sm whitespace-nowrap",
+          { "sm:text-base": size === "lg" },
+        ]}
+        datetime={datetime.toISOString()}
+        title={srDate}
+        aria-label={`${srLabel}: ${srDate}`}
+      >
+        {datetime.locale(localeCode).format("D MMM, YYYY")}
+      </time>
+    </>
+  )}
 </div>

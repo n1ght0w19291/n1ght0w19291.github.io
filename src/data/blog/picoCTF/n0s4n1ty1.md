@@ -1,7 +1,7 @@
 ---
 title: "n0s4n1ty 1"
 description: "Solving the n0s4n1ty 1 challenge from picoCTF."
-pubDatetime: 2025-07-10T01:00:00Z
+pubDatetime: 2025-07-10T09:00:00+08:00
 tags: ["picoCTF", "Web"]
 parentPost: "picoctf"
 draft: false

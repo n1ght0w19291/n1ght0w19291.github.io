@@ -1,7 +1,7 @@
 ---
 title: "DanaBot Lab"
 description: "CyberDefenders DanaBot Lab writeup"
-pubDatetime: 2025-08-02T06:10:48.000Z
+pubDatetime: 2025-08-02T14:10:48+08:00
 image: "../../../../assets/images/blog/cyberdefenders/DanaBot_Lab/cover.png"
 tags: ["CyberDefenders", "Blue Team CTF"]
 parentPost: "cyberdefenders"

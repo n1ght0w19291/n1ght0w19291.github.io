@@ -1,7 +1,7 @@
 ---
 title: "vault-door"
 description: "Writeup for the vault-door challenge from picoCTF."
-pubDatetime: 2025-12-26T19:00:00Z
+pubDatetime: 2025-12-27T03:00:00+08:00
 tags: ["picoCTF", "Reverse"]
 parentPost: "picoctf"
 draft: true

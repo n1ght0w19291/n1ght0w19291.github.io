@@ -1,6 +1,6 @@
 ---
 title: "Hello, go!"
-pubDatetime: 2025-07-25T00:00:00Z
+pubDatetime: 2025-07-25T08:00:00+08:00
 description: "Dreamhack"
 tags: ["Dreamhack", "Web"]
 parentPost: "dreamhack"

@@ -1,7 +1,7 @@
 ---
 title: "MSB"
 description: "Solving the MSB challenge from picoCTF."
-pubDatetime: 2025-07-15T01:00:00Z
+pubDatetime: 2025-07-15T09:00:00+08:00
 tags: ["picoCTF", "Forensics"]
 parentPost: "picoctf"
 draft: false

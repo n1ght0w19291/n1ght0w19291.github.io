@@ -4,9 +4,9 @@ createPost({
   defaultExtension: ".mdx",
   usage: "pnpm new-mdx-post",
   renderContent: ({ title, pubDatetime }) => `---
-title: "${title}"
+title: ${JSON.stringify(title)}
 description: ''
-pubDatetime: ${pubDatetime}
+pubDatetime: ${pubDatetime} # Taiwan local time (UTC+08:00).
 modDatetime: ${pubDatetime} # Manually update this when editing; shown only when later than pubDatetime.
 # Optional frontmatter fields:
 # author: "Author name" # Defaults to the site author.

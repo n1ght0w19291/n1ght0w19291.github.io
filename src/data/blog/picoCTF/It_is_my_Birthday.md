@@ -1,7 +1,7 @@
 ---
 title: "It is my Birthday"
 description: "Solving the It is my Birthday challenge from picoCTF."
-pubDatetime: 2025-07-12T01:00:00Z
+pubDatetime: 2025-07-12T09:00:00+08:00
 tags: ["picoCTF", "Web"]
 parentPost: "picoctf"
 draft: false

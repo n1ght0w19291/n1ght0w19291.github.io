@@ -2,7 +2,7 @@
 title: "Portal"
 description: "請假系統團隊專案紀錄"
 ogImage: "../../../assets/images/projects/utaipei_portal/portal_img.png"
-pubDatetime: 2025-08-25T10:00:00Z
+pubDatetime: 2025-08-25T18:00:00+08:00
 tags: ["UTaipei"]
 draft: false
 ---

@@ -1,7 +1,7 @@
 ---
 title: "SOAP"
 description: "Writeup for the SOAP challenge from picoCTF."
-pubDatetime: 2025-07-11T00:00:00Z
+pubDatetime: 2025-07-11T08:00:00+08:00
 tags: ["picoCTF", "Web"]
 parentPost: "picoctf"
 draft: false

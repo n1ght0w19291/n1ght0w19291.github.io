@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import PostDetails from "@/layouts/PostDetails.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import { getPath } from "@/utils/getPath";
+import postFilter from "@/utils/postFilter";
 
 type Props = {
   post: CollectionEntry<"blog">;
@@ -12,7 +13,9 @@ type Props = {
 };
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("blog", ({ data }) => !data.draft || import.meta.env.DEV);
+  const allPosts = await getCollection("blog", post =>
+    postFilter(post, { excludeSubPosts: false })
+  );
 
   const postIdSet = new Set(allPosts.map(p => p.id.split("/").pop()));
   const postBySlug = new Map(allPosts.map(p => [p.id.split("/").pop()!, p]));

@@ -1,7 +1,7 @@
 ---
 title: "Tomcat Takeover Lab"
 description: "CyberDefenders Tomcat Takeover Lab writeup"
-pubDatetime: 2025-08-08T13:00:00.000Z
+pubDatetime: 2025-08-08T21:00:00+08:00
 image: "../../../assets/images/blog/cyberdefenders/Tomcat_Takeover_Lab/cover.png"
 tags: ["CyberDefenders", "Blue Team CTF"]
 parentPost: "cyberdefenders"

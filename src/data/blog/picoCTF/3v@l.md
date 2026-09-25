@@ -1,7 +1,7 @@
 ---
 title: "3v@l"
 description: "Solving the 3v@l web challenge from picoCTF."
-pubDatetime: 2025-07-13T01:00:00Z
+pubDatetime: 2025-07-13T09:00:00+08:00
 tags: ["picoCTF", "Web"]
 parentPost: "picoctf"
 draft: false

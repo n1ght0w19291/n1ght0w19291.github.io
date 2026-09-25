@@ -1,7 +1,7 @@
 ---
 title: "findme"
 description: "Solving the findme challenge from picoCTF."
-pubDatetime: 2025-07-11T04:00:00Z
+pubDatetime: 2025-07-11T12:00:00+08:00
 tags: ["picoCTF", "Web"]
 parentPost: "picoctf"
 draft: false

@@ -1,6 +1,6 @@
 ---
 title: "Small Counter"
-pubDatetime: 2025-02-20T00:00:00Z
+pubDatetime: 2025-02-20T08:00:00+08:00
 description: "Dreamhack Blitz CTF #12"
 tags: ["Dreamhack", "Reverse"]
 parentPost: "dreamhack"

@@ -1,7 +1,7 @@
 ---
 title: "PIE TIME &  PIE TIME 2"
 description: "Writeup for the PIE TIME and PIE TIME 2 challenges from picoCTF."
-pubDatetime: 2025-07-11T02:00:00Z
+pubDatetime: 2025-07-11T10:00:00+08:00
 tags: ["picoCTF", "pwnable"]
 parentPost: "picoctf"
 draft: false

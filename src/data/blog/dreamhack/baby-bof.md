@@ -1,6 +1,6 @@
 ---
 title: "baby-bof"
-pubDatetime: 2025-07-10T00:00:00Z
+pubDatetime: 2025-07-10T08:00:00+08:00
 description: "Dreamhack"
 tags: ["Dreamhack", "pwnable"]
 parentPost: "dreamhack"
