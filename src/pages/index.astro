@@ -21,8 +21,12 @@ const [blogPosts, projectPosts] = await Promise.all([
 const posts = [...blogPosts, ...projectPosts];
 
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => "featured" in data && data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !("featured" in data && data.featured));
+const featuredPosts = sortedPosts.filter(
+  ({ data }) => "featured" in data && data.featured
+);
+const recentPosts = sortedPosts.filter(
+  ({ data }) => !("featured" in data && data.featured)
+);
 ---
 
 <Layout>
@@ -32,39 +36,35 @@ const recentPosts = sortedPosts.filter(({ data }) => !("featured" in data && dat
     <!-- ═══════════════════ HERO ═══════════════════ -->
     <div
       class="relative w-full"
-      style={SITE.heroImage ? `background-image: url('${SITE.heroImage}'); background-size: cover; background-position: center;` : undefined}
+      style={
+        SITE.heroImage
+          ? `background-image: url('${SITE.heroImage}'); background-size: cover; background-position: center;`
+          : undefined
+      }
     >
       {SITE.heroImage && (
         <div class="absolute inset-0 bg-background/60" aria-hidden="true" />
       )}
-    <section
-      id="hero"
-      class="hero-section app-layout relative pt-10 pb-14 sm:pt-14 sm:pb-20"
-    >
-      <div class="relative z-10">
-        <!-- Terminal prompt badge -->
-        <div
-          class="mb-3 inline-flex items-center gap-2 rounded-full border border-border/40 bg-muted/20 px-3.5 py-1.5 font-firacode text-xs sm:text-sm"
-        >
-          <span class="relative flex h-2 w-2">
-            <span
-              class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"
-            ></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"
-            ></span>
-          </span>
+      <section
+        id="hero"
+        class="hero-section app-layout relative pt-10 pb-14 sm:pt-14 sm:pb-20"
+      >
+        <div class="relative z-10">
+          <!-- Terminal prompt badge -->
+          <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-border/40 bg-muted/20 px-3.5 py-1.5 font-firacode text-xs sm:text-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+            </span>
             <span class="text-accent">{SITE.heroTerminalPrompt.prefix}</span>
             {SITE.heroTerminalPrompt.path}
             <span class="opacity-40">{SITE.heroTerminalPrompt.suffix}</span>
-        </div>
+          </div>
 
-        <!-- Title -->
-        <h1
-          class="hero-title mb-3 py-3 text-5xl leading-[1.1] font-bold tracking-tight sm:text-6xl lg:text-7xl"
-        >
-          {SITE.title}
-          {
-            import.meta.env.PUBLIC_ENABLE_RSS === "true" && (
+          <!-- Title -->
+          <h1 class="hero-title mb-3 py-3 text-5xl leading-[1.1] font-bold tracking-tight sm:text-6xl lg:text-7xl">
+            {SITE.title}
+            {import.meta.env.PUBLIC_ENABLE_RSS === "true" && (
               <a
                 target="_blank"
                 href="/rss.xml"
@@ -78,45 +78,45 @@ const recentPosts = sortedPosts.filter(({ data }) => !("featured" in data && dat
                   class="stroke-accent stroke-3 opacity-40 transition-opacity duration-300 hover:opacity-100"
                 />
               </a>
-            )
-          }
-        </h1>
+            )}
+          </h1>
 
-        <!-- Description -->
-        <p
-          class="mt-7 max-w-xl text-base leading-relaxed opacity-75 sm:text-lg"
-        >
-          I write to remember — not just the answers, but the process of getting there. The wrong turns, the late nights, the small moments where something I didn't understand suddenly made sense. This is where I keep all of that, so I can look back someday and see how far I've come.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
-          <p class="text-sm opacity-50 flex-shrink-0">
-            Written by
-            <LinkButton
-              class="font-medium underline decoration-dashed underline-offset-4 hover:text-accent"
-              href={SITE.profile}
-              target="_blank"
-            >
-              {SITE.author}
-            </LinkButton>
+          <!-- Description -->
+          <p class="mt-7 max-w-xl text-base leading-relaxed opacity-75 sm:text-lg">
+            I write to remember — not just the answers, but the process of
+            getting there. The wrong turns, the late nights, the small moments
+            where something I didn't understand suddenly made sense. This is
+            where I keep all of that, so I can look back someday and see how far
+            I've come.
           </p>
+          <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
+            <p class="text-sm opacity-50 flex-shrink-0">
+              Written by{" "}
+              <LinkButton
+                class="font-medium underline decoration-dashed underline-offset-4 hover:text-accent"
+                href={SITE.profile}
+                target="_blank"
+              >
+                {SITE.author}
+              </LinkButton>
+            </p>
 
-          {
-            // only display if at least one social link is enabled
-            SOCIALS.length > 0 && (
-              <div class="sm:border-l border-border/40 sm:pl-4">
-                <Socials />
-              </div>
-            )
-          }
+            {
+              // only display if at least one social link is enabled
+              SOCIALS.length > 0 && (
+                <div class="sm:border-l border-border/40 sm:pl-4">
+                  <Socials />
+                </div>
+              )
+            }
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </div>
 
     <div class="app-layout">
-    <!-- ═══════════════════ FEATURED ═══════════════════ -->
-    {
-      featuredPosts.length > 0 && (
+      <!-- ═══════════════════ FEATURED ═══════════════════ -->
+      {featuredPosts.length > 0 && (
         <section id="featured" class="pb-6">
           <div class="mb-6 flex items-center gap-3">
             <h2 class="flex items-center gap-2 text-sm font-bold tracking-widest text-accent uppercase">
@@ -139,26 +139,25 @@ const recentPosts = sortedPosts.filter(({ data }) => !("featured" in data && dat
             ))}
           </ul>
         </section>
-      )
-    }
+      )}
 
-    <!-- ═══════════════════ RECENT POSTS ═══════════════════ -->
-    {
-      recentPosts.length > 0 && (
+      <!-- ═══════════════════ RECENT POSTS ═══════════════════ -->
+      {recentPosts.length > 0 && (
         <section id="recent-posts" class="pt-6 pb-6">
           <div class="mb-6 flex items-center gap-3">
-            <h2 class="text-sm font-bold tracking-widest uppercase">
-              Recent
-            </h2>
+            <h2 class="text-sm font-bold tracking-widest uppercase">Recent</h2>
             <div class="h-px flex-1 bg-border/20" />
             <span class="font-firacode text-xs text-accent/40 select-none">
               [{recentPosts.slice(0, SITE.postPerIndex).length}/
               {recentPosts.length}]
             </span>
           </div>
-          <ul class:list={[
-            SITE.indexPostsGrid && "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          ]}>
+          <ul
+            class:list={[
+              SITE.indexPostsGrid &&
+                "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3",
+            ]}
+          >
             {recentPosts.map(
               (data, index) =>
                 index < SITE.postPerIndex && <Card variant="h3" {...data} />
@@ -172,14 +171,11 @@ const recentPosts = sortedPosts.filter(({ data }) => !("featured" in data && dat
               class="group inline-flex items-center w-full sm:w-auto justify-center gap-2 rounded-xl border border-accent/20 bg-accent/10 px-8 py-4 text-base font-bold text-accent transition-all duration-300 hover:border-accent hover:bg-accent/20 hover:shadow-xl hover:shadow-accent/20 hover:-translate-y-0.5"
             >
               Explore all posts
-              <IconArrowRight
-                class="inline-block transition-transform duration-300 group-hover:translate-x-1 rtl:-rotate-180"
-              />
+              <IconArrowRight class="inline-block transition-transform duration-300 group-hover:translate-x-1 rtl:-rotate-180" />
             </LinkButton>
           </div>
         </section>
-      )
-    }
+      )}
     </div>
   </main>
   <Footer />
