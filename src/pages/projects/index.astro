@@ -43,26 +43,24 @@ const projects = rawProjects.sort(
         <div class="mt-4 flex flex-wrap items-center gap-2">
           <span class="hero-badge">
             {projects.length}
-            {projects.length === 1 ? "project" : "projects"}
+            {projects.length === 1 ? " project" : " projects"}
           </span>
         </div>
       </div>
     </div>
 
     <!-- Projects grid -->
-    {
-      projects.length === 0 ? (
-        <p class="mt-12 text-center text-foreground/50 italic">
-          No projects published yet.
-        </p>
-      ) : (
-        <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 [&>li]:my-0">
-          {projects.map(project => (
-            <Card {...project} />
-          ))}
-        </ul>
-      )
-    }
+    {projects.length === 0 ? (
+      <p class="mt-12 text-center text-foreground/50 italic">
+        No projects published yet.
+      </p>
+    ) : (
+      <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 [&>li]:my-0">
+        {projects.map(project => (
+          <Card {...project} />
+        ))}
+      </ul>
+    )}
   </main>
   <Footer />
 </Layout>
@@ -217,11 +215,17 @@ const projects = rawProjects.sort(
   }
 
   .glow-text {
-    background: linear-gradient(135deg, var(--color-foreground), var(--highlight));
+    background: linear-gradient(
+      135deg,
+      var(--color-foreground),
+      var(--highlight)
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 0 25px color-mix(in srgb, var(--highlight) 25%, transparent));
+    filter: drop-shadow(
+      0 0 25px color-mix(in srgb, var(--highlight) 25%, transparent)
+    );
   }
 
   .hero-badge {

@@ -366,7 +366,7 @@ const timelineData = [
           ],
         },
         result: "初賽",
-        note: '團體賽 - 隊伍名稱：<script>alert("水獭")</script>',
+        note: '團體賽 - 隊伍名稱：<script>alert("水獺")</script>',
       },
     ],
   },
