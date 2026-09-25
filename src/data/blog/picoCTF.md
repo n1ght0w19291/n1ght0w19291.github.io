@@ -9,4 +9,4 @@ draft: false
 
 My notes and writeups from working through picoCTF. Each challenge is documented separately in the series below.
 
-[Profile](https://learn.cylabacademy.org/users/n1ght0w1)
+[CyLab Security Academy User Profile](https://learn.cylabacademy.org/users/n1ght0w1)
