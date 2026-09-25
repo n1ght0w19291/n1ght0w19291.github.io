@@ -59,7 +59,7 @@ const isActive = (path: string) => {
           <!-- Mobile hamburger (animated lines) -->
           <button
             id="menu-btn"
-            class="hamburger-btn sm:hidden"
+            class="hamburger-btn md:hidden"
             aria-label="Open Menu"
             aria-expanded="false"
             aria-controls="mobile-menu"
@@ -72,7 +72,7 @@ const isActive = (path: string) => {
           </button>
 
           <!-- Desktop links (always visible on sm+) -->
-          <ul class="hidden sm:flex sm:flex-row sm:items-center sm:gap-1">
+          <ul class="hidden md:flex md:flex-row md:items-center md:gap-1">
             <li>
               <a
                 href="/posts/"
@@ -113,8 +113,8 @@ const isActive = (path: string) => {
                     title="Archives"
                     aria-label="archives"
                   >
-                    <IconArchive class="hidden sm:inline-block" />
-                    <span class="sm:sr-only">Archives</span>
+                    <IconArchive class="hidden md:inline-block" />
+                    <span class="md:sr-only">Archives</span>
                   </LinkButton>
                 </li>
               )
@@ -131,8 +131,8 @@ const isActive = (path: string) => {
                     title="Projects"
                     aria-label="projects"
                   >
-                    <IconProject class="hidden sm:inline-block" />
-                    <span class="sm:sr-only">Projects</span>
+                    <IconProject class="hidden md:inline-block" />
+                    <span class="md:sr-only">Projects</span>
                   </LinkButton>
                 </li>
               )
@@ -394,7 +394,7 @@ const isActive = (path: string) => {
     cursor: pointer;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 768px) {
     .hamburger-btn {
       display: none;
     }

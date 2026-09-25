@@ -133,6 +133,7 @@ i {
   }
   html {
     @apply overflow-y-scroll scroll-smooth;
+    overflow-x: clip;
   }
   body {
     @apply flex min-h-svh flex-col bg-background font-app text-foreground;
@@ -160,9 +161,26 @@ i {
 }
 
 /* Mobile reading comfort and safe wrapping for user supplied content. */
-@media (max-width: 639px) {
+@media (max-width: 767px) {
+  body {
+    max-width: 100%;
+  }
+
   .app-layout {
     padding-inline: 1rem;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #main-content,
+  .footer-wrapper {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .footer-wrapper p,
+  .footer-home-link {
+    overflow-wrap: anywhere;
   }
 
   .prose,
