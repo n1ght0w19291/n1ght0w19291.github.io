@@ -1,9 +1,8 @@
 export const SITE = {
   website: "https://n1ght0w19291.github.io",
   author: "n1ght0w1",
-  profile: process.env.PUBLIC_SOCIAL_GITHUB
-    ? process.env.PUBLIC_SOCIAL_GITHUB
-    : "/about", // set in .env
+  // Use the GitHub profile while running Astro's dev server.
+  profile: "/about/",
   desc: "A space where curiosity becomes code. Exploring web development, software architecture and everything that makes the tech world spin.",
   title: "n1ght0w1's blog",
   ogImage: "", // empty = use the dynamic /og.png route (src/pages/og.png.ts)
