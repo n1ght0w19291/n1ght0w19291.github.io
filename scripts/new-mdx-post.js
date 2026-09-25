@@ -16,7 +16,7 @@ modDatetime: ${pubDatetime} # Manually update this when editing; shown only when
 # timezone: "Asia/Taipei" # IANA timezone for this post's dates; defaults to the site timezone.
 # parentPost: "parent-post-id" # Group this as a child post under the matching blog entry ID.
 tags: []
-draft: false
+draft: true
 # Optional resource links (URL must use HTTP or HTTPS; title is optional):
 # references:
 #   - title: "Reference title"
