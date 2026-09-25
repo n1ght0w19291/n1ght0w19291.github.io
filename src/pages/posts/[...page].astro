@@ -90,7 +90,7 @@ const totalPosts = page.total;
             </p>
           </div>
         ) : (
-          <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul class="grid grid-cols-1 gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {page.data.map((data: ContentEntry) => <Card {...data} />)}
           </ul>
         )
