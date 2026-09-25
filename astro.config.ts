@@ -159,6 +159,7 @@ const serverCjsBridges = new Map([
   ],
   ["eventemitter3", createServerCjsBridge("eventemitter3", ["EventEmitter"])],
   ["esbuild", createServerCjsBridge("esbuild", ["build", "transform"])],
+  ["sharp", createServerCjsBridge("sharp")],
   ["js-yaml", createServerCjsBridge("js-yaml", ["load", "dump"])],
   ["lodash.kebabcase", createServerCjsBridge("lodash.kebabcase")],
   ["slugify", createServerCjsBridge("slugify")],
