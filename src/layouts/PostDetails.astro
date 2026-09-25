@@ -857,4 +857,51 @@ const relatedPosts = posts
     }
   }
 
+  @media (max-width: 639px) {
+    .post-header {
+      margin-bottom: 1.75rem;
+      text-align: start;
+    }
+
+    .post-header > div.relative {
+      padding: 1.25rem 1rem;
+      border-radius: 1.25rem;
+    }
+
+    .post-title {
+      font-size: clamp(1.75rem, 8vw, 2.35rem);
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .post-header .post-tag-badge {
+      font-size: 0.7rem;
+    }
+
+    .sub-posts-index {
+      padding: 1rem;
+    }
+
+    .sub-post-link {
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 0.55rem 0.25rem;
+    }
+
+    .sub-post-tags {
+      justify-content: flex-start;
+      max-width: 100%;
+      padding-left: 2.25rem;
+    }
+
+    .post-nav-link {
+      min-width: 0;
+      padding: 0.875rem 0.75rem;
+    }
+
+    .post-nav-link span {
+      overflow-wrap: anywhere;
+    }
+  }
+
 </style>

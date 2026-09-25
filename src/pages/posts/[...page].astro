@@ -225,6 +225,22 @@ const totalPosts = page.total;
 </script>
 
 <style>
+  @media (max-width: 639px) {
+    .posts-hero {
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      border-radius: 1.25rem;
+    }
+
+    .posts-hero h1 {
+      font-size: clamp(1.75rem, 8vw, 2.25rem);
+    }
+
+    .posts-hero p {
+      line-height: 1.65;
+    }
+  }
+
   .posts-hero {
     position: relative;
     overflow: hidden;

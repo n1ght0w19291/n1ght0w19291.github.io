@@ -172,6 +172,30 @@ const maxCount = Math.max(...tagsWithCount.map(t => t.count));
 </script>
 
 <style>
+  @media (max-width: 639px) {
+    .tags-hero {
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      border-radius: 1.25rem;
+    }
+
+    .tags-hero h1 {
+      font-size: clamp(1.75rem, 8vw, 2.25rem);
+    }
+
+    .tags-hero p {
+      line-height: 1.65;
+    }
+
+    .tag-card {
+      padding: 1rem;
+    }
+
+    .tag-name {
+      overflow-wrap: anywhere;
+    }
+  }
+
   /* ===== Hero ===== */
   .tags-hero {
     position: relative;

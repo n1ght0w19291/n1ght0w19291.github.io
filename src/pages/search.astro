@@ -270,6 +270,22 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
 </script>
 
 <style>
+  @media (max-width: 639px) {
+    .search-hero {
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      border-radius: 1.25rem;
+    }
+
+    .search-hero h1 {
+      font-size: clamp(1.75rem, 8vw, 2.25rem);
+    }
+
+    .search-hero p {
+      line-height: 1.65;
+    }
+  }
+
   /* ===== Hero ===== */
   .search-hero {
     position: relative;

@@ -159,6 +159,30 @@ i {
   @apply text-accent;
 }
 
+/* Mobile reading comfort and safe wrapping for user supplied content. */
+@media (max-width: 639px) {
+  .app-layout {
+    padding-inline: 1rem;
+  }
+
+  .prose,
+  [data-pagefind-body] {
+    min-width: 0;
+  }
+
+  .prose pre,
+  .prose table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .prose img,
+  .prose video,
+  .prose iframe {
+    max-width: 100%;
+  }
+}
+
 /* Shared expanding halo for small status and navigation indicators. */
 .diffusing-indicator {
   position: relative;

@@ -180,6 +180,42 @@ const recentPosts = sortedPosts.filter(
 </Layout>
 
 <style>
+  /* Keep the desktop hero intact; give narrow screens a calmer, more compact
+     introduction and prevent long site names from forcing horizontal scroll. */
+  @media (max-width: 639px) {
+    .hero-section {
+      padding-top: clamp(1.75rem, 8vw, 2.75rem);
+      padding-bottom: clamp(2.5rem, 10vw, 3.5rem);
+    }
+
+    .hero-section > div {
+      min-width: 0;
+    }
+
+    .hero-title {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      font-size: clamp(2.35rem, 11vw, 3.5rem);
+      line-height: 1.05;
+    }
+
+    .hero-section > div > p {
+      margin-top: 1.25rem;
+      max-width: 36rem;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .hero-section > div > div:last-child {
+      gap: 0.875rem;
+    }
+
+    .hero-section > div > div:last-child > div {
+      border-left: 0;
+      padding-left: 0;
+    }
+  }
+
   /* ── Hero title shimmer ── */
   .hero-title {
     background: linear-gradient(
