@@ -44,7 +44,10 @@ const recentPosts = sortedPosts.filter(
       }
     >
       {SITE.heroImage && (
-        <div class="absolute inset-0 bg-background/60" aria-hidden="true" />
+        <div
+          class="absolute inset-0 bg-linear-to-r from-background/70 via-background/45 to-background/20"
+          aria-hidden="true"
+        />
       )}
       <section
         id="hero"
@@ -52,11 +55,11 @@ const recentPosts = sortedPosts.filter(
       >
         <div class="relative z-10">
           <!-- Terminal prompt badge -->
-          <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-border/40 bg-muted/20 px-3.5 py-1.5 font-firacode text-xs sm:text-sm">
+          <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-border/50 bg-background/45 px-3.5 py-1.5 font-firacode text-xs text-foreground backdrop-blur-sm sm:text-sm">
             <BreathingLight color="var(--accent)" />
             <span class="text-accent">{SITE.heroTerminalPrompt.prefix}</span>
             {SITE.heroTerminalPrompt.path}
-            <span class="opacity-40">{SITE.heroTerminalPrompt.suffix}</span>
+            <span class="opacity-60">{SITE.heroTerminalPrompt.suffix}</span>
           </div>
 
           <!-- Title -->

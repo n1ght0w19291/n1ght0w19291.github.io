@@ -39,7 +39,7 @@ const learningLinks = [
   {
     name: "GitHub",
     shortName: "GH",
-    description: "開源專案與程式足跡",
+    description: "專案與程式碼的提交紀錄",
     panelLabel: "BUILDING IN PUBLIC",
     panelNote: "用提交紀錄回看寫程式、修正與持續累積的軌跡。",
     panelStatus: "TRACKING",
