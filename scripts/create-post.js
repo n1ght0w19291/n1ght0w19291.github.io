@@ -5,6 +5,11 @@ import { fileURLToPath } from "node:url";
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, "..");
 
+export function getTaipeiDatetime() {
+  const taipeiDate = new Date(Date.now() + 8 * 60 * 60 * 1000);
+  return `${taipeiDate.toISOString().replace(/\.\d{3}Z$/, "")}+08:00`;
+}
+
 function resolvePostPath(input, targetDir, defaultExtension) {
   const normalizedInput = input.replace(/[\\/]+/g, path.sep);
   const segments = normalizedInput.split(path.sep);
@@ -72,8 +77,7 @@ export function createPost({ defaultExtension, usage, renderContent }) {
     process.exit(1);
   }
 
-  const taipeiDate = new Date(Date.now() + 8 * 60 * 60 * 1000);
-  const pubDatetime = `${taipeiDate.toISOString().replace(/\.\d{3}Z$/, "")}+08:00`;
+  const pubDatetime = getTaipeiDatetime();
   const title = path.basename(fileName, path.extname(fileName));
 
   fs.mkdirSync(path.dirname(fullPath), { recursive: true });
