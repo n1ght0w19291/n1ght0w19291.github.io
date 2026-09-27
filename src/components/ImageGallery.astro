@@ -1,0 +1,162 @@
+---
+import type { ImageMetadata } from "astro";
+
+export interface GalleryImage {
+  /** Imported local image metadata or a public/remote image URL. */
+  src: ImageMetadata | string;
+  /** Accessible description of the image. Use an empty string only when decorative. */
+  alt: string;
+  /** Optional visible caption shown below the image. */
+  caption?: string;
+}
+
+interface Props {
+  /** Number of images per row on wide screens. Smaller screens reduce this automatically. */
+  columns?: 2 | 3 | 4;
+  images: GalleryImage[];
+  class?: string;
+}
+
+const { columns = 2, images, class: className } = Astro.props;
+---
+
+{images.length > 0 && (
+  <div
+    class:list={["image-gallery", className]}
+    data-columns={columns}
+    role="list"
+    aria-label="文章圖片集"
+  >
+    {images.map((image) => (
+      <figure class="gallery-item" role="listitem">
+        <div class="gallery-image-frame">
+          <img
+            src={typeof image.src === "string" ? image.src : image.src.src}
+            alt={image.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        {image.caption && <figcaption>{image.caption}</figcaption>}
+      </figure>
+    ))}
+  </div>
+)}
+
+<style>
+  .image-gallery {
+    --gallery-gap: clamp(0.85rem, 2.2vw, 1.35rem);
+    --gallery-columns: 2;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: var(--gallery-gap);
+    width: 100%;
+    margin: 2rem auto;
+  }
+
+  .image-gallery[data-columns="3"] {
+    --gallery-columns: 3;
+  }
+
+  .image-gallery[data-columns="4"] {
+    --gallery-columns: 4;
+  }
+
+  .gallery-item {
+    flex: 0 1
+      calc(
+        (100% - (var(--gallery-columns) - 1) * var(--gallery-gap)) /
+          var(--gallery-columns)
+      );
+    min-width: 0;
+    margin: 0;
+    padding: 0.65rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+    border-radius: 1.1rem;
+    background:
+      linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--color-foreground) 2%, var(--color-background)),
+        color-mix(in srgb, var(--color-foreground) 4%, var(--color-background))
+      );
+    box-shadow:
+      0 1px 2px rgb(15 23 42 / 4%),
+      0 10px 28px -20px rgb(15 23 42 / 22%);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--color-accent) 38%, var(--color-border));
+    box-shadow:
+      0 2px 5px rgb(15 23 42 / 5%),
+      0 18px 36px -22px rgb(15 23 42 / 32%);
+  }
+
+  .gallery-image-frame {
+    display: grid;
+    min-height: 7rem;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 0.72rem;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgb(255 255 255 / 55%), transparent 72%),
+      color-mix(in srgb, var(--color-background) 88%, var(--color-foreground));
+  }
+
+  .gallery-image-frame img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 31.25rem;
+    margin: 0;
+    justify-self: center;
+    border-radius: 0.72rem;
+    object-fit: contain;
+  }
+
+  .gallery-item figcaption {
+    margin: 0.65rem 0.25rem 0.15rem;
+    color: var(--color-muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .image-gallery[data-columns="3"],
+    .image-gallery[data-columns="4"] {
+      --gallery-columns: 2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .image-gallery[data-columns] {
+      --gallery-columns: 1;
+      margin-block: 1.5rem;
+    }
+
+    .gallery-item {
+      max-width: 34rem;
+      padding: 0.55rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-item {
+      transition: none;
+    }
+
+    .gallery-item:hover {
+      transform: none;
+    }
+  }
+</style>
